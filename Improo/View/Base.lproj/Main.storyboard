@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RSu-Pg-hHQ">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Improo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dxy-oH-DSy">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="improoItemCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoItemCell" id="ZlX-jG-hMx">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZlX-jG-hMx" id="mLX-BW-SIO">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="TBr-jb-BlZ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="orm-r3-PAJ"/>
+                                </connections>
+                            </tableView>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-uD-o0f">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem title="Книги" image="books" id="a5p-UR-oeD"/>
+                                    <tabBarItem title="Їжа" image="food" id="iOU-n3-fxl"/>
+                                    <tabBarItem title="Дії" image="activity" id="H7E-lc-eYO"/>
+                                    <tabBarItem title="Курси" image="learning" id="UA8-gh-kpF"/>
+                                    <tabBarItem title="Розваги" image="movie" id="LqO-Tf-yHo"/>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Eo5-vu-Rod"/>
+                                </connections>
+                            </tabBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dxy-oH-DSy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="11l-10-zSN"/>
+                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="Dxy-oH-DSy" secondAttribute="bottom" id="FAd-qi-Uqv"/>
+                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sjh-Gc-JK8"/>
+                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ifq-pF-Ccd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dxy-oH-DSy" secondAttribute="trailing" id="k0l-CE-S46"/>
+                            <constraint firstItem="Dxy-oH-DSy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oyj-aQ-2D0"/>
+                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wXt-E0-oOB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uOL-Qu-0Wm">
+                        <barButtonItem key="leftBarButtonItem" image="dice" id="dQl-rd-mH0"/>
+                        <barButtonItem key="rightBarButtonItem" title="Усі категорії" id="Wty-Pr-b1v"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="itemsTableView" destination="Dxy-oH-DSy" id="Y0J-6q-zU0"/>
+                        <outlet property="sectionsTabBar" destination="XlQ-uD-o0f" id="bO2-4t-bwU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534.375" y="133.09859154929578"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hX9-4v-QzR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RSu-Pg-hHQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BXt-ar-p5D">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="HpL-UY-xx0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eVm-w0-N7w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-251" y="145"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="activity" width="25" height="25"/>
+        <image name="books" width="25" height="25"/>
+        <image name="dice" width="25" height="25"/>
+        <image name="food" width="25" height="25"/>
+        <image name="learning" width="25" height="25"/>
+        <image name="movie" width="25" height="25"/>
+    </resources>
+</document>
