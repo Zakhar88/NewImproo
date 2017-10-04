@@ -7,46 +7,63 @@
 //
 
 import UIKit
+import Firebase
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
     @IBOutlet weak var itemsTableView: UITableView?
     @IBOutlet weak var sectionsTabBar: UITabBar?
+    @IBOutlet weak var categoriesBarButton: UIBarButtonItem?
     
-    var firebaseManager: FirebaseManager!
+    var databaseReference: Firestore!
 
-    var selectedSectionItems = [Item]() {
+    var sectionItems = [Item]() {
         didSet {
             itemsTableView?.reloadData()
         }
     }
     
+    var sectionCategories: [String]?
     var selectedCategory: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firebaseManager = FirebaseManager.sharedManager
-        firebaseManager.loadItems()
-        
-        selectedSectionItems.append(Item(name: "One"))
-        selectedSectionItems.append(Item(name: "Two"))
-        selectedSectionItems.append(Item(name: "Three"))
-        
         let booksBarItem = sectionsTabBar?.items?.first
         sectionsTabBar?.selectedItem = booksBarItem
-        title = booksBarItem?.title        
+        title = booksBarItem?.title
+
+        databaseReference = Firestore.firestore()
+
+        //Load categories
+        databaseReference.document("Books/Categories").getDocument { (document, error) in
+            guard error == nil, let categories = document?.data()["All"] as? [String] else { return }
+            self.sectionCategories = categories
+        }
+    }
+    
+    //MARK: - IBActions
+    
+    @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
+        guard let categoriesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoriesViewController") as? CategoriesViewController else { return }
+        
+        categoriesViewController.categoires = sectionCategories ?? []
+        categoriesViewController.selectAction = { category in
+            self.selectedCategory = category
+            sender?.title = category
+        }
+        navigationController?.pushViewController(categoriesViewController, animated: true)
     }
     
     //MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedSectionItems.count
+        return sectionItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell") ?? UITableViewCell()
-        cell.textLabel?.text = selectedSectionItems[indexPath.row].title
+        cell.textLabel?.text = sectionItems[indexPath.row].title
         return cell
     }
     
