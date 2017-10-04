@@ -21,7 +21,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    var selectedCategory: 
+    var selectedCategory: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
