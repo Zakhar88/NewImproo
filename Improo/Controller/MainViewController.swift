@@ -11,9 +11,13 @@ import Firebase
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var itemsTableView: UITableView?
     @IBOutlet weak var sectionsTabBar: UITabBar?
     @IBOutlet weak var categoriesBarButton: UIBarButtonItem?
+    
+    // MARK: - Properties
     
     var databaseReference: Firestore!
 
@@ -25,6 +29,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var sectionCategories: [String]?
     var selectedCategory: String?
+    
+    // MARK: - ViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +42,26 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         databaseReference = Firestore.firestore()
 
         //Load categories
+        let query = databaseReference!.collection("Books").addSnapshotListener { (snapshot, err) in
+            
+        }
+        
+    }
+    
+    // MARK: - Funcrions
+    
+    private func changeSectionTo(_ newSectionName: String) {
         databaseReference.document("Books/Categories").getDocument { (document, error) in
             guard error == nil, let categories = document?.data()["All"] as? [String] else { return }
             self.sectionCategories = categories
         }
     }
     
-    //MARK: - IBActions
+    private func loadCategories(forSection sectionName: String) {
+        
+    }
+    
+    // MARK: - IBActions
     
     @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
         guard let categoriesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoriesViewController") as? CategoriesViewController else { return }
@@ -55,7 +74,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         navigationController?.pushViewController(categoriesViewController, animated: true)
     }
     
-    //MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionItems.count
@@ -67,13 +86,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    //MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO: SHOW ITEM
     }
 
-    //MARK: - UITabBarDelegate
+    // MARK: - UITabBarDelegate
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         self.title = item.title
