@@ -23,6 +23,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Properties
     
     var databaseReference: Firestore!
+    var sectionItems = [Item]()
     var selectedCategory: String?
     
     var sectionCategories: [String]? {
@@ -31,12 +32,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
-    var sectionItems = [Item]() {
-        didSet {
-            itemsTableView?.reloadData()
-        }
-    }
-    
     var selectedSection: Section = .Books {
         didSet {
             self.title = selectedSection.ukrainianTitle
@@ -124,13 +119,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         //Load items
-        databaseReference.collection("publicData/\(selectedSection.rawValue)/Collection").getDocuments { (querySnaphot, error) in
+        databaseReference.collection("publicData/\(selectedSection.rawValue)/Collection").getDocuments { (querySnapshot, error) in
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
-            guard let documents = querySnaphot?.documents.map({Item(dictionary: $0.data())}) as? [Item] else { return }
-//            DispatchQueue.main.async {
-//                self.sectionItems = documents
-//            }
+            
+            self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
+            DispatchQueue.main.async {
+                self.itemsTableView?.reloadData()
+            }
         }
     }
     
