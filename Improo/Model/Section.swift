@@ -9,26 +9,27 @@
 import Foundation
 
 enum Section: String {
-    case Books = "Books"
-    case Food = "Food"
     case Activities = "Activities"
+    case Books = "Books"
     case Courses = "Courses"
     case Entertainment = "Entertainment"
+    case Food = "Food"
     
-    init?(ukrainianTitle: String) {
-        switch ukrainianTitle {
-        case "Книги":
-            self = .Books
-        case "Їжа":
-            self = .Food
-        case "Дії":
-            self = .Activities
-        case "Курси":
-            self = .Courses
-        case "Розваги":
-            self = .Entertainment
-        default:
-            return nil
+    init?(ukrainianTitle: String?) {
+        guard let title = ukrainianTitle else { return nil }
+        switch title {
+            case "Книги":
+                self = .Books
+            case "Їжа":
+                self = .Food
+            case "Дії":
+                self = .Activities
+            case "Курси":
+                self = .Courses
+            case "Розваги":
+                self = .Entertainment
+            default:
+                return nil
         }
     }
     

@@ -15,11 +15,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var itemsTableView: UITableView?
     @IBOutlet weak var sectionsTabBar: UITabBar?
-    @IBOutlet weak var categoriesBarButton: UIBarButtonItem?
-    
+    @IBOutlet var categoriesBarButton: UIBarButtonItem?
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView?
+
+    //@IBOutlet weak var randomItemBarButton: UIBarButtonItem?
+
     // MARK: - Properties
     
     var databaseReference: Firestore!
+    var selectedCategory: String?
+    
+    var sectionCategories: [String]? {
+        didSet {
+            navigationItem.rightBarButtonItem = sectionCategories == nil ? nil : categoriesBarButton
+        }
+    }
 
     var sectionItems = [Item]() {
         didSet {
@@ -27,8 +37,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    var sectionCategories: [String]?
-    var selectedCategory: String?
+    var selectedSection: Section = .Books {
+        didSet {
+            self.title = selectedSection.ukrainianTitle
+            loadDocuments()
+        }
+    }
     
     // MARK: - ViewController Lifecycle
 
@@ -40,12 +54,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         title = booksBarItem?.title
 
         databaseReference = Firestore.firestore()
-
-        //Load categories
-        let query = databaseReference!.collection("Books").addSnapshotListener { (snapshot, err) in
-            
-        }
-        
+        loadDocuments()
     }
     
     // MARK: - Funcrions
@@ -55,10 +64,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             guard error == nil, let categories = document?.data()["All"] as? [String] else { return }
             self.sectionCategories = categories
         }
-    }
-    
-    private func loadCategories(forSection sectionName: String) {
-        
     }
     
     // MARK: - IBActions
@@ -95,13 +100,46 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - UITabBarDelegate
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        self.title = item.title
-        
-        
+        guard let newSection = Section(ukrainianTitle: item.title) else { return }
+        selectedSection = newSection
     }
     
+    //MARK: - Firebase
     
+    private func loadDocuments() {
+        activityIndicatorView?.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        //Try to load categories
+        databaseReference.document("publicData/\(selectedSection.rawValue)").getDocument { (documentSnaphot, error) in
+            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()["categories"] as? [String] else {
+                self.sectionCategories = nil
+                return
+            }
+            categories.insert("Усі категорії", at: 0)
+            DispatchQueue.main.async {
+                self.sectionCategories = categories
+                self.categoriesBarButton?.title = categories.first
+            }
+        }
+        
+        //Load items
+        databaseReference.collection("publicData/\(selectedSection.rawValue)/Collection").getDocuments { (querySnaphot, error) in
+            self.activityIndicatorView?.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            guard let documents = querySnaphot?.documents.map({Item(dictionary: $0.data())}) as? [Item] else { return }
+//            DispatchQueue.main.async {
+//                self.sectionItems = documents
+//            }
+        }
+    }
     
+    private func addListener() {
+        databaseReference.document("").addSnapshotListener { (documentSnapshot, error) in
+            
+        }
+    }
+
     
     
     

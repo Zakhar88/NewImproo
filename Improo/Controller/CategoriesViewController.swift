@@ -10,11 +10,7 @@ import UIKit
 
 class CategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var categoires = [String]() {
-        didSet {
-            categoires.insert("Усі категорії", at: 0)
-        }
-    }
+    var categoires = [String]()
     var selectAction: ((String)->())?
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

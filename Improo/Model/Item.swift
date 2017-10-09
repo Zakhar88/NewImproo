@@ -11,46 +11,34 @@ import Firebase
 import FirebaseDatabase
 
 class Item {
-    var title: String
-    let description: String
-    let categories: [String]
+    //var id: String
+    var title: String = ""
+    var description: String = ""
+    var categories: [String] = []
     var imageURL: URL?
     var url: URL?
+    var author: String?
     
-    init?(dataSnapshot: DataSnapshot) {
-        guard let value = dataSnapshot.value as? NSDictionary,
-            let newTitle = value["title"] as? String,
-            let newDescription = value["description"] as? String,
-            let newCategories = value["categories"] as? [String] else {
+    init?(dictionary: [String:Any]) {
+        guard let title = dictionary["title"] as? String,
+            let description = dictionary["description"] as? String,
+            let categories = dictionary["categories"] as? [String] else {
                 return nil
         }
-        title = newTitle
-        description = newDescription
-        categories = newCategories
+        self.title = title
+        self.description = description
+        self.categories = categories
         
-        if let newURLString = value["url"] as? String, let newURL = URL(string: newURLString) {
-            url = newURL
+        if let urlString = dictionary["url"] as? String, let url = URL(string: urlString) {
+            self.url = url
         }
         
-        if let imageURLString = value["imageurl"] as? String, let imageNewURL = URL(string: imageURLString) {
-            imageURL = imageNewURL
+        if let imageURLString = dictionary["imageurl"] as? String, let imageURL = URL(string: imageURLString) {
+            self.imageURL = imageURL
         }
-    }
-    
-    init() {
-        title = "Test Title"
-        description = "Test Description"
-        categories = ["TestCat1", "TestCat2"]
-        url = URL(string: "https://www.facebook.com")
-    }
-    
-    convenience init(name: String) {
-        self.init()
-        title = name
-    }
-    
-    func getImage() -> UIImage {
-        return UIImage(named: "TestImage")!
-
+        
+        if let author = dictionary["author"] as? String {
+            self.author = author
+        }
     }
 }

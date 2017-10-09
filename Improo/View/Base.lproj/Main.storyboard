@@ -40,23 +40,29 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Книги" image="books" id="a5p-UR-oeD"/>
-                                    <tabBarItem title="Їжа" image="food" id="iOU-n3-fxl"/>
                                     <tabBarItem title="Дії" image="activity" id="H7E-lc-eYO"/>
                                     <tabBarItem title="Курси" image="learning" id="UA8-gh-kpF"/>
                                     <tabBarItem title="Розваги" image="movie" id="LqO-Tf-yHo"/>
+                                    <tabBarItem title="Їжа" image="food" id="iOU-n3-fxl"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Eo5-vu-Rod"/>
                                 </connections>
                             </tabBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LIN-wC-Cze">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Dxy-oH-DSy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="11l-10-zSN"/>
+                            <constraint firstItem="LIN-wC-Cze" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D2r-Kh-m3d"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="Dxy-oH-DSy" secondAttribute="bottom" id="FAd-qi-Uqv"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sjh-Gc-JK8"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ifq-pF-Ccd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dxy-oH-DSy" secondAttribute="trailing" id="k0l-CE-S46"/>
+                            <constraint firstItem="LIN-wC-Cze" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="odS-0d-NH3"/>
                             <constraint firstItem="Dxy-oH-DSy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oyj-aQ-2D0"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wXt-E0-oOB"/>
                         </constraints>
@@ -71,6 +77,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="LIN-wC-Cze" id="GZR-0u-ecC"/>
+                        <outlet property="categoriesBarButton" destination="Wty-Pr-b1v" id="h6w-82-MoQ"/>
                         <outlet property="itemsTableView" destination="Dxy-oH-DSy" id="Y0J-6q-zU0"/>
                         <outlet property="sectionsTabBar" destination="XlQ-uD-o0f" id="bO2-4t-bwU"/>
                     </connections>
