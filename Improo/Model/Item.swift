@@ -26,7 +26,7 @@ class Item {
                 return nil
         }
         self.title = title
-        self.description = description
+        self.description = "    " + description
         self.categories = categories
         
         if let urlString = dictionary["url"] as? String, let url = URL(string: urlString) {
