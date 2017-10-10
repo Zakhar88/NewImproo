@@ -30,7 +30,9 @@ class ItemViewController: UIViewController {
             if let imageURL = selectedItem.imageURL {
                 DispatchQueue.global().async {
                     guard let data = try? Data(contentsOf: imageURL) else {
-                        self.imageView?.removeFromSuperview()
+                        DispatchQueue.main.async {
+                            self.imageView?.removeFromSuperview()
+                        }
                         return
                     }
                     DispatchQueue.main.async {

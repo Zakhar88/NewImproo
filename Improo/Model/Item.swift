@@ -21,13 +21,15 @@ class Item {
     
     init?(dictionary: [String:Any]) {
         guard let title = dictionary["title"] as? String,
-            let description = dictionary["description"] as? String,
-            let categories = dictionary["categories"] as? [String] else {
+            let description = dictionary["description"] as? String else {
                 return nil
         }
         self.title = title
         self.description = "    " + description
-        self.categories = categories
+        
+        if let categories = dictionary["categories"] as? [String] {
+            self.categories = categories
+        }
         
         if let urlString = dictionary["url"] as? String, let url = URL(string: urlString) {
             self.url = url

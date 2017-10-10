@@ -60,8 +60,19 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         sectionsTabBar?.selectedItem = booksBarItem
         title = booksBarItem?.title
 
-        databaseReference = Firestore.firestore()
+        configureFirestore()
         loadDocuments()
+    }
+    
+    // Functions
+    
+    private func configureFirestore() {
+        FirebaseApp.configure()
+        databaseReference = Firestore.firestore()
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = true
+        let db = Firestore.firestore()
+        db.settings = settings
     }
     
     // MARK: - IBActions
@@ -91,7 +102,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell") ?? UITableViewCell()
+        let cell: UITableViewCell
+        if selectedSection == .Books {
+            cell = tableView.dequeueReusableCell(withIdentifier: "improoBookCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "improoBookCell")
+            cell.detailTextLabel?.text = selectedSectionItems[indexPath.row].author
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell") ?? UITableViewCell()
+        }
         cell.textLabel?.text = selectedSectionItems[indexPath.row].title
         return cell
     }
