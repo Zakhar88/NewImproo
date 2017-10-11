@@ -17,7 +17,6 @@ class Item {
     var categories: [String] = []
     var imageURL: URL?
     var url: URL?
-    var author: String?
     
     init?(dictionary: [String:Any]) {
         guard let title = dictionary["title"] as? String,
@@ -37,10 +36,6 @@ class Item {
         
         if let imageURLString = dictionary["imageUrl"] as? String, let imageURL = URL(string: imageURLString) {
             self.imageURL = imageURL
-        }
-        
-        if let author = dictionary["author"] as? String {
-            self.author = author
         }
     }
 }

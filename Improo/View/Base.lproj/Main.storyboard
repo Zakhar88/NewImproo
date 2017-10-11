@@ -259,11 +259,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Mw-MO-aBf"/>
                     </view>
+                    <navigationItem key="navigationItem" id="iNL-8s-QAY">
+                        <barButtonItem key="rightBarButtonItem" title="Open in Safari" id="OWc-TS-HRy">
+                            <connections>
+                                <action selector="openURL" destination="BaT-2H-SP6" id="vNZ-c3-msa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="authorLabel" destination="IpN-B5-hOo" id="zaU-FP-fOC"/>
                         <outlet property="descriptionTextView" destination="BNa-i0-GIs" id="nq0-PY-iZY"/>
                         <outlet property="imageView" destination="Iag-X9-XhT" id="Cry-dK-Dqf"/>
+                        <outlet property="openItemURLBarButton" destination="OWc-TS-HRy" id="ON1-vH-5NU"/>
                         <outlet property="titleLabel" destination="EKC-5e-UEj" id="KEe-iW-qGS"/>
                     </connections>
                 </viewController>

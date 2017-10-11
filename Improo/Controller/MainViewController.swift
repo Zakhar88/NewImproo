@@ -61,8 +61,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         title = booksBarItem?.title
 
         configureFirestore()
-        
-        
         loadDocuments()
     }
     
@@ -105,9 +103,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
-        if selectedSection == .Books {
+        if let selectedBook = selectedSectionItems[indexPath.row] as? Book {
             cell = tableView.dequeueReusableCell(withIdentifier: "improoBookCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "improoBookCell")
-            cell.detailTextLabel?.text = selectedSectionItems[indexPath.row].author
+            cell.detailTextLabel?.text = selectedBook.author
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell") ?? UITableViewCell()
         }
@@ -154,7 +152,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         databaseReference.collection("ukrainian/\(selectedSection.rawValue)/Collection").getDocuments { (querySnapshot, error) in
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
-            self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
+            switch self.selectedSection {
+                case .Books:
+                    self.sectionItems = querySnapshot!.documents.flatMap({Book(dictionary: $0.data())})
+                default:
+                    self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
+            }
+            
             DispatchQueue.main.async {
                 self.itemsTableView?.reloadData()
             }
