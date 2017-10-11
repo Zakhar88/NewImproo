@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="improoItemCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoItemCell" textLabel="c0n-s9-Mqu" style="IBUITableViewCellStyleDefault" id="ZlX-jG-hMx">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoItemCell" textLabel="c0n-s9-Mqu" style="IBUITableViewCellStyleDefault" id="ZlX-jG-hMx">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZlX-jG-hMx" id="mLX-BW-SIO">
@@ -40,7 +40,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="improoItemCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoBookCell" textLabel="DBu-pY-03l" detailTextLabel="JBX-CS-y5T" style="IBUITableViewCellStyleSubtitle" id="ZBh-Ln-e9N">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoBookCell" textLabel="DBu-pY-03l" detailTextLabel="JBX-CS-y5T" style="IBUITableViewCellStyleSubtitle" id="ZBh-Ln-e9N">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZBh-Ln-e9N" id="PCu-oo-qU6">
