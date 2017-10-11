@@ -24,7 +24,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private let allCategories = "Усі категорії"
     
-    private var databaseReference: Firestore!
+    var databaseReference: Firestore!
     private var sectionItems = [Item]()
     private var selectedCategory: String?
 
@@ -61,6 +61,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         title = booksBarItem?.title
 
         configureFirestore()
+        
+        
         loadDocuments()
     }
     
@@ -136,8 +138,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         //Try to load categories
-        databaseReference.document("publicData/\(selectedSection.rawValue)").getDocument { (documentSnaphot, error) in
-            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()["categories"] as? [String] else {
+        databaseReference.document("ukrainian/\(selectedSection.rawValue)").getDocument { (documentSnaphot, error) in
+            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()["Categories"] as? [String] else {
                 self.sectionCategories = nil
                 return
             }
@@ -149,7 +151,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         //Load items
-        databaseReference.collection("publicData/\(selectedSection.rawValue)/Collection").getDocuments { (querySnapshot, error) in
+        databaseReference.collection("ukrainian/\(selectedSection.rawValue)/Collection").getDocuments { (querySnapshot, error) in
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})

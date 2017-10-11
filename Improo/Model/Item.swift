@@ -25,7 +25,7 @@ class Item {
                 return nil
         }
         self.title = title
-        self.description = "    " + description
+        self.description = description
         
         if let categories = dictionary["categories"] as? [String] {
             self.categories = categories
@@ -35,7 +35,7 @@ class Item {
             self.url = url
         }
         
-        if let imageURLString = dictionary["imageurl"] as? String, let imageURL = URL(string: imageURLString) {
+        if let imageURLString = dictionary["imageUrl"] as? String, let imageURL = URL(string: imageURLString) {
             self.imageURL = imageURL
         }
         

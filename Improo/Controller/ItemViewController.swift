@@ -21,7 +21,7 @@ class ItemViewController: UIViewController {
             guard let selectedItem = selectedItem else { return }
             loadViewIfNeeded()
             titleLabel?.text = selectedItem.title
-            descriptionTextView?.text = selectedItem.description
+            descriptionTextView?.text = "   " + selectedItem.description.replacingOccurrences(of: "\n", with: "\n   ")
             if let authorTitle = selectedItem.author {
                 authorLabel?.text = authorTitle
             } else {
@@ -30,17 +30,13 @@ class ItemViewController: UIViewController {
             if let imageURL = selectedItem.imageURL {
                 DispatchQueue.global().async {
                     guard let data = try? Data(contentsOf: imageURL) else {
-                        DispatchQueue.main.async {
-                            self.imageView?.removeFromSuperview()
-                        }
+                        DispatchQueue.main.async { self.imageView?.superview?.removeFromSuperview() }
                         return
                     }
-                    DispatchQueue.main.async {
-                        self.imageView?.image = UIImage(data: data)
-                    }
+                    DispatchQueue.main.async { self.imageView?.image = UIImage(data: data) }
                 }
             } else {
-                imageView?.removeFromSuperview()
+                self.imageView?.superview?.removeFromSuperview()
             }
         }
     }
