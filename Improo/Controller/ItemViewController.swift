@@ -28,11 +28,20 @@ class ItemViewController: UIViewController {
             }
             if let imageURL = selectedItem.imageURL {
                 DispatchQueue.global().async {
-                    guard let data = try? Data(contentsOf: imageURL) else {
+                    guard let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data), let imageView = self.imageView else {
                         DispatchQueue.main.async { self.imageView?.superview?.removeFromSuperview() }
                         return
                     }
-                    DispatchQueue.main.async { self.imageView?.image = UIImage(data: data) }
+                    DispatchQueue.main.async {
+                        imageView.image = image
+                        imageView.layer.cornerRadius = 5
+                        imageView.layer.masksToBounds = true
+                        imageView.layer.borderColor = UIColor.black.cgColor
+                        imageView.layer.borderWidth = 3
+                        imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
+                        imageView.isHidden = false
+                        self.view.layoutIfNeeded()
+                    }
                 }
             } else {
                 self.imageView?.superview?.removeFromSuperview()
@@ -53,33 +62,32 @@ class ItemViewController: UIViewController {
     
     @IBAction func openURL() {
         guard let selectedItem = selectedItem else { return }
-        let url: URL?
+        let url: URL
         
         if let itemUrl = selectedItem.url {
             url = itemUrl
+        } else if let book = selectedItem as? Book, let bookURL = getGoogleSearchURL(parameters: "\(book.title) \(book.author)") {
+            url = bookURL
+        } else if let itemURL = getGoogleSearchURL(parameters: "\(selectedItem.title)") {
+            url = itemURL
         } else {
-            let scheme = "https"
-            let host = "www.google.com"
-            let path = "/search"
-            let value: String
-            
-            if let book = selectedItem as? Book {
-                value = "\(book.title.components(separatedBy: CharacterSet.punctuationCharacters).joined(separator: "")) \(book.author)"
-            } else {
-                value = selectedItem.title
-            }
-            
-            let queryItem = URLQueryItem(name: "q", value: value)
-            
-            var urlComponents = URLComponents()
-            urlComponents.scheme = scheme
-            urlComponents.host = host
-            urlComponents.path = path
-            urlComponents.queryItems = [queryItem]
-            url = urlComponents.url
+            return
         }
-        if let url = url {
-            UIApplication.shared.open(url, options: [:])
-        }
+        UIApplication.shared.open(url, options: [:])
+    }
+    
+    func getGoogleSearchURL(parameters: String) -> URL? {
+        let scheme = "https"
+        let host = "www.google.com"
+        let path = "/search"
+        let value = parameters.components(separatedBy: CharacterSet.punctuationCharacters).joined(separator: "")
+        let queryItem = URLQueryItem(name: "q", value: value)
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = scheme
+        urlComponents.host = host
+        urlComponents.path = path
+        urlComponents.queryItems = [queryItem]
+        return urlComponents.url
     }
 }
