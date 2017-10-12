@@ -271,7 +271,6 @@
                         <outlet property="authorLabel" destination="IpN-B5-hOo" id="zaU-FP-fOC"/>
                         <outlet property="descriptionTextView" destination="BNa-i0-GIs" id="nq0-PY-iZY"/>
                         <outlet property="imageView" destination="Iag-X9-XhT" id="Cry-dK-Dqf"/>
-                        <outlet property="openItemURLBarButton" destination="OWc-TS-HRy" id="ON1-vH-5NU"/>
                         <outlet property="titleLabel" destination="EKC-5e-UEj" id="KEe-iW-qGS"/>
                     </connections>
                 </viewController>
