@@ -37,7 +37,7 @@ class ItemViewController: UIViewController {
                         imageView.layer.cornerRadius = 5
                         imageView.layer.masksToBounds = true
                         imageView.layer.borderColor = UIColor.black.cgColor
-                        imageView.layer.borderWidth = 3
+                        imageView.layer.borderWidth = 2
                         imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
                         imageView.isHidden = false
                         self.view.layoutIfNeeded()
