@@ -219,7 +219,7 @@
                                                                 <rect key="frame" x="27" y="57" width="37" height="37"/>
                                                                 <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </activityIndicatorView>
-                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iU1-nC-JlG">
+                                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iU1-nC-JlG" customClass="ImprooImageView" customModule="Improo" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="90.5" height="151"/>
                                                             </imageView>
                                                         </subviews>

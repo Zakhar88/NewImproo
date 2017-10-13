@@ -12,8 +12,10 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var authorLabel: UILabel?
-    @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var imageView: ImprooImageView?
     @IBOutlet weak var descriptionTextView: UITextView?
+    
+    var fullscreenImageView: UIImageView?
     
     var selectedItem: Item? {
         didSet {
@@ -34,10 +36,6 @@ class ItemViewController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         imageView.image = image
-                        imageView.layer.cornerRadius = 5
-                        imageView.layer.masksToBounds = true
-                        imageView.layer.borderColor = UIColor.black.cgColor
-                        imageView.layer.borderWidth = 2
                         imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
                         imageView.isHidden = false
                         self.view.layoutIfNeeded()
@@ -90,4 +88,6 @@ class ItemViewController: UIViewController {
         urlComponents.queryItems = [queryItem]
         return urlComponents.url
     }
+    
+    
 }
