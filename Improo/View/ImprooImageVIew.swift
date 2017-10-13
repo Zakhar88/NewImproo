@@ -23,48 +23,55 @@ class ImprooImageView: UIImageView {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showFullscreenImage))
         self.addGestureRecognizer(tapGestureRecognizer)
         
-        prepareImageView(self)
+        addBorder(self)
     }
     
-    func prepareImageView(_ imageView: UIImageView) {
+    func addBorder(_ imageView: UIImageView, width: CGFloat = 2) {
         imageView.layer.cornerRadius = 5
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = 2
+        imageView.layer.borderWidth =  width
     }
     
     @objc func showFullscreenImage() {
         fullscreenImageView = UIImageView(image: image)
         fullscreenImageView.contentMode = .scaleAspectFit
-        fullscreenImageView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         fullscreenImageView.alpha = 0
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideFullscreenImage))
         fullscreenImageView.isUserInteractionEnabled = true
         fullscreenImageView.addGestureRecognizer(tapGestureRecognizer)
         
-        prepareImageView(fullscreenImageView)
+        addBorder(fullscreenImageView, width: 5)
         
         let topWindow = UIApplication.shared.windows.first!
+        let backgroundView = UIView(frame: self.convert(frame, to: topWindow))
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        backgroundView.alpha = 0
         fullscreenImageView.frame = self.convert(frame, to: topWindow)
-        topWindow.addSubview(fullscreenImageView)
-        fullscreenImageView.translatesAutoresizingMaskIntoConstraints = false
-        fullscreenImageView.centerXAnchor.constraint(equalTo: topWindow.centerXAnchor).isActive = true
-        fullscreenImageView.centerYAnchor.constraint(equalTo: topWindow.centerYAnchor).isActive = true
+        fullscreenImageView.center = backgroundView.center
+        backgroundView.addSubview(fullscreenImageView)
+        topWindow.addSubview(backgroundView)
 
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
             self.fullscreenImageView.frame = CGRect(origin: CGPoint.zero, size: self.fullscreenImageView.image!.size)
+            self.fullscreenImageView.center = topWindow.center
             self.fullscreenImageView.alpha = 1
-            self.fullscreenImageView.layoutSubviews()
+            backgroundView.frame = topWindow.frame
+            backgroundView.center = topWindow.center
+            backgroundView.alpha = 1
         }, completion: nil)
     }
     
     @objc func hideFullscreenImage() {
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
-            self.fullscreenImageView.frame = self.convert(self.frame, to: UIApplication.shared.windows.first!)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
+            let newFrame = self.convert(self.frame, to: UIApplication.shared.windows.first!)
+            self.fullscreenImageView.superview?.frame = newFrame
+            self.fullscreenImageView.superview?.alpha = 0
+            self.fullscreenImageView.frame = newFrame
             self.fullscreenImageView.alpha = 0
         }, completion: { finished in
-            self.fullscreenImageView.removeFromSuperview()
+            self.fullscreenImageView.superview?.removeFromSuperview()
             self.fullscreenImageView = nil
         })
     }
