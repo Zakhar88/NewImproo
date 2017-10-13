@@ -119,7 +119,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         guard let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemViewController") as? ItemViewController else { return }
         itemViewController.selectedItem = selectedSectionItems[indexPath.row]
         navigationController?.pushViewController(itemViewController, animated: true)
-        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return selectedSection == .Books ? 77 : -1
     }
 
     // MARK: - UITabBarDelegate
@@ -155,8 +158,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             switch self.selectedSection {
                 case .Books:
                     self.sectionItems = querySnapshot!.documents.flatMap({Book(dictionary: $0.data())})
+                    self.itemsTableView?.estimatedRowHeight = 100
                 default:
                     self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
+                    self.itemsTableView?.estimatedRowHeight = 50
             }
             
             DispatchQueue.main.async {
