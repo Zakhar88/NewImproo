@@ -19,18 +19,12 @@ class ImprooImageView: UIImageView {
     }
     
     func setup() {
-        isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showFullscreenImage))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        //TODO: Add fullscreen image review
+//        isUserInteractionEnabled = true
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showFullscreenImage))
+//        self.addGestureRecognizer(tapGestureRecognizer)
         
-        addBorder(self)
-    }
-    
-    func addBorder(_ imageView: UIImageView, width: CGFloat = 2) {
-        imageView.layer.cornerRadius = 5
-        imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth =  width
+        addBorder()
     }
     
     @objc func showFullscreenImage() {
@@ -42,7 +36,7 @@ class ImprooImageView: UIImageView {
         fullscreenImageView.isUserInteractionEnabled = true
         fullscreenImageView.addGestureRecognizer(tapGestureRecognizer)
         
-        addBorder(fullscreenImageView, width: 5)
+        fullscreenImageView.addBorder(width: 5)
         
         let topWindow = UIApplication.shared.windows.first!
         let backgroundView = UIView(frame: self.convert(frame, to: topWindow))

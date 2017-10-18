@@ -16,10 +16,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var itemsTableView: UITableView?
     @IBOutlet weak var sectionsTabBar: UITabBar?
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView?
+    @IBOutlet var randomItemBarButton: UIBarButtonItem?
     @IBOutlet var categoriesBarButton: UIBarButtonItem?
-
+    @IBOutlet weak var aboutView: AboutView?
+    
     //@IBOutlet weak var randomItemBarButton: UIBarButtonItem?
-
+    
     // MARK: - Properties
     
     private let allCategories = "Усі категорії"
@@ -27,7 +29,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var databaseReference: Firestore!
     private var sectionItems = [Item]()
     private var selectedCategory: String?
-
+    
     private var selectedSectionItems: [Item] {
         get {
             if let selectedCategory = selectedCategory, selectedCategory != allCategories {
@@ -43,25 +45,39 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             navigationItem.rightBarButtonItem = sectionCategories == nil ? nil : categoriesBarButton
         }
     }
-
+    
     private var selectedSection: Section = .Books {
         didSet {
+            guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
+            
+            if selectedSection == .About {
+                showAboutView()
+                return
+            }
+            
+            if oldValue == .About {
+                hideAboutView()
+            }
+            
             loadDocuments()
         }
     }
     
     // MARK: - ViewController Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         let booksBarItem = sectionsTabBar?.items?.first
         sectionsTabBar?.selectedItem = booksBarItem
         title = booksBarItem?.title
-
+        
         configureFirestore()
         loadDocuments()
+        
+        //TODO: Load info text
+        aboutView?.infoTextLabel?.text = "\tЗадумувалися інколи що хотілося б розвиватися, але не знаєте як, з чого почати і куди рухатись? Цей додаток створения саме для того, щоб допомогти Вам у цьому. Ми лише починаємо, і ваші поради та зауваження дуже важливі! Нижче ви можете надіслати їх нам. Дякуємо!"
     }
     
     // Functions
@@ -73,6 +89,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         settings.isPersistenceEnabled = true
         let db = Firestore.firestore()
         db.settings = settings
+    }
+    
+    
+    func showAboutView() {
+        aboutView?.isHidden = false
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.leftBarButtonItem = nil
+        UIView.animate(withDuration: 0.5, animations: {
+            self.aboutView?.alpha = 1
+        })
+    }
+    
+    func hideAboutView() {
+        navigationItem.leftBarButtonItem = randomItemBarButton
+        UIView.animate(withDuration: 0.5, animations: {
+            self.aboutView?.alpha = 0
+        }) { (_) in
+            self.aboutView?.isHidden = true
+        }
     }
     
     // MARK: - IBActions
@@ -124,7 +159,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return selectedSection == .Books ? 77 : -1
     }
-
+    
     // MARK: - UITabBarDelegate
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -135,6 +170,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //MARK: - Firebase
     
     private func loadDocuments() {
+        
         activityIndicatorView?.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
@@ -156,12 +192,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             switch self.selectedSection {
-                case .Books:
-                    self.sectionItems = querySnapshot!.documents.flatMap({Book(dictionary: $0.data())})
-                    self.itemsTableView?.estimatedRowHeight = 100
-                default:
-                    self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
-                    self.itemsTableView?.estimatedRowHeight = 50
+            case .Books:
+                self.sectionItems = querySnapshot!.documents.flatMap({Book(dictionary: $0.data())})
+                self.itemsTableView?.estimatedRowHeight = 100
+            default:
+                self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
+                self.itemsTableView?.estimatedRowHeight = 50
             }
             
             DispatchQueue.main.async {
@@ -170,12 +206,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    private func addListener() {
-        databaseReference.document("").addSnapshotListener { (documentSnapshot, error) in
-            
-        }
-    }
-
     
     
     

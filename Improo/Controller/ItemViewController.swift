@@ -14,8 +14,7 @@ class ItemViewController: UIViewController {
     @IBOutlet weak var authorLabel: UILabel?
     @IBOutlet weak var imageView: ImprooImageView?
     @IBOutlet weak var descriptionTextView: UITextView?
-    
-    var fullscreenImageView: UIImageView?
+    @IBOutlet weak var openURLBarButton: UIBarButtonItem?
     
     var selectedItem: Item? {
         didSet {
@@ -36,13 +35,22 @@ class ItemViewController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         imageView.image = image
-                        imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
-                        imageView.isHidden = false
-                        self.view.layoutIfNeeded()
+                        UIView.animate(withDuration: 0.5, animations: {
+                            imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
+                            imageView.isHidden = false
+                            imageView.alpha = 1
+                            self.view.layoutIfNeeded()
+                        })
                     }
                 }
             } else {
                 self.imageView?.superview?.removeFromSuperview()
+            }
+            
+            if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
+                openURLBarButton?.title = hostName
+            } else {
+                openURLBarButton?.title = "Google"
             }
         }
     }
@@ -88,6 +96,4 @@ class ItemViewController: UIViewController {
         urlComponents.queryItems = [queryItem]
         return urlComponents.url
     }
-    
-    
 }

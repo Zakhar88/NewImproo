@@ -9,19 +9,19 @@
 import Foundation
 
 enum Section: String {
+    case About = "About"
     case Activities = "Activities"
     case Books = "Books"
     case Courses = "Courses"
     case Entertainment = "Entertainment"
-    case Food = "Food"
     
     init?(ukrainianTitle: String?) {
         guard let title = ukrainianTitle else { return nil }
         switch title {
             case "Книги":
                 self = .Books
-            case "Їжа":
-                self = .Food
+            case "Про Нас":
+                self = .About
             case "Дії":
                 self = .Activities
             case "Курси":
@@ -37,8 +37,8 @@ enum Section: String {
         switch self {
         case .Books:
             return "Книги"
-        case .Food:
-            return "Їжа"
+        case .About:
+            return "Про Нас"
         case .Activities:
             return "Дії"
         case .Courses:
