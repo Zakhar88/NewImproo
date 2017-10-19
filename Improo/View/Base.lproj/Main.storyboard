@@ -91,19 +91,19 @@
                                 <rect key="frame" x="0.0" y="51" width="320" height="466"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3F-TG-S9f">
-                                        <rect key="frame" x="16" y="30" width="288" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="16" y="26" width="288" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ваш нікнейм (за бажанням)" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vSb-kY-qO2">
-                                        <rect key="frame" x="16" y="45.5" width="288" height="30"/>
+                                        <rect key="frame" x="16" y="41.5" width="288" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RAP-DL-BdZ">
-                                        <rect key="frame" x="16" y="95.5" width="288" height="298.5"/>
+                                        <rect key="frame" x="16" y="91.5" width="288" height="302.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
@@ -132,7 +132,7 @@
                                     <constraint firstAttribute="bottom" secondItem="bXy-CP-Ost" secondAttribute="bottom" constant="16" id="N1M-au-XNa"/>
                                     <constraint firstItem="vSb-kY-qO2" firstAttribute="top" secondItem="J3F-TG-S9f" secondAttribute="bottom" constant="16" id="Nx6-c0-gMk"/>
                                     <constraint firstAttribute="trailing" secondItem="J3F-TG-S9f" secondAttribute="trailing" constant="16" id="Wsl-bq-0Dl"/>
-                                    <constraint firstItem="J3F-TG-S9f" firstAttribute="top" secondItem="LCi-df-PWh" secondAttribute="top" constant="30" id="XPZ-jN-Zck"/>
+                                    <constraint firstItem="J3F-TG-S9f" firstAttribute="top" secondItem="LCi-df-PWh" secondAttribute="top" constant="26" id="XPZ-jN-Zck"/>
                                     <constraint firstItem="vSb-kY-qO2" firstAttribute="leading" secondItem="LCi-df-PWh" secondAttribute="leading" constant="16" id="YP6-Tz-HG3"/>
                                     <constraint firstItem="bXy-CP-Ost" firstAttribute="centerX" secondItem="LCi-df-PWh" secondAttribute="centerX" id="c0F-M8-1iu"/>
                                     <constraint firstItem="RAP-DL-BdZ" firstAttribute="leading" secondItem="LCi-df-PWh" secondAttribute="leading" constant="16" id="lPs-A8-LBm"/>

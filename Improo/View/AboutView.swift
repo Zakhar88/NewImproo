@@ -55,6 +55,10 @@ class AboutView: UIView {
 
 extension AboutView: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        
+        if let placeholderLabel = self.viewWithTag(100) as? UILabel {
+            placeholderLabel.isHidden = textView.text.characters.count > 0
+        }
         sendButton?.isEnabled = !textView.text.isEmpty
         sendButton?.backgroundColor = textView.text.isEmpty ? UIColor.lightGray : sendButton?.tintColor
     }

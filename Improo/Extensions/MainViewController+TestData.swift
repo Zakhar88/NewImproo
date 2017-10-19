@@ -40,4 +40,15 @@ extension MainViewController {
             }
         }
     }
+    
+    func addInfoText() {
+        let infoText = ["text": "\tЗамислюєтеся інколи, що хотіли б розвиватися, але поки не знаєте, з чого почати і куди рухатись? Цей застосунок створено саме для того, щоб у цьому Вам допомогти.\n\tМи лише починаємо, отож Ваші поради та зауваження дуже важливі! Ви можете надсилати їх нам, скориставшись формою нижче. Дякуємо!"]
+        databaseReference.document("ukrainian/info").setData(infoText) { error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Failed to add infoText", message: error.localizedDescription)
+                }
+            }
+        }
+    }
 }

@@ -177,7 +177,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             DispatchQueue.main.async {
-                self.aboutView?.infoTextLabel?.text = "\t" + infoText
+                self.aboutView?.infoTextLabel?.text = infoText
             }
         }
     }
