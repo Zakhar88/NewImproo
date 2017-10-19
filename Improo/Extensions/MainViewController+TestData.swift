@@ -40,9 +40,4 @@ extension MainViewController {
             }
         }
     }
-    
-    func showAlert(title: String?, message: String?) {
-        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        navigationController?.present(alertViewController, animated: true)
-    }
 }

@@ -21,7 +21,7 @@ class ItemViewController: UIViewController {
             guard let selectedItem = selectedItem else { return }
             loadViewIfNeeded()
             titleLabel?.text = selectedItem.title
-            descriptionTextView?.text = "   " + selectedItem.description.replacingOccurrences(of: "\n", with: "\n   ")
+            descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
             if let selectedBook = selectedItem as? Book {
                 authorLabel?.text = selectedBook.author
             } else {

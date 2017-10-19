@@ -68,7 +68,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         let booksBarItem = sectionsTabBar?.items?.first
         sectionsTabBar?.selectedItem = booksBarItem
         title = booksBarItem?.title
@@ -77,7 +77,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         loadDocuments()
         
         //TODO: Load info text
-        aboutView?.infoTextLabel?.text = "\tЗадумувалися інколи що хотілося б розвиватися, але не знаєте як, з чого почати і куди рухатись? Цей додаток створения саме для того, щоб допомогти Вам у цьому. Ми лише починаємо, і ваші поради та зауваження дуже важливі! Нижче ви можете надіслати їх нам. Дякуємо!"
+        loadInfo()
+        aboutView?.messageTextView?.placeholder = "Ваше повідомлення..."
     }
     
     // Functions
@@ -92,7 +93,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func showAboutView() {
+    private func showAboutView() {
         aboutView?.isHidden = false
         navigationItem.rightBarButtonItem = nil
         navigationItem.leftBarButtonItem = nil
@@ -101,7 +102,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     
-    func hideAboutView() {
+    private func hideAboutView() {
         navigationItem.leftBarButtonItem = randomItemBarButton
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 0
@@ -169,6 +170,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: - Firebase
     
+    private func loadInfo() {
+        databaseReference.document("ukrainian/info").getDocument { (documentSnapshot, error) in
+            guard let infoText = documentSnapshot?.data()["text"] as? String else {
+                self.showAlert(title: "Failed to load Info Text", message: nil)
+                return
+            }
+            DispatchQueue.main.async {
+                self.aboutView?.infoTextLabel?.text = "\t" + infoText
+            }
+        }
+    }
+    
     private func loadDocuments() {
         
         activityIndicatorView?.startAnimating()
@@ -181,8 +194,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             categories.insert(self.allCategories, at: 0)
+            self.sectionCategories = categories
             DispatchQueue.main.async {
-                self.sectionCategories = categories
                 self.categoriesBarButton?.title = categories.first
             }
         }
