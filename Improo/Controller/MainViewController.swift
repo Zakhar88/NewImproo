@@ -175,7 +175,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //Try to load categories
         FirestoreManager.shared.loadCategories(forSection: selectedSection) { (categories, error) in
-            guard let categories = categories else {
+            guard error == nil else {
                 self.showError(error)
                 return
             }
