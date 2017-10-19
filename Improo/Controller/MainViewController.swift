@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
@@ -20,19 +19,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet var categoriesBarButton: UIBarButtonItem?
     @IBOutlet weak var aboutView: AboutView?
     
-    //@IBOutlet weak var randomItemBarButton: UIBarButtonItem?
-    
     // MARK: - Properties
-    
-    private let allCategories = "Усі категорії"
-    
-    var databaseReference: Firestore!
-    private var sectionItems = [Item]()
+        
+    private var sectionItems = [Item]() {
+        didSet {
+            itemsTableView?.reloadData()
+        }
+    }
     private var selectedCategory: String?
     
     private var selectedSectionItems: [Item] {
         get {
-            if let selectedCategory = selectedCategory, selectedCategory != allCategories {
+            if let selectedCategory = selectedCategory, selectedCategory != FirestoreManager.allCategories {
                 return sectionItems.filter({$0.categories.contains(selectedCategory)})
             } else {
                 return sectionItems
@@ -43,6 +41,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var sectionCategories: [String]? {
         didSet {
             navigationItem.rightBarButtonItem = sectionCategories == nil ? nil : categoriesBarButton
+            categoriesBarButton?.title = sectionCategories?.first
         }
     }
     
@@ -60,6 +59,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 hideAboutView()
             }
             
+            self.itemsTableView?.estimatedRowHeight = selectedSection == .Books ? 100 : 50
+
             loadDocuments()
         }
     }
@@ -73,25 +74,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         sectionsTabBar?.selectedItem = booksBarItem
         title = booksBarItem?.title
         
-        configureFirestore()
         loadDocuments()
-        
-        //TODO: Load info text
-        loadInfo()
-        aboutView?.messageTextView?.placeholder = "Ваше повідомлення..."
+        setupAboutView()
     }
     
     // Functions
     
-    private func configureFirestore() {
-        FirebaseApp.configure()
-        databaseReference = Firestore.firestore()
-        let settings = FirestoreSettings()
-        settings.isPersistenceEnabled = true
-        let db = Firestore.firestore()
-        db.settings = settings
+    private func setupAboutView() {
+        FirestoreManager.shared.loadInfo { (infoText, error) in
+            guard let infoText = infoText else {
+                self.showError(error)
+                return
+            }
+            self.aboutView?.infoTextLabel?.text = infoText
+        }
+        aboutView?.messageTextView?.placeholder = "Ваше повідомлення..."
     }
-    
     
     private func showAboutView() {
         aboutView?.isHidden = false
@@ -170,60 +168,31 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: - Firebase
     
-    private func loadInfo() {
-        databaseReference.document("ukrainian/info").getDocument { (documentSnapshot, error) in
-            guard let infoText = documentSnapshot?.data()["text"] as? String else {
-                self.showAlert(title: "Failed to load Info Text", message: nil)
-                return
-            }
-            DispatchQueue.main.async {
-                self.aboutView?.infoTextLabel?.text = infoText
-            }
-        }
-    }
-    
     private func loadDocuments() {
         
         activityIndicatorView?.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         //Try to load categories
-        databaseReference.document("ukrainian/\(selectedSection.rawValue)").getDocument { (documentSnaphot, error) in
-            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()["Categories"] as? [String] else {
-                self.sectionCategories = nil
+        FirestoreManager.shared.loadCategories(forSection: selectedSection) { (categories, error) in
+            guard let categories = categories else {
+                self.showError(error)
                 return
             }
-            categories.insert(self.allCategories, at: 0)
             self.sectionCategories = categories
-            DispatchQueue.main.async {
-                self.categoriesBarButton?.title = categories.first
-            }
         }
         
         //Load items
-        databaseReference.collection("ukrainian/\(selectedSection.rawValue)/Collection").getDocuments { (querySnapshot, error) in
+        FirestoreManager.shared.loadDocuments(forSection: selectedSection) { (items, error) in
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
-            switch self.selectedSection {
-            case .Books:
-                self.sectionItems = querySnapshot!.documents.flatMap({Book(dictionary: $0.data())})
-                self.itemsTableView?.estimatedRowHeight = 100
-            default:
-                self.sectionItems = querySnapshot!.documents.flatMap({Item(dictionary: $0.data())})
-                self.itemsTableView?.estimatedRowHeight = 50
+            
+            guard let items = items else {
+                self.showError(error)
+                return
             }
             
-            DispatchQueue.main.async {
-                self.itemsTableView?.reloadData()
-            }
+            self.sectionItems = items
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }

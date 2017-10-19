@@ -14,7 +14,7 @@ extension UIViewController {
         navigationController?.present(alertViewController, animated: true)
     }
     
-    func showError(_ error: Error) {
-        showAlert(title: "Error", message: error.localizedDescription)
+    func showError(_ error: Error?) {
+        showAlert(title: "Error", message: error?.localizedDescription)
     }
 }

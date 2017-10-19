@@ -12,6 +12,7 @@
 		6B116C521F97A47300DF5D52 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116C511F97A47300DF5D52 /* UIView+Border.swift */; };
 		6B116C541F98A6F500DF5D52 /* ViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116C531F98A6F500DF5D52 /* ViewController+Alerts.swift */; };
 		6B116C561F98BAD700DF5D52 /* TextView+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116C551F98BAD700DF5D52 /* TextView+Placeholder.swift */; };
+		6B116C581F98EE6700DF5D52 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B116C571F98EE6700DF5D52 /* FirestoreManager.swift */; };
 		6B624C841F8D0D04007CC30A /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B624C831F8D0D04007CC30A /* ItemViewController.swift */; };
 		6B624C871F8E2207007CC30A /* MainViewController+TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B624C861F8E2207007CC30A /* MainViewController+TestData.swift */; };
 		6B624C891F8E2829007CC30A /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B624C881F8E2829007CC30A /* Categories.swift */; };
@@ -33,6 +34,7 @@
 		6B116C511F97A47300DF5D52 /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		6B116C531F98A6F500DF5D52 /* ViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alerts.swift"; sourceTree = "<group>"; };
 		6B116C551F98BAD700DF5D52 /* TextView+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextView+Placeholder.swift"; sourceTree = "<group>"; };
+		6B116C571F98EE6700DF5D52 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		6B624C831F8D0D04007CC30A /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 		6B624C861F8E2207007CC30A /* MainViewController+TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+TestData.swift"; sourceTree = "<group>"; };
 		6B624C881F8E2829007CC30A /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				B1CE46BB1F7C2C5300BE8937 /* View */,
 				B1CE46BC1F7C2C5900BE8937 /* Controller */,
 				B1CE46A81F7C2BC600BE8937 /* AppDelegate.swift */,
+				6B116C571F98EE6700DF5D52 /* FirestoreManager.swift */,
 				B1CE46B41F7C2BC600BE8937 /* Info.plist */,
 				B1CE46C31F7EA4D900BE8937 /* GoogleService-Info.plist */,
 			);
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BDE92091F852FD90065E080 /* Section.swift in Sources */,
+				6B116C581F98EE6700DF5D52 /* FirestoreManager.swift in Sources */,
 				6B116C541F98A6F500DF5D52 /* ViewController+Alerts.swift in Sources */,
 				6B624C891F8E2829007CC30A /* Categories.swift in Sources */,
 				6B116C521F97A47300DF5D52 /* UIView+Border.swift in Sources */,
