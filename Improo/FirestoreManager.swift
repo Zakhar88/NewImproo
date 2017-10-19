@@ -12,10 +12,11 @@ class FirestoreManager {
     static let shared = FirestoreManager()
     static let allCategories = "Усі категорії"
     
-    private let databaseReference = Firestore.firestore()
+    private let databaseReference: Firestore!
     
     private init() {
         FirebaseApp.configure()
+        databaseReference = Firestore.firestore()
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = true
         let db = Firestore.firestore()
