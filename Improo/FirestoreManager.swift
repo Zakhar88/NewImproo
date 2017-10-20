@@ -15,7 +15,6 @@ class FirestoreManager {
     private let databaseReference: Firestore!
     
     private init() {
-        FirebaseApp.configure()
         databaseReference = Firestore.firestore()
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = true
@@ -57,6 +56,7 @@ class FirestoreManager {
                 default:
                     items = documents.flatMap({Item(dictionary: $0.data())})
             }
+            items.sort{$0.title < $1.title}
             completion(items, nil)
         }
     }

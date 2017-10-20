@@ -7,5 +7,6 @@ target 'Improo' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 end
  

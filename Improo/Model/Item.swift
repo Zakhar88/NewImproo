@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseDatabase
 
 class Item {
     //var id: String
@@ -17,6 +15,7 @@ class Item {
     var categories: [String] = []
     var imageURL: URL?
     var url: URL?
+    var image: UIImage?
     
     init?(dictionary: [String:Any]) {
         guard let title = dictionary["title"] as? String,

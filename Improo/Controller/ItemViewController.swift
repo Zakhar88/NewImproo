@@ -27,25 +27,33 @@ class ItemViewController: UIViewController {
             } else {
                 authorLabel?.removeFromSuperview()
             }
-            if let imageURL = selectedItem.imageURL {
-                DispatchQueue.global().async {
-                    guard let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data), let imageView = self.imageView else {
-                        DispatchQueue.main.async { self.imageView?.superview?.removeFromSuperview() }
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        imageView.image = image
-                        UIView.animate(withDuration: 0.5, animations: {
-                            imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
-                            imageView.isHidden = false
-                            imageView.alpha = 1
-                            self.view.layoutIfNeeded()
-                        })
-                    }
-                }
+            
+            if let image = selectedItem.image, let imageView = self.imageView {
+                imageView.image = image
+                imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
             } else {
                 self.imageView?.superview?.removeFromSuperview()
             }
+            
+//            if let imageURL = selectedItem.imageURL {
+//                DispatchQueue.global().async {
+//                    guard let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data), let imageView = self.imageView else {
+//                        DispatchQueue.main.async { self.imageView?.superview?.removeFromSuperview() }
+//                        return
+//                    }
+//                    DispatchQueue.main.async {
+//                        imageView.image = image
+//                        UIView.animate(withDuration: 0.5, animations: {
+//                            imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: imageView, attribute: NSLayoutAttribute.width, multiplier: image.size.height/image.size.width, constant: 0))
+//                            imageView.isHidden = false
+//                            imageView.alpha = 1
+//                            self.view.layoutIfNeeded()
+//                        })
+//                    }
+//                }
+//            } else {
+//                self.imageView?.superview?.removeFromSuperview()
+//            }
             
             if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
                 openURLBarButton?.title = hostName

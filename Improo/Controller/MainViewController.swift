@@ -76,6 +76,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         loadDocuments()
         setupAboutView()
+        
+        StorageManager.loadImages()
     }
     
     // Functions
@@ -92,21 +94,23 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func showAboutView() {
-        aboutView?.isHidden = false
         navigationItem.rightBarButtonItem = nil
         navigationItem.leftBarButtonItem = nil
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 1
-        })
+            self.itemsTableView?.alpha = 0
+        }) { _ in
+            self.itemsTableView?.isHidden = true
+        }
     }
     
     private func hideAboutView() {
         navigationItem.leftBarButtonItem = randomItemBarButton
+        self.itemsTableView?.isHidden = false
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 0
-        }) { (_) in
-            self.aboutView?.isHidden = true
-        }
+            self.itemsTableView?.alpha = 1
+        })
     }
     
     // MARK: - IBActions
@@ -136,15 +140,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        if let selectedBook = selectedSectionItems[indexPath.row] as? Book {
-            cell = tableView.dequeueReusableCell(withIdentifier: "improoBookCell") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "improoBookCell")
-            cell.detailTextLabel?.text = selectedBook.author
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell") ?? UITableViewCell()
+        switch selectedSection {
+            case .Books:
+                let bookCell = tableView.dequeueReusableCell(withIdentifier: "improoBookCell") as? BookCell ?? BookCell()
+                bookCell.book = selectedSectionItems[indexPath.row] as? Book
+                return bookCell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell", for: indexPath)
+                cell.textLabel?.text = selectedSectionItems[indexPath.row].title
+                return cell
         }
-        cell.textLabel?.text = selectedSectionItems[indexPath.row].title
-        return cell
     }
     
     // MARK: - UITableViewDelegate
@@ -157,6 +162,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return selectedSection == .Books ? 77 : -1
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let bookCell = cell as? BookCell {
+            bookCell.showImage()
+        }
     }
     
     // MARK: - UITabBarDelegate
