@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -82,25 +82,8 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoItemCell" textLabel="c0n-s9-Mqu" style="IBUITableViewCellStyleDefault" id="ZlX-jG-hMx">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZlX-jG-hMx" id="mLX-BW-SIO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c0n-s9-Mqu">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="improoBookCell" rowHeight="100" id="Yyv-BR-txd" customClass="BookCell" customModule="Improo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="100" id="Yyv-BR-txd" userLabel="itemCell" customClass="ItemCell" customModule="Improo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yyv-BR-txd" id="dsN-qh-WWs">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
@@ -175,9 +158,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="authorLabel" destination="gOQ-5W-S0Q" id="Tkg-gZ-x2p"/>
-                                            <outlet property="coverImageView" destination="i7N-OW-sIt" id="bgW-o6-W1m"/>
-                                            <outlet property="titleLabel" destination="iVJ-aK-zkX" id="Vqb-ix-H3y"/>
+                                            <outlet property="coverImageView" destination="i7N-OW-sIt" id="RIU-MO-hMG"/>
+                                            <outlet property="detailsLabel" destination="gOQ-5W-S0Q" id="mRh-HZ-ozl"/>
+                                            <outlet property="titleLabel" destination="iVJ-aK-zkX" id="SS3-zh-5Py"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

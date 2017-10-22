@@ -9,16 +9,16 @@
 import UIKit
 import FirebaseStorage
 
-class BookCell: UITableViewCell {
+class ItemCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel?
-    @IBOutlet weak var authorLabel: UILabel?
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var detailsLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     
-    var book: Book! {
+    var item: Item! {
         didSet {
             titleLabel?.text = book.title
-            authorLabel?.text = book.author
+            detailsLabel?.text = book.author
         }
     }
     

@@ -38,9 +38,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    private var sectionCategories: [String]? {
+    private var sectionCategories: [String]! {
         didSet {
-            navigationItem.rightBarButtonItem = sectionCategories == nil ? nil : categoriesBarButton
             categoriesBarButton?.title = sectionCategories?.first
         }
     }
@@ -76,8 +75,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         loadDocuments()
         setupAboutView()
-        
-        StorageManager.loadImages()
     }
     
     // Functions
@@ -140,16 +137,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch selectedSection {
-            case .Books:
-                let bookCell = tableView.dequeueReusableCell(withIdentifier: "improoBookCell") as? BookCell ?? BookCell()
-                bookCell.book = selectedSectionItems[indexPath.row] as? Book
-                return bookCell
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "improoItemCell", for: indexPath)
-                cell.textLabel?.text = selectedSectionItems[indexPath.row].title
-                return cell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
+        cell.item = selectedSectionItems[indexPath.row]
+        return cell
     }
     
     // MARK: - UITableViewDelegate
@@ -162,12 +152,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return selectedSection == .Books ? 77 : -1
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let bookCell = cell as? BookCell {
-            bookCell.showImage()
-        }
     }
     
     // MARK: - UITabBarDelegate
@@ -184,7 +168,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         activityIndicatorView?.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        //Try to load categories
+        //Load categories
         FirestoreManager.shared.loadCategories(forSection: selectedSection) { (categories, error) in
             guard error == nil else {
                 self.showError(error)

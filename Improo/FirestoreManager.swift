@@ -49,15 +49,7 @@ class FirestoreManager {
                 completion(nil, error)
                 return
             }
-            var items = [Item]()
-            switch section {
-                case .Books:
-                    items = documents.flatMap({Book(dictionary: $0.data())})
-                default:
-                    items = documents.flatMap({Item(dictionary: $0.data())})
-            }
-            items.sort{$0.title < $1.title}
-            completion(items, nil)
+            completion(documents.flatMap({Item(dictionary: $0.data(), section: section)}).sorted{$0.title < $1.title}, nil)
         }
     }
 }

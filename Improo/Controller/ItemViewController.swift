@@ -21,9 +21,10 @@ class ItemViewController: UIViewController {
             guard let selectedItem = selectedItem else { return }
             loadViewIfNeeded()
             titleLabel?.text = selectedItem.title
+            
             descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
-            if let selectedBook = selectedItem as? Book {
-                authorLabel?.text = selectedBook.author
+            if let author = selectedItem.author {
+                authorLabel?.text = author
             } else {
                 authorLabel?.removeFromSuperview()
             }
@@ -77,10 +78,10 @@ class ItemViewController: UIViewController {
     @IBAction func openURL() {
         guard let selectedItem = selectedItem else { return }
         let url: URL
-        
+        //TODO: Update with switch item.section
         if let itemUrl = selectedItem.url {
             url = itemUrl
-        } else if let book = selectedItem as? Book, let bookURL = getGoogleSearchURL(parameters: "\(book.title) \(book.author)") {
+        } else if let author = selectedItem.author, let bookURL = getGoogleSearchURL(parameters: "\(selectedItem.title) \(author)") {
             url = bookURL
         } else if let itemURL = getGoogleSearchURL(parameters: "\(selectedItem.title)") {
             url = itemURL

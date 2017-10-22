@@ -6,15 +6,14 @@
 //  Copyright © 2017 GaranZZ. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import FirebaseStorage
 
 class StorageManager {
     
-    static func loadImages() {
-        let imageReference = Storage.storage().reference().b
-        imageReference.getMetadata { (metaData, error) in
-            print(metaData?.downloadURLs)
-        }
+    static func getImage(forSection section: Section, imageName: String, completion: (UIImage?, Error?)->()) {
+        //TRY LOAD LOCAL IMAG
+        //ELSE LOAD FROM SERVER & SAVE LOCAL
+        let imageReference = Storage.storage()
     }
 }
