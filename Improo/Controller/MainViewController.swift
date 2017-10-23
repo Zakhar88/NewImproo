@@ -58,8 +58,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 hideAboutView()
             }
             
-            self.itemsTableView?.estimatedRowHeight = selectedSection == .Books ? 100 : 50
-
             loadDocuments()
         }
     }

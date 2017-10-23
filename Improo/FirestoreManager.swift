@@ -49,7 +49,7 @@ class FirestoreManager {
                 completion(nil, error)
                 return
             }
-            completion(documents.flatMap({Item(dictionary: $0.data(), section: section)}).sorted{$0.title < $1.title}, nil)
+            completion(documents.flatMap({Item(documentSnapshot: $0, section: section)}).sorted{$0.title < $1.title}, nil)
         }
     }
 }
