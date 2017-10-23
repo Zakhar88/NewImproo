@@ -20,49 +20,25 @@ class ItemCell: UITableViewCell {
             layoutIfNeeded()
             titleLabel?.text = item.title
             detailsLabel?.text = item.author
-            tryToDisplayImage()
+            displayImage()
         }
     }
     
-    func tryToDisplayImage() {
+    func displayImage() {
         if let image = item.image {
-            coverImageView.image = image
-            fitCoverImageView(imageSize: image.size)
+            coverImageView.fit(toImage: image)
         } else {
+            //TODO: Could be needed to check image extension - jpeg or png
             StorageManager.getImage(forSection: item.section, imageName: item.id + ".jpeg", completion: { (image) in
                 DispatchQueue.main.async {
-                    guard let image = image ?? UIImage(named: "bookStub") else {
-                        self.hideCoverImageView()
-                        return
+                    if let image = image {
+                        self.item.image = image
+                        self.coverImageView.fit(toImage: image, borderWidth: 1)
+                    } else {
+                        self.coverImageView.fit(toImage: UIImage(named: "bookStub")!)
                     }
-                    self.item.image = image
-                    self.coverImageView.image = image
-                    self.fitCoverImageView(imageSize: image.size)
                 }
             })
         }
-    }
-    
-    func fitCoverImageView(imageSize: CGSize) {
-        UIView.animate(withDuration: 0.5, animations: {
-            let aspectRatioConstraint = NSLayoutConstraint(item: self.coverImageView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self.coverImageView, attribute: NSLayoutAttribute.width, multiplier: imageSize.height/imageSize.width, constant: 0)
-            aspectRatioConstraint.identifier = "aspectRatioConstraint"
-            self.coverImageView.addConstraint(aspectRatioConstraint)
-            self.coverImageView.isHidden = false
-            self.coverImageView.alpha = 1
-            self.coverImageView.addBorder(width: 1)
-        })
-    }
-    
-    func hideCoverImageView() {
-        self.coverImageView.isHidden = true
-        self.coverImageView.alpha = 0
-        for constraint in coverImageView.constraints {
-            print(constraint)
-            if constraint.identifier == "aspectRatioConstraint" {
-                coverImageView.removeConstraint(constraint)
-            }
-        }
-        self.coverImageView.superview?.removeFromSuperview()
     }
 }

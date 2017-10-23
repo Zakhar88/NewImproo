@@ -101,6 +101,7 @@
                                                                 </activityIndicatorView>
                                                                 <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="38.5" placeholderIntrinsicHeight="89.5" translatesAutoresizingMaskIntoConstraints="NO" id="i7N-OW-sIt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38.5" height="89.5"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
