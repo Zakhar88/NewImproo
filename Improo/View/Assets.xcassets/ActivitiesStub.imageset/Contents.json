@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "ActivitiesStub.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "dice.png",
       "scale" : "2x"
     },
     {

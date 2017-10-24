@@ -101,6 +101,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func hideAboutView() {
         navigationItem.leftBarButtonItem = randomItemBarButton
+        navigationItem.rightBarButtonItem = categoriesBarButton
+
         self.itemsTableView?.isHidden = false
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 0
