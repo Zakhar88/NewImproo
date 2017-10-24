@@ -111,6 +111,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - IBActions
     
     @IBAction func selectRandomItem(_ sender: UIBarButtonItem?) {
+        guard selectedSectionItems.count > 0 else { return }
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedSectionItems.count))), section: 0)
         itemsTableView?.selectRow(at: randomItemIndexPath, animated: true, scrollPosition: .none)
         self.tableView(itemsTableView!, didSelectRowAt: randomItemIndexPath)

@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -95,8 +95,8 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ewe-mA-3XO">
                                                             <rect key="frame" x="0.0" y="1" width="38.5" height="89.5"/>
                                                             <subviews>
-                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Uia-2N-ecY">
-                                                                    <rect key="frame" x="1.5" y="26.5" width="37" height="37"/>
+                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Uia-2N-ecY">
+                                                                    <rect key="frame" x="9.5" y="35.5" width="20" height="20"/>
                                                                     <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </activityIndicatorView>
                                                                 <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="38.5" placeholderIntrinsicHeight="89.5" translatesAutoresizingMaskIntoConstraints="NO" id="i7N-OW-sIt">
@@ -159,6 +159,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicatorView" destination="Uia-2N-ecY" id="Cpb-tk-d5Y"/>
                                             <outlet property="coverImageView" destination="i7N-OW-sIt" id="RIU-MO-hMG"/>
                                             <outlet property="detailsLabel" destination="gOQ-5W-S0Q" id="mRh-HZ-ozl"/>
                                             <outlet property="titleLabel" destination="iVJ-aK-zkX" id="SS3-zh-5Py"/>

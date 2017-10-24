@@ -23,25 +23,13 @@ class ItemViewController: UIViewController {
             titleLabel?.text = selectedItem.title
             
             descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
-            if let author = selectedItem.author {
-                authorLabel?.text = author
-            } else {
-                authorLabel?.removeFromSuperview()
-            }
+            
+            authorLabel?.text = selectedItem.author ?? selectedItem.categories.joined(separator: ", ")
             
             if let image = selectedItem.image {
                 self.imageView?.fit(toImage: image, borderWidth: 2)
             } else {
-                StorageManager.getImage(forSection: selectedItem.section, imageName: selectedItem.id + ".jpeg", completion: { image in
-                    DispatchQueue.main.async {
-                        if let image = image {
-                            self.selectedItem?.image = image
-                            self.imageView?.fit(toImage: image, borderWidth: 2)
-                        } else {
-                            self.imageView?.superview?.removeFromSuperview()
-                        }
-                    }
-                })
+                self.imageView?.superview?.removeFromSuperview()
             }
             
             if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
