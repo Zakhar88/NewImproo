@@ -75,7 +75,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         setupAboutView()
     }
     
-    // Functions
+    // MARK: - Functions
     
     private func setupAboutView() {
         FirestoreManager.shared.loadInfo { (infoText, error) in
