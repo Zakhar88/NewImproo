@@ -26,11 +26,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             itemsTableView?.reloadData()
         }
     }
-    private var selectedCategory: String?
+    private var selectedCategory = FirestoreManager.allCategories
     
     private var selectedSectionItems: [Item] {
         get {
-            if let selectedCategory = selectedCategory, selectedCategory != FirestoreManager.allCategories {
+            if selectedCategory != FirestoreManager.allCategories {
                 return sectionItems.filter({$0.categories.contains(selectedCategory)})
             } else {
                 return sectionItems
@@ -38,9 +38,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    private var sectionCategories: [String]! {
+    private var sectionCategories = [String]() {
         didSet {
-            categoriesBarButton?.title = sectionCategories?.first
+            if let allCategories = sectionCategories.first { //First category always should be "All Categories", sets in FirestoreManager
+                categoriesBarButton?.title = allCategories
+                selectedCategory = allCategories
+            }
         }
     }
     
@@ -122,7 +125,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
         guard let categoriesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoriesViewController") as? CategoriesViewController else { return }
         
-        categoriesViewController.categoires = sectionCategories ?? []
+        categoriesViewController.categoires = sectionCategories
         categoriesViewController.selectAction = { category in
             self.selectedCategory = category
             sender?.title = category
@@ -171,7 +174,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //Load categories
         FirestoreManager.shared.loadCategories(forSection: selectedSection) { (categories, error) in
-            guard error == nil else {
+            guard error == nil, let categories = categories else {
                 self.showError(error)
                 return
             }
