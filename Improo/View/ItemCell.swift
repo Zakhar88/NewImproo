@@ -41,8 +41,9 @@ class ItemCell: UITableViewCell {
                     if let image = image {
                         self.item.image = image
                         self.coverImageView.fit(toImage: image, borderWidth: 1)
-                    } else {
-                        self.coverImageView.fit(toImage: UIImage(named: self.item.section.rawValue + "Stub")!, borderWidth: 0)
+                    } else if let stubImage = UIImage(named: self.item.section.rawValue + "Stub"){
+                        self.item.image = stubImage
+                        self.coverImageView.fit(toImage: stubImage, borderWidth: 0)
                     }
                 }
             })

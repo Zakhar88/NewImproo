@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
+class MainViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -26,14 +26,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             itemsTableView?.reloadData()
         }
     }
+    private var filteredSectionItems: [Item] {
+        get {
+            if isFiltering(), let searchText = navigationItem.searchController?.searchBar.text?.lowercased() {
+                return sectionItems.filter({ item -> Bool in
+                    return item.title.lowercased().contains(searchText) || (item.author?.lowercased().contains(searchText) == true)
+                    })
+            } else {
+                return sectionItems
+            }
+        }
+    }
     private var selectedCategory = FirestoreManager.allCategories
     
     private var selectedSectionItems: [Item] {
         get {
             if selectedCategory != FirestoreManager.allCategories {
-                return sectionItems.filter({$0.categories.contains(selectedCategory)})
+                return filteredSectionItems.filter({$0.categories.contains(selectedCategory)})
             } else {
-                return sectionItems
+                return filteredSectionItems
             }
         }
     }
@@ -76,6 +87,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         loadDocuments()
         setupAboutView()
+        addSearchController()
     }
     
     // MARK: - Functions
@@ -113,6 +125,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         })
     }
     
+    private func addSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Пошук"
+        searchController.searchBar.setValue("Відмінити", forKey:"_cancelButtonText")
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        definesPresentationContext = true
+    }
+    
+    private func searchBarIsEmpty() -> Bool {
+        return navigationItem.searchController?.searchBar.text?.isEmpty ?? true
+    }
+    
+    private func isFiltering() -> Bool {
+        return navigationItem.searchController?.isActive == true && !searchBarIsEmpty()
+    }
+    
     // MARK: - IBActions
     
     @IBAction func selectRandomItem(_ sender: UIBarButtonItem?) {
@@ -132,37 +163,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.itemsTableView?.reloadData()
         }
         navigationController?.pushViewController(categoriesViewController, animated: true)
-    }
-    
-    // MARK: - UITableViewDataSource
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedSectionItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-        cell.item = selectedSectionItems[indexPath.row]
-        return cell
-    }
-    
-    // MARK: - UITableViewDelegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemViewController") as? ItemViewController else { return }
-        itemViewController.selectedItem = selectedSectionItems[indexPath.row]
-        navigationController?.pushViewController(itemViewController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return selectedSection == .Books ? 77 : -1
-    }
-    
-    // MARK: - UITabBarDelegate
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let newSection = Section(ukrainianTitle: item.title) else { return }
-        selectedSection = newSection
     }
     
     //MARK: - Firebase
@@ -193,5 +193,38 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             self.sectionItems = items
         }
+    }
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        itemsTableView?.reloadData()
+    }
+}
+
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return selectedSectionItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
+        cell.item = selectedSectionItems[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemViewController") as? ItemViewController else { return }
+        itemViewController.selectedItem = selectedSectionItems[indexPath.row]
+        navigationController?.pushViewController(itemViewController, animated: true)
+    }
+}
+
+extension MainViewController: UITabBarDelegate {
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let newSection = Section(ukrainianTitle: item.title) else { return }
+        selectedSection = newSection
     }
 }
