@@ -350,17 +350,26 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80u-YY-BUL">
+                                                                <rect key="frame" x="0.0" y="136.5" width="181" height="14.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
+                                                            <constraint firstItem="80u-YY-BUL" firstAttribute="leading" secondItem="m56-KR-Hsw" secondAttribute="leading" id="113-s8-a7Q"/>
                                                             <constraint firstItem="xbv-20-113" firstAttribute="top" secondItem="3Jr-Bq-TkR" secondAttribute="bottom" constant="8" id="M3N-nH-dRN"/>
+                                                            <constraint firstAttribute="bottom" secondItem="80u-YY-BUL" secondAttribute="bottom" id="Si1-vu-sS1"/>
                                                             <constraint firstItem="3Jr-Bq-TkR" firstAttribute="top" secondItem="m56-KR-Hsw" secondAttribute="top" id="XrE-16-TAt"/>
+                                                            <constraint firstAttribute="trailing" secondItem="80u-YY-BUL" secondAttribute="trailing" id="b3o-Zd-eau"/>
+                                                            <constraint firstItem="80u-YY-BUL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xbv-20-113" secondAttribute="bottom" id="bsn-gf-3Jd"/>
                                                             <constraint firstAttribute="trailing" secondItem="3Jr-Bq-TkR" secondAttribute="trailing" id="cVU-vC-eE7"/>
                                                             <constraint firstItem="3Jr-Bq-TkR" firstAttribute="leading" secondItem="m56-KR-Hsw" secondAttribute="leading" id="jFB-Ed-wqw"/>
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3Jr-Bq-TkR" secondAttribute="bottom" id="sMj-ah-qHU"/>
                                                             <constraint firstAttribute="trailing" secondItem="xbv-20-113" secondAttribute="trailing" id="uAa-n1-QH7"/>
                                                             <constraint firstItem="xbv-20-113" firstAttribute="leading" secondItem="m56-KR-Hsw" secondAttribute="leading" id="uWz-s4-XFv"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xbv-20-113" secondAttribute="bottom" id="wS7-ME-j1A"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -428,6 +437,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="authorLabel" destination="xbv-20-113" id="bAp-xy-UdR"/>
+                        <outlet property="categoriesLabel" destination="80u-YY-BUL" id="SU0-9N-l22"/>
                         <outlet property="descriptionTextView" destination="h73-c8-gZ4" id="ZZX-4e-LKe"/>
                         <outlet property="imageView" destination="iU1-nC-JlG" id="wpH-Wj-etK"/>
                         <outlet property="openURLBarButton" destination="tR7-ZU-ioC" id="Hbw-qS-GAG"/>

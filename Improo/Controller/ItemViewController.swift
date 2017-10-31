@@ -12,6 +12,7 @@ class ItemViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var authorLabel: UILabel?
+    @IBOutlet weak var categoriesLabel: UILabel?
     @IBOutlet weak var imageView: ImprooImageView?
     @IBOutlet weak var descriptionTextView: UITextView?
     @IBOutlet weak var openURLBarButton: UIBarButtonItem?
@@ -24,9 +25,10 @@ class ItemViewController: UIViewController {
             
             descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
             
-            authorLabel?.text = selectedItem.author ?? selectedItem.categories.joined(separator: ", ")
+            authorLabel?.text = selectedItem.author
+            categoriesLabel?.text = selectedItem.categories.joined(separator: ", ")
             
-            if let image = selectedItem.image {
+            if let image = selectedItem.image, image != UIImage(named: selectedItem.section.rawValue + "Stub") {
                 self.imageView?.fit(toImage: image, borderWidth: 2)
             } else {
                 self.imageView?.superview?.removeFromSuperview()

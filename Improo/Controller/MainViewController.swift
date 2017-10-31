@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
         
         loadDocuments()
         setupAboutView()
-        addSearchController()
+        // addSearchController() - for future versions
     }
     
     // MARK: - Functions
@@ -106,6 +106,7 @@ class MainViewController: UIViewController {
     private func showAboutView() {
         navigationItem.rightBarButtonItem = nil
         navigationItem.leftBarButtonItem = nil
+        navigationItem.searchController = nil
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 1
             self.itemsTableView?.alpha = 0
