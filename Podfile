@@ -8,5 +8,6 @@ target 'Improo' do
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'Firebase/AdMob'
 end
  

@@ -5,6 +5,9 @@ PODS:
   - BoringSSL/Implementation (9.0):
     - BoringSSL/Interface (= 9.0)
   - BoringSSL/Interface (9.0)
+  - Firebase/AdMob (4.3.0):
+    - Firebase/Core
+    - Google-Mobile-Ads-SDK (= 7.24.1)
   - Firebase/Core (4.3.0):
     - FirebaseAnalytics (= 4.0.4)
     - FirebaseCore (= 4.0.8)
@@ -45,6 +48,7 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - Google-Mobile-Ads-SDK (7.24.1)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -81,6 +85,7 @@ PODS:
   - Protobuf (3.4.0)
 
 DEPENDENCIES:
+  - Firebase/AdMob
   - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
@@ -96,6 +101,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: 8e2fd99a621ae6fc6acfac3bdea824fe9d9c128d
   FirebaseInstanceID: 70c2b877e9338971b2429ea5a4293df6961aa44e
   FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
+  Google-Mobile-Ads-SDK: ed8004a7265b424568dc84f3d2bbe3ea3fff958f
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   gRPC: 42f915ce322b1abc5241621acc776f2fdb0a2039
   gRPC-Core: 54211a073d238ec8569be06e1a939a72f081a3e9
@@ -106,6 +112,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
 
-PODFILE CHECKSUM: 183881270f70083938ab33400eb8fb5b3c3f09ef
+PODFILE CHECKSUM: dba57fa871b4fe591a31ce297b2c883b6c062655
 
 COCOAPODS: 1.2.1

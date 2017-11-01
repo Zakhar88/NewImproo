@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ItemViewController: UIViewController {
+class ItemViewController: AdvertisementViewController {
     
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var authorLabel: UILabel?
