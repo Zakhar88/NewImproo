@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainViewController: AdvertisementViewController {
     
@@ -87,6 +88,7 @@ class MainViewController: AdvertisementViewController {
         
         loadDocuments()
         setupAboutView()
+        subscribeForUpdates()
         // addSearchController() - for future versions
     }
     
@@ -193,6 +195,28 @@ class MainViewController: AdvertisementViewController {
             }
             
             self.sectionItems = items
+        }
+    }
+    
+    private func subscribeForUpdates() {
+        FirestoreManager.shared.sunscribeForUpdates(forSection: selectedSection) { (item, changeType, error) in
+            guard let item = item, let changeType = changeType, error == nil else {
+                self.showError(error)
+                return
+            }
+            switch changeType {
+                case .added:
+                    self.sectionItems.insert(item, at: 0)
+                case .modified:
+                    if let index = self.sectionItems.index(where: {$0.id == item.id}) {
+                        self.sectionItems[index] = item
+                }
+                case .removed:
+                    if let index = self.sectionItems.index(where: {$0.id == item.id}) {
+                        self.sectionItems.remove(at: index)
+                }
+            }
+            self.itemsTableView?.reloadData()
         }
     }
 }

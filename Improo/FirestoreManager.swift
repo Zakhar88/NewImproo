@@ -52,4 +52,16 @@ class FirestoreManager {
             completion(documents.flatMap({Item(documentSnapshot: $0, section: section)}).sorted{$0.title < $1.title}, nil)
         }
     }
+    
+    func sunscribeForUpdates(forSection section: Section, completion: @escaping (Item?, DocumentChangeType?, Error?)->()) {
+        databaseReference.collection("ukrainian/\(section.rawValue)/Collection").addSnapshotListener { (querySnapshot, error) in
+            guard let querySnapshot = querySnapshot, error == nil else {
+                completion(nil, nil, error)
+                return
+            }
+            querySnapshot.documentChanges.forEach({ documentChange in
+                completion(Item(documentSnapshot: documentChange.document, section: section), documentChange.type, nil)
+            })
+        }
+    }
 }

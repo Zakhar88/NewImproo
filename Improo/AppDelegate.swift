@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func addAdvertisementTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { _ in
             guard let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController, let topViewController = navigationController.visibleViewController as? AdvertisementViewController else { return }
             topViewController.createAndLoadInterstitial()
         }
