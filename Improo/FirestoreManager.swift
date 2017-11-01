@@ -64,4 +64,14 @@ class FirestoreManager {
             })
         }
     }
+    
+    func uploadMessage(messageText: String, nickname: String? = nil, completion: @escaping (Error?)->()) {
+        var data = ["text": messageText]
+        if let nickname = nickname {
+            data["nickname"] = nickname
+        }
+        databaseReference.collection("ukrainian/messages/Collection").addDocument(data: data) { error in
+            completion(error)
+        }
+    }
 }
