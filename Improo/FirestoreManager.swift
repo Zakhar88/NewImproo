@@ -70,8 +70,14 @@ class FirestoreManager {
         if let nickname = nickname {
             data["nickname"] = nickname
         }
-        databaseReference.collection("ukrainian/messages/Collection").addDocument(data: data) { error in
+        databaseReference.collection("ukrainian/systemData/messages").addDocument(data: data) { error in
             completion(error)
         }
+    }
+    
+    func uploadError(_ error: Error?) {
+        guard let error = error else { return }
+        let data = ["description": error.localizedDescription] //Add additional data, like device ID
+        databaseReference.collection("ukrainian/systemData/errors").addDocument(data: data)
     }
 }

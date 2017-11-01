@@ -33,5 +33,6 @@ extension AdvertisementViewController: GADInterstitialDelegate {
     
     func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
         print(error.localizedDescription)
+        FirestoreManager.shared.uploadError(error)
     }
 }

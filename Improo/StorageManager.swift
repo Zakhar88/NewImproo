@@ -28,10 +28,7 @@ class StorageManager {
         if let image = getLocalImage(imageUrl: documentsImagePath) {
             completion(image)
         } else {
-            guard directoryExists(forSection: section) else {
-                //SHOW ALERT
-                return
-            }
+            guard directoryExists(forSection: section) else { return }
             let imageReference = Storage.storage().reference(withPath: imagePath)
             let _ = imageReference.write(toFile: documentsImagePath, completion: { (url, error) in
                 guard let url = url else {
@@ -44,13 +41,8 @@ class StorageManager {
     }
     
     static func getLocalImage(imageUrl: URL) -> UIImage? {
-        do {
-            let imageData = try Data(contentsOf: imageUrl)
-            return UIImage(data: imageData)
-        }
-        catch {
-            return nil
-        }
+        guard let imageData = try? Data(contentsOf: imageUrl) else { return nil }
+        return UIImage(data: imageData)
     }
     
     static func directoryExists(forSection section: Section) -> Bool {
@@ -66,6 +58,7 @@ class StorageManager {
                 try FileManager.default.createDirectory(atPath: sectionPath, withIntermediateDirectories: true, attributes: nil)
                 return true
             } catch {
+                FirestoreManager.shared.uploadError(error)
                 return false
             }
         }
