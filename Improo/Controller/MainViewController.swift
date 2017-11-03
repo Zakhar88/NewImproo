@@ -106,6 +106,7 @@ class MainViewController: AdvertisementViewController {
     }
     
     private func showAboutView() {
+        setupAboutView()
         navigationItem.rightBarButtonItem = nil
         navigationItem.leftBarButtonItem = nil
         navigationItem.searchController = nil
