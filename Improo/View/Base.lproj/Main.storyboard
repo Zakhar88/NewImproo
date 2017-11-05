@@ -195,11 +195,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="uOL-Qu-0Wm">
                         <barButtonItem key="leftBarButtonItem" title="Випадково" id="dQl-rd-mH0">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="selectRandomItem:" destination="BYZ-38-t0r" id="0aA-5g-k9T"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Усі категорії" id="Wty-Pr-b1v">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="selectCategory:" destination="BYZ-38-t0r" id="An9-Up-Ic8"/>
                             </connections>

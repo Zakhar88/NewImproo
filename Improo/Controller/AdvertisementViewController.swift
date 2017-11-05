@@ -24,6 +24,8 @@ class AdvertisementViewController: UIViewController {
         currentInterstitial.delegate = self
         interstitial = currentInterstitial
     }
+    
+    
 }
 
 extension AdvertisementViewController: GADInterstitialDelegate {
