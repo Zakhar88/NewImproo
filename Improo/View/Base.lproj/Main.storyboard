@@ -81,8 +81,9 @@
                                     <outlet property="sendButton" destination="bXy-CP-Ost" id="OuE-CS-pXa"/>
                                 </connections>
                             </view>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-uD-o0f">
+                            <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-uD-o0f">
                                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <tabBarItem title="Книги" image="books" id="a5p-UR-oeD"/>
                                     <tabBarItem title="Курси" image="learning" id="UA8-gh-kpF"/>
@@ -99,7 +100,7 @@
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LfN-3w-a6H">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="454"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dhf-Rw-dNt">
                                     <size key="itemSize" width="200" height="300"/>
@@ -175,7 +176,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LIN-wC-Cze" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D2r-Kh-m3d"/>
                             <constraint firstItem="LfN-3w-a6H" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="DEw-C2-hY9"/>
@@ -186,7 +187,7 @@
                             <constraint firstItem="LfN-3w-a6H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lqh-QX-WDC"/>
                             <constraint firstItem="LCi-df-PWh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nnf-Q2-Rwn"/>
                             <constraint firstItem="LIN-wC-Cze" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="odS-0d-NH3"/>
-                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="LfN-3w-a6H" secondAttribute="bottom" id="sG3-zh-h0u"/>
+                            <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="LfN-3w-a6H" secondAttribute="bottom" constant="1" id="sG3-zh-h0u"/>
                             <constraint firstItem="LCi-df-PWh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="tTu-9o-kr4"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wXt-E0-oOB"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="LCi-df-PWh" secondAttribute="bottom" constant="2" id="ynJ-3W-9EU"/>
