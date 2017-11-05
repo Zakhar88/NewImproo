@@ -9,22 +9,35 @@
 import UIKit
 import Firebase
 
-class MainViewController: AdvertisementViewController {
+class MainViewController: AdvertisementViewController, ItemsCollectionViewDelegate {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var itemsTableView: UITableView?
-    @IBOutlet weak var sectionsTabBar: UITabBar?
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView?
-    @IBOutlet var randomItemBarButton: UIBarButtonItem?
-    @IBOutlet var categoriesBarButton: UIBarButtonItem?
+    @IBOutlet weak var itemsCollectionView: UICollectionView!
+    @IBOutlet weak var sectionsTabBar: UITabBar!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var randomItemBarButton: UIBarButtonItem!
+    @IBOutlet var categoriesBarButton: UIBarButtonItem!
     @IBOutlet weak var aboutView: AboutView?
     
     // MARK: - Properties
-        
+    let sectionInsets = UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0)
+    let itemsPerRow: CGFloat = 2
+    
+    var books = [Item]()
+    var courses = [Item]()
+    var activities = [Item]()
+    var entertainmens = [Item]()
+
+    private var selectedCategory = FirestoreManager.allCategories
+    
+    var items: [Item] {
+        return selectedSectionItems
+    }
+
     private var sectionItems = [Item]() {
         didSet {
-            itemsTableView?.reloadData()
+            itemsCollectionView?.reloadData()
         }
     }
     private var filteredSectionItems: [Item] {
@@ -38,9 +51,8 @@ class MainViewController: AdvertisementViewController {
             }
         }
     }
-    private var selectedCategory = FirestoreManager.allCategories
     
-    private var selectedSectionItems: [Item] {
+    var selectedSectionItems: [Item] {
         get {
             if selectedCategory != FirestoreManager.allCategories {
                 return filteredSectionItems.filter({$0.categories.contains(selectedCategory)})
@@ -77,6 +89,8 @@ class MainViewController: AdvertisementViewController {
         }
     }
     
+    var itemsCollectioViewDataSource: ItemsCollectionViewDataSource!
+    
     // MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
@@ -89,6 +103,10 @@ class MainViewController: AdvertisementViewController {
         loadDocuments()
         setupAboutView()
         subscribeForUpdates()
+        
+        itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
+        itemsCollectionView.dataSource = itemsCollectioViewDataSource
+                
         // addSearchController() - for future versions
     }
     
@@ -112,9 +130,9 @@ class MainViewController: AdvertisementViewController {
         navigationItem.searchController = nil
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 1
-            self.itemsTableView?.alpha = 0
+            self.itemsCollectionView?.alpha = 0
         }) { _ in
-            self.itemsTableView?.isHidden = true
+            self.itemsCollectionView?.isHidden = true
         }
     }
     
@@ -122,10 +140,10 @@ class MainViewController: AdvertisementViewController {
         navigationItem.leftBarButtonItem = randomItemBarButton
         navigationItem.rightBarButtonItem = categoriesBarButton
 
-        self.itemsTableView?.isHidden = false
+        self.itemsCollectionView?.isHidden = false
         UIView.animate(withDuration: 0.5, animations: {
             self.aboutView?.alpha = 0
-            self.itemsTableView?.alpha = 1
+            self.itemsCollectionView?.alpha = 1
         })
     }
     
@@ -153,8 +171,8 @@ class MainViewController: AdvertisementViewController {
     @IBAction func selectRandomItem(_ sender: UIBarButtonItem?) {
         guard selectedSectionItems.count > 0 else { return }
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedSectionItems.count))), section: 0)
-        itemsTableView?.selectRow(at: randomItemIndexPath, animated: true, scrollPosition: .none)
-        self.tableView(itemsTableView!, didSelectRowAt: randomItemIndexPath)
+        itemsCollectionView?.selectItem(at: randomItemIndexPath, animated: true, scrollPosition: .centeredVertically)
+        //self.itemsCollectionView
     }
     
     @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
@@ -164,7 +182,7 @@ class MainViewController: AdvertisementViewController {
         categoriesViewController.selectAction = { category in
             self.selectedCategory = category
             sender?.title = category
-            self.itemsTableView?.reloadData()
+            self.itemsCollectionView?.reloadData()
         }
         navigationController?.pushViewController(categoriesViewController, animated: true)
     }
@@ -217,33 +235,14 @@ class MainViewController: AdvertisementViewController {
                         self.sectionItems.remove(at: index)
                 }
             }
-            self.itemsTableView?.reloadData()
+            self.itemsCollectionView?.reloadData()
         }
     }
 }
 
 extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        itemsTableView?.reloadData()
-    }
-}
-
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedSectionItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-        cell.item = selectedSectionItems[indexPath.row]
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemViewController") as? ItemViewController else { return }
-        itemViewController.selectedItem = selectedSectionItems[indexPath.row]
-        navigationController?.pushViewController(itemViewController, animated: true)
+        itemsCollectionView?.reloadData()
     }
 }
 

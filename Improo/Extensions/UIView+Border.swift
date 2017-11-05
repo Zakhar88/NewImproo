@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func addBorder(width: CGFloat = 2, color: UIColor = UIColor.black) {
+    func addBorder(width: CGFloat = 2, color: UIColor = UIColor.lightGray) {
         layer.cornerRadius = 5
         layer.masksToBounds = true
         layer.borderColor = color.cgColor
