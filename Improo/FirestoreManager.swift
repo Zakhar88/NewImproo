@@ -39,7 +39,9 @@ class FirestoreManager {
                 return
             }
             categories.insert(FirestoreManager.allCategories, at: 0)
-            completion(categories, nil)
+            DispatchQueue.main.async {
+                completion(categories, nil)
+            }
         }
     }
     
@@ -49,7 +51,9 @@ class FirestoreManager {
                 completion(nil, error)
                 return
             }
-            completion(documents.flatMap({Item(documentSnapshot: $0, section: section)}).sorted{$0.title < $1.title}, nil)
+            DispatchQueue.main.async {
+                completion(documents.flatMap({Item(documentSnapshot: $0, section: section)}).sorted{$0.title < $1.title}, nil)
+            }
         }
     }
     
@@ -70,7 +74,7 @@ class FirestoreManager {
         if let nickname = nickname {
             data["nickname"] = nickname
         }
-        databaseReference.collection("ukrainian/systemData/messages").addDocument(data: data) { error in
+        databaseReference.collection("messages").addDocument(data: data) { error in
             completion(error)
         }
     }
@@ -78,6 +82,6 @@ class FirestoreManager {
     func uploadError(_ error: Error?) {
         guard let error = error else { return }
         let data = ["description": error.localizedDescription] //Add additional data, like device ID
-        databaseReference.collection("ukrainian/systemData/errors").addDocument(data: data)
+        databaseReference.collection("errors").addDocument(data: data)
     }
 }

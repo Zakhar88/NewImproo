@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ItemsCollectionViewDelegate {
-    var items: [Item] { get }
+    var selectedItems: [Item] { get }
 }
 
 class ItemsCollectionViewDataSource: NSObject, UICollectionViewDataSource {
@@ -20,12 +20,12 @@ class ItemsCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return delegate.items.count
+        return delegate.selectedItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCollectionViewCell", for: indexPath) as! ItemCollectionViewCell
-        cell.item =  delegate.items[indexPath.item]
+        cell.item =  delegate.selectedItems[indexPath.item]
         return cell
     }
 }

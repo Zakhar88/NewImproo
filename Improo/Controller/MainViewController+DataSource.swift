@@ -28,7 +28,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let itemViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemViewController") as? ItemViewController else { return }
-        itemViewController.selectedItem = selectedSectionItems[indexPath.item]
+        itemViewController.selectedItem = selectedItems[indexPath.item]
         navigationController?.pushViewController(itemViewController, animated: true)
     }
 }
