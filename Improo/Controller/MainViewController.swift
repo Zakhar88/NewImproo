@@ -189,10 +189,10 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     // MARK: - IBActions
     
     @IBAction func selectRandomItem(_ sender: UIBarButtonItem?) {
-        guard selectedItems.count > 0, let itemsCollectionView = itemsCollectionView else { return }
+        guard selectedItems.count > 0 else { return }
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedItems.count))), section: 0)
         itemsCollectionView.selectItem(at: randomItemIndexPath, animated: true, scrollPosition: .centeredVertically)
-        //itemsCollectionView(itemsCollectionView, didSelectItemAt: randomItemIndexPath)
+        self.collectionView(itemsCollectionView, didSelectItemAt: randomItemIndexPath)
     }
     
     @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
