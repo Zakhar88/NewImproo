@@ -16,8 +16,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     @IBOutlet weak var itemsCollectionView: UICollectionView!
     @IBOutlet weak var sectionsTabBar: UITabBar!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var aboutView: AboutView?
-    @IBOutlet var randomItemBarButton: UIBarButtonItem!
+    //@IBOutlet var randomItemBarButton: UIBarButtonItem!
     @IBOutlet var categoriesBarButton: UIBarButtonItem!
     
     // MARK: - Properties
@@ -89,14 +88,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         didSet {
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
-            
-            if selectedSection == .About {
-                showAboutView()
-                return
-            }
-            if oldValue == .About {
-                hideAboutView()
-            }
             itemsCollectionView.reloadData()
         }
     }
@@ -112,7 +103,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         title = booksBarItem?.title
         
         loadDocuments()
-        setupAboutView()
         //subscribeForUpdates()
         
         itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
@@ -123,41 +113,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     }
     
     // MARK: - Functions
-    
-    private func setupAboutView() {
-        FirestoreManager.shared.loadInfo { (infoText, error) in
-            guard let infoText = infoText else {
-                self.showError(error)
-                return
-            }
-            self.aboutView?.infoTextLabel?.text = infoText
-        }
-        aboutView?.messageTextView?.placeholder = "Ваше повідомлення..."
-    }
-    
-    private func showAboutView() {
-        setupAboutView()
-        navigationItem.rightBarButtonItem = nil
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.searchController = nil
-        UIView.animate(withDuration: 0.5, animations: {
-            self.aboutView?.alpha = 1
-            self.itemsCollectionView?.alpha = 0
-        }) { _ in
-            self.itemsCollectionView?.isHidden = true
-        }
-    }
-    
-    private func hideAboutView() {
-        navigationItem.leftBarButtonItem = randomItemBarButton
-        navigationItem.rightBarButtonItem = categoriesBarButton
-        
-        self.itemsCollectionView?.isHidden = false
-        UIView.animate(withDuration: 0.5, animations: {
-            self.aboutView?.alpha = 0
-            self.itemsCollectionView?.alpha = 1
-        })
-    }
     
     func checkAllDataExisting() {
         if activities != nil, books != nil, courses != nil, entertainmens != nil {
