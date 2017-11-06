@@ -175,7 +175,7 @@
                                                             <rect key="frame" x="81.5" y="108.5" width="37" height="37"/>
                                                             <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </activityIndicatorView>
-                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="169" placeholderIntrinsicHeight="253.5" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-3k-1wi">
+                                                        <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="169" placeholderIntrinsicHeight="253.5" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-3k-1wi">
                                                             <rect key="frame" x="15.5" y="0.0" width="169" height="253.5"/>
                                                         </imageView>
                                                     </subviews>

@@ -70,20 +70,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         }
     }
     
-    //FOR SEARCHING
-    //    var filteredSectionItems: [Item] {
-    //        get {
-    //            if isFiltering(), let searchText = navigationItem.searchController?.searchBar.text?.lowercased() {
-    //                return sectionItems.filter({ item -> Bool in
-    //                    return item.title.lowercased().contains(searchText) || (item.author?.lowercased().contains(searchText) == true)
-    //                    })
-    //            } else {
-    //                return sectionItems
-    //            }
-    //        }
-    //    }
-    
-    
     var selectedSection: Section = .Books {
         didSet {
             guard oldValue != selectedSection else { return }
@@ -91,7 +77,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             itemsCollectionView.reloadData()
         }
     }
-    
     
     // MARK: - ViewController Lifecycle
     
@@ -109,7 +94,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         itemsCollectionView.dataSource = itemsCollectioViewDataSource
         
         sectionsTabBar.tintColor = UIColor.facebookBlueColor
-        // addSearchController() - for future versions
     }
     
     // MARK: - Functions
@@ -121,34 +105,14 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         }
     }
     
-    //FOR SEARCHING
-    //    private func addSearchController() {
-    //        let searchController = UISearchController(searchResultsController: nil)
-    //        searchController.searchResultsUpdater = self
-    //        searchController.obscuresBackgroundDuringPresentation = false
-    //        searchController.searchBar.placeholder = "Пошук"
-    //        searchController.searchBar.setValue("Відмінити", forKey:"_cancelButtonText")
-    //        navigationItem.searchController = searchController
-    //        navigationItem.hidesSearchBarWhenScrolling = true
-    //        definesPresentationContext = true
-    //    }
-    //
-    //    private func searchBarIsEmpty() -> Bool {
-    //        return navigationItem.searchController?.searchBar.text?.isEmpty ?? true
-    //    }
-    //
-    //    private func isFiltering() -> Bool {
-    //        return navigationItem.searchController?.isActive == true && !searchBarIsEmpty()
-    //    }
-    
-    // MARK: - IBActions
-    
-    @IBAction func selectRandomItem(_ sender: UIBarButtonItem?) {
+    func selectRandomItem() {
         guard selectedItems.count > 0 else { return }
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedItems.count))), section: 0)
         itemsCollectionView.selectItem(at: randomItemIndexPath, animated: true, scrollPosition: .centeredVertically)
         self.collectionView(itemsCollectionView, didSelectItemAt: randomItemIndexPath)
     }
+    
+    // MARK: - IBActions
     
     @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
         guard let categoriesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoriesViewController") as? CategoriesViewController else { return }
@@ -213,38 +177,9 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             self.checkAllDataExisting()
         }
     }
-    
-    //    private func subscribeForUpdates() {
-    //        FirestoreManager.shared.sunscribeForUpdates(forSection: selectedSection) { (item, changeType, error) in
-    //            guard let item = item, let changeType = changeType, error == nil else {
-    //                self.showError(error)
-    //                return
-    //            }
-    //            switch changeType {
-    //                case .added:
-    //                    self.sectionItems.insert(item, at: 0)
-    //                case .modified:
-    //                    if let index = self.sectionItems.index(where: {$0.id == item.id}) {
-    //                        self.sectionItems[index] = item
-    //                }
-    //                case .removed:
-    //                    if let index = self.sectionItems.index(where: {$0.id == item.id}) {
-    //                        self.sectionItems.remove(at: index)
-    //                }
-    //            }
-    //            self.itemsCollectionView?.reloadData()
-    //        }
-    //    }
-}
-
-extension MainViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        itemsCollectionView?.reloadData()
-    }
 }
 
 extension MainViewController: UITabBarDelegate {
-    
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let newSection = Section(ukrainianTitle: item.title) else { return }
         selectedSection = newSection
