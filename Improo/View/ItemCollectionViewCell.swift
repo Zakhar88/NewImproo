@@ -56,8 +56,10 @@ class ItemCollectionViewCell: UICollectionViewCell {
             }
             let imageReference = Storage.storage().reference(withPath: imageURL)
             imageDownloadTask = imageReference.write(toFile: imagePath, completion: { (url, error) in
-                guard let url = url else {
-                    self.setEmptyImage()
+                guard error == nil, let url = url else {
+                    if let error = error as NSError?, StorageErrorCode(rawValue: error.code) != .cancelled {
+                        self.setEmptyImage()
+                    }
                     return
                 }
                 DispatchQueue.main.async { _ = self.setLocalImage(imageUrl: url) }
