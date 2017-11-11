@@ -25,8 +25,6 @@ class ItemCollectionViewCell: UICollectionViewCell {
             layoutIfNeeded()
             titleLabel.text = item.title
             detailsLabel.text = item.author ?? item.categories.joined(separator: ", ")
-            coverImageView.isHidden = true
-            coverImageView.alpha = 0
             
             if let image = item.image {
                 coverImageView.fit(toImage: image, borderWidth: 1)
@@ -34,6 +32,13 @@ class ItemCollectionViewCell: UICollectionViewCell {
                 loadImage()
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        coverImageView.isHidden = true
+        coverImageView.alpha = 0
+        coverImageView.image = nil
     }
     
     private func setEmptyImage() {
