@@ -18,6 +18,7 @@
 		6B624CAC1F90E177007CC30A /* ImprooImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B624CAB1F90E177007CC30A /* ImprooImageVIew.swift */; };
 		6B64706D1FAF5D1600E3D8DE /* MainViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B64706C1FAF5D1600E3D8DE /* MainViewController+DataSource.swift */; };
 		6B9708F71FA9E855000DDE6B /* AdvertisementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9708F61FA9E855000DDE6B /* AdvertisementViewController.swift */; };
+		6BAB9B771FB8BF9C003E4A7A /* DiagonallyFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB9B761FB8BF9C003E4A7A /* DiagonallyFilledView.swift */; };
 		6BAF476A1FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAF47691FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift */; };
 		6BAF476C1FAF45970018FCF7 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAF476B1FAF45970018FCF7 /* ItemCollectionViewCell.swift */; };
 		6BDE77481FB0A8E800C43E93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6BDE77471FB0A8E700C43E93 /* GoogleService-Info.plist */; };
@@ -46,6 +47,7 @@
 		6B624CAB1F90E177007CC30A /* ImprooImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprooImageVIew.swift; sourceTree = "<group>"; };
 		6B64706C1FAF5D1600E3D8DE /* MainViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+DataSource.swift"; sourceTree = "<group>"; };
 		6B9708F61FA9E855000DDE6B /* AdvertisementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementViewController.swift; sourceTree = "<group>"; };
+		6BAB9B761FB8BF9C003E4A7A /* DiagonallyFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagonallyFilledView.swift; sourceTree = "<group>"; };
 		6BAF47691FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		6BAF476B1FAF45970018FCF7 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BDE77471FB0A8E700C43E93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				6B624CAB1F90E177007CC30A /* ImprooImageVIew.swift */,
 				6BAF476B1FAF45970018FCF7 /* ItemCollectionViewCell.swift */,
 				6BAF47691FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift */,
+				6BAB9B761FB8BF9C003E4A7A /* DiagonallyFilledView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1DD935F1F9E64B6003EA49E /* UIImageView + Helpers.swift in Sources */,
+				6BAB9B771FB8BF9C003E4A7A /* DiagonallyFilledView.swift in Sources */,
 				B19FE8C81FAF9BD800F0B801 /* Colors.swift in Sources */,
 				6BDE92091F852FD90065E080 /* Section.swift in Sources */,
 				6B116C581F98EE6700DF5D52 /* FirestoreManager.swift in Sources */,
