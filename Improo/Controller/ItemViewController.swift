@@ -13,9 +13,11 @@ class ItemViewController: AdvertisementViewController {
     @IBOutlet weak var titleLabel: UILabel?
     @IBOutlet weak var authorLabel: UILabel?
     @IBOutlet weak var categoriesLabel: UILabel?
-    @IBOutlet weak var imageView: ImprooImageView?
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var descriptionTextView: UITextView?
     @IBOutlet weak var openURLBarButton: UIBarButtonItem?
+    @IBOutlet weak var imageBorderView: UIView?
+    @IBOutlet weak var separatorView: UIView?
     
     var selectedItem: Item? {
         didSet {
@@ -29,7 +31,7 @@ class ItemViewController: AdvertisementViewController {
             categoriesLabel?.text = selectedItem.categories.joined(separator: ", ")
             
             if let image = selectedItem.image, image != UIImage(named: selectedItem.section.rawValue + "Stub") {
-                self.imageView?.fit(toImage: image, borderWidth: 2)
+                self.imageView?.fit(toImage: image)
             } else {
                 self.imageView?.superview?.removeFromSuperview()
             }
@@ -39,6 +41,9 @@ class ItemViewController: AdvertisementViewController {
             } else {
                 openURLBarButton?.title = "Google"
             }
+            imageBorderView?.layer.borderColor = UIColor.mainThemeColor.cgColor
+            imageBorderView?.layer.borderWidth = 2
+            separatorView?.backgroundColor = UIColor.mainThemeColor
         }
     }
     

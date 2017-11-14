@@ -28,6 +28,8 @@ extension UIImageView {
         UIView.animate(withDuration: 0.5, animations: {
             self.isHidden = false
             self.alpha = 1
+            self.layer.cornerRadius = 5
+            self.layer.masksToBounds = true
             if let borderWidth = borderWidth {
                 self.addBorder(width: borderWidth)
             }

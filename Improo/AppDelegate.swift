@@ -19,10 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-1829214457085802~5279639934")
         
-        (UIApplication.shared.value(forKey: "statusBar") as? UIView)?.backgroundColor = UIColor.facebookBlueColor
+        (UIApplication.shared.value(forKey: "statusBar") as? UIView)?.backgroundColor = UIColor.mainThemeColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
-        UINavigationBar.appearance().backgroundColor = UIColor.facebookBlueColor
+        UINavigationBar.appearance().backgroundColor = UIColor.mainThemeColor
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
+        UINavigationBar.appearance().shadowImage = UIImage()
         UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().tintColor = UIColor.white
         UITabBar.appearance().backgroundColor = UIColor.white

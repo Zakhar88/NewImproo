@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-    static var facebookBlueColor: UIColor {
+    static var mainThemeColor: UIColor {
         return UIColor(red: 65/255, green: 100/255, blue: 175/255, alpha: 1)
     }
 }

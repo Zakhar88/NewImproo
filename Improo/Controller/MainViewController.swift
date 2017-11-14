@@ -93,7 +93,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
         itemsCollectionView.dataSource = itemsCollectioViewDataSource
         
-        sectionsTabBar.tintColor = UIColor.facebookBlueColor
+        sectionsTabBar.tintColor = UIColor.mainThemeColor
     }
     
     // MARK: - Functions
