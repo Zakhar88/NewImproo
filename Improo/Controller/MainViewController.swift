@@ -21,7 +21,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     // MARK: - Properties
     
-    let sectionInsets = UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0)
+    let sectionInsets = UIEdgeInsets(top: 15.0, left: 10.0, bottom: 15.0, right: 10.0)
     let itemsPerRow: CGFloat = 2
     
     var books: [Item]?
