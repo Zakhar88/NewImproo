@@ -460,7 +460,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKz-q5-vdu" userLabel="Description Scroll View">
-                                <rect key="frame" x="0.5" y="277.5" width="319.5" height="290.5"/>
+                                <rect key="frame" x="0.5" y="277.5" width="319.5" height="214.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="568" translatesAutoresizingMaskIntoConstraints="NO" id="BI8-d5-XbF">
                                         <rect key="frame" x="0.5" y="0.0" width="320" height="568"/>
@@ -489,6 +489,35 @@
                                     <constraint firstItem="BI8-d5-XbF" firstAttribute="top" secondItem="XKz-q5-vdu" secondAttribute="top" id="iCJ-Lf-fgR"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Tn-sk-YHF">
+                                <rect key="frame" x="0.0" y="492" width="320" height="76"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qWd-FM-CLJ">
+                                        <rect key="frame" x="16" y="8" width="288" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAg-8V-T0h">
+                                                <rect key="frame" x="0.0" y="0.0" width="136" height="60"/>
+                                                <state key="normal" title="Google"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-Xf-APx">
+                                                <rect key="frame" x="152" y="0.0" width="136" height="60"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="L0A-Xf-APx" firstAttribute="width" secondItem="wAg-8V-T0h" secondAttribute="width" id="VXY-6E-aPD"/>
+                                            <constraint firstAttribute="height" constant="60" id="vDH-sO-AaC"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="qWd-FM-CLJ" firstAttribute="leading" secondItem="3Tn-sk-YHF" secondAttribute="leading" constant="16" id="1of-fm-6ox"/>
+                                    <constraint firstItem="qWd-FM-CLJ" firstAttribute="top" secondItem="3Tn-sk-YHF" secondAttribute="top" constant="8" id="Nqo-xg-riK"/>
+                                    <constraint firstAttribute="bottom" secondItem="qWd-FM-CLJ" secondAttribute="bottom" constant="8" id="wQy-7R-02P"/>
+                                    <constraint firstAttribute="trailing" secondItem="qWd-FM-CLJ" secondAttribute="trailing" constant="16" id="z4X-Mz-f0g"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZv-JN-6L3">
                                 <rect key="frame" x="0.5" y="568" width="319.5" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -499,12 +528,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WZv-JN-6L3" firstAttribute="top" secondItem="XKz-q5-vdu" secondAttribute="bottom" id="2gD-xz-9q7"/>
                             <constraint firstItem="c5G-RY-p9I" firstAttribute="trailing" secondItem="oNg-S2-ElO" secondAttribute="trailing" id="4HY-PE-uOR"/>
                             <constraint firstItem="c5G-RY-p9I" firstAttribute="trailing" secondItem="XKz-q5-vdu" secondAttribute="trailing" id="5x9-nM-mQb"/>
+                            <constraint firstItem="WZv-JN-6L3" firstAttribute="top" secondItem="3Tn-sk-YHF" secondAttribute="bottom" id="86a-3w-UEO"/>
+                            <constraint firstItem="c5G-RY-p9I" firstAttribute="trailing" secondItem="3Tn-sk-YHF" secondAttribute="trailing" id="B6g-Um-paU"/>
                             <constraint firstItem="oNg-S2-ElO" firstAttribute="top" secondItem="c5G-RY-p9I" secondAttribute="top" id="CRP-L0-hsM"/>
                             <constraint firstItem="BI8-d5-XbF" firstAttribute="width" secondItem="esI-ep-lyh" secondAttribute="width" id="OPB-et-ljU"/>
+                            <constraint firstItem="3Tn-sk-YHF" firstAttribute="top" secondItem="XKz-q5-vdu" secondAttribute="bottom" id="ciA-tq-yhd"/>
                             <constraint firstItem="oNg-S2-ElO" firstAttribute="leading" secondItem="c5G-RY-p9I" secondAttribute="leading" id="g4N-j9-82S"/>
+                            <constraint firstItem="3Tn-sk-YHF" firstAttribute="leading" secondItem="c5G-RY-p9I" secondAttribute="leading" id="gcM-kf-qmr"/>
                             <constraint firstItem="c5G-RY-p9I" firstAttribute="trailing" secondItem="WZv-JN-6L3" secondAttribute="trailing" id="hM7-KC-Vm5"/>
                             <constraint firstItem="XKz-q5-vdu" firstAttribute="width" secondItem="esI-ep-lyh" secondAttribute="width" id="hZN-TI-UKh"/>
                             <constraint firstItem="XKz-q5-vdu" firstAttribute="leading" secondItem="c5G-RY-p9I" secondAttribute="leading" id="oiR-dX-nYr"/>
@@ -515,11 +547,7 @@
                         <viewLayoutGuide key="safeArea" id="c5G-RY-p9I"/>
                     </view>
                     <navigationItem key="navigationItem" id="kW3-bN-Lm8">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="tR7-ZU-ioC">
-                            <connections>
-                                <action selector="openURL" destination="gmA-2C-WzO" id="an7-ek-pje"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tR7-ZU-ioC"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -528,9 +556,10 @@
                         <outlet property="authorLabel" destination="xbv-20-113" id="bAp-xy-UdR"/>
                         <outlet property="categoriesLabel" destination="80u-YY-BUL" id="SU0-9N-l22"/>
                         <outlet property="descriptionTextView" destination="h73-c8-gZ4" id="ZZX-4e-LKe"/>
+                        <outlet property="googleButton" destination="wAg-8V-T0h" id="qsk-Ne-Ci2"/>
                         <outlet property="imageBorderView" destination="9An-EQ-UZs" id="wCx-c6-Rm6"/>
                         <outlet property="imageView" destination="iU1-nC-JlG" id="wpH-Wj-etK"/>
-                        <outlet property="openURLBarButton" destination="tR7-ZU-ioC" id="Hbw-qS-GAG"/>
+                        <outlet property="openURLButton" destination="L0A-Xf-APx" id="uhI-ES-ZkC"/>
                         <outlet property="separatorView" destination="I3s-6e-Sdh" id="Nir-fv-Iw8"/>
                         <outlet property="titleLabel" destination="3Jr-Bq-TkR" id="tRC-yB-tgh"/>
                     </connections>

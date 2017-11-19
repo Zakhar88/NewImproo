@@ -15,7 +15,8 @@ class ItemViewController: AdvertisementViewController {
     @IBOutlet weak var categoriesLabel: UILabel?
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var descriptionTextView: UITextView?
-    @IBOutlet weak var openURLBarButton: UIBarButtonItem?
+    @IBOutlet weak var openURLButton: UIButton?
+    @IBOutlet weak var googleButton: UIButton?
     @IBOutlet weak var imageBorderView: UIView?
     @IBOutlet weak var separatorView: UIView?
     
@@ -37,13 +38,16 @@ class ItemViewController: AdvertisementViewController {
             }
             
             if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
-                openURLBarButton?.title = hostName
+                openURLButton?.titleLabel?.text = hostName
             } else {
-                openURLBarButton?.title = "Google"
+                openURLButton?.removeFromSuperview()
             }
             imageBorderView?.layer.borderColor = UIColor.mainThemeColor.cgColor
             imageBorderView?.layer.borderWidth = 2
             separatorView?.backgroundColor = UIColor.mainThemeColor
+            
+            openURLButton?.layer.cornerRadius = 5
+            googleButton?.layer.cornerRadius = 5
         }
     }
     

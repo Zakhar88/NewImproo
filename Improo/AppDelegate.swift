@@ -24,9 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor.mainThemeColor
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarPosition.any, barMetrics: UIBarMetrics.default)
         UINavigationBar.appearance().shadowImage = UIImage()
-        UIApplication.shared.statusBarStyle = .lightContent
         UINavigationBar.appearance().tintColor = UIColor.white
+
         UITabBar.appearance().backgroundColor = UIColor.white
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        UIButton.appearance().backgroundColor = UIColor.mainThemeColor
+        UIButton.appearance().setTitleColor(UIColor.white, for: .normal)
         
         return true
     }

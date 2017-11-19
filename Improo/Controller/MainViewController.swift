@@ -16,7 +16,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     @IBOutlet weak var itemsCollectionView: UICollectionView!
     @IBOutlet weak var sectionsTabBar: UITabBar!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    //@IBOutlet var randomItemBarButton: UIBarButtonItem!
     @IBOutlet var categoriesBarButton: UIBarButtonItem!
     
     // MARK: - Properties
