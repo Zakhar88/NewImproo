@@ -18,6 +18,7 @@ class ItemViewController: AdvertisementViewController {
     @IBOutlet weak var openURLButton: UIButton?
     @IBOutlet weak var googleButton: UIButton?
     @IBOutlet weak var imageBorderView: UIView?
+    @IBOutlet weak var topSeparatorView: UIView?
     @IBOutlet weak var separatorView: UIView?
     
     var selectedItem: Item!
@@ -39,8 +40,10 @@ class ItemViewController: AdvertisementViewController {
         imageBorderView?.layer.borderColor = UIColor.mainThemeColor.cgColor
         imageBorderView?.layer.borderWidth = 2
         separatorView?.backgroundColor = UIColor.mainThemeColor
+        topSeparatorView?.backgroundColor = UIColor.mainThemeColor
         openURLButton?.layer.cornerRadius = 5
         googleButton?.layer.cornerRadius = 5
+        view.backgroundColor = UIColor.mainThemeColor
     }
     
     func setupInfo() {
