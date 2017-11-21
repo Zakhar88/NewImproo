@@ -20,36 +20,7 @@ class ItemViewController: AdvertisementViewController {
     @IBOutlet weak var imageBorderView: UIView?
     @IBOutlet weak var separatorView: UIView?
     
-    var selectedItem: Item? {
-        didSet {
-            guard let selectedItem = selectedItem else { return }
-            loadViewIfNeeded()
-            titleLabel?.text = selectedItem.title
-            
-            descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
-            
-            authorLabel?.text = selectedItem.author
-            categoriesLabel?.text = selectedItem.categories.joined(separator: ", ")
-            
-            if let image = selectedItem.image, image != UIImage(named: selectedItem.section.rawValue + "Stub") {
-                self.imageView?.fit(toImage: image)
-            } else {
-                self.imageView?.superview?.removeFromSuperview()
-            }
-            
-            if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
-                openURLButton?.titleLabel?.text = hostName
-            } else {
-                openURLButton?.removeFromSuperview()
-            }
-            imageBorderView?.layer.borderColor = UIColor.mainThemeColor.cgColor
-            imageBorderView?.layer.borderWidth = 2
-            separatorView?.backgroundColor = UIColor.mainThemeColor
-            
-            openURLButton?.layer.cornerRadius = 5
-            googleButton?.layer.cornerRadius = 5
-        }
-    }
+    var selectedItem: Item!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,24 +29,56 @@ class ItemViewController: AdvertisementViewController {
         view.addGestureRecognizer(backGestureRecognizer)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupUI()
+        setupInfo()
+    }
+    
+    func setupUI() {
+        imageBorderView?.layer.borderColor = UIColor.mainThemeColor.cgColor
+        imageBorderView?.layer.borderWidth = 2
+        separatorView?.backgroundColor = UIColor.mainThemeColor
+        openURLButton?.layer.cornerRadius = 5
+        googleButton?.layer.cornerRadius = 5
+    }
+    
+    func setupInfo() {
+        guard let selectedItem = selectedItem else { return }
+        titleLabel?.text = selectedItem.title
+        descriptionTextView?.text = "\t" + selectedItem.description.replacingOccurrences(of: "\n", with: "\n\t")
+        authorLabel?.text = selectedItem.author
+        categoriesLabel?.text = selectedItem.categories.joined(separator: ", ")
+        
+        if let image = selectedItem.image, image != UIImage(named: selectedItem.section.rawValue + "Stub") {
+            self.imageView?.fit(toImage: image)
+        } else {
+            self.imageView?.superview?.removeFromSuperview()
+        }
+        
+        if let url = selectedItem.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true), let hostName = urlComponents.host {
+            openURLButton?.setTitle(hostName, for: .normal)
+        } else {
+            openURLButton?.removeFromSuperview()
+        }
+        
+        if selectedItem.section != .Books {
+            googleButton?.removeFromSuperview()
+        }
+    }
+    
     @objc func back() {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func openURL() {
-        guard let selectedItem = selectedItem else { return }
-        let url: URL
-        //TODO: Update with switch item.section
-        if let itemUrl = selectedItem.url {
-            url = itemUrl
-        } else if let author = selectedItem.author, let bookURL = getGoogleSearchURL(parameters: "\(selectedItem.title) \(author)") {
-            url = bookURL
-        } else if let itemURL = getGoogleSearchURL(parameters: "\(selectedItem.title)") {
-            url = itemURL
-        } else {
-            return
-        }
-        UIApplication.shared.open(url, options: [:])
+        guard let itemUrl = selectedItem.url else { return }
+        UIApplication.shared.open(itemUrl, options: [:])
+    }
+    
+    @IBAction func searchInGoogle() {
+        guard let author = selectedItem.author, let searchURL = getGoogleSearchURL(parameters: "\(selectedItem.title) \(author)") else { return }
+        UIApplication.shared.open(searchURL, options: [:])
     }
     
     func getGoogleSearchURL(parameters: String) -> URL? {

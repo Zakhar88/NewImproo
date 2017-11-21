@@ -498,10 +498,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAg-8V-T0h">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="60"/>
                                                 <state key="normal" title="Google"/>
+                                                <connections>
+                                                    <action selector="searchInGoogle" destination="gmA-2C-WzO" eventType="touchUpInside" id="7VH-Eb-6Ui"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-Xf-APx">
                                                 <rect key="frame" x="152" y="0.0" width="136" height="60"/>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="openURL" destination="gmA-2C-WzO" eventType="touchUpInside" id="6HB-4n-HwT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -559,7 +565,7 @@
                         <outlet property="googleButton" destination="wAg-8V-T0h" id="qsk-Ne-Ci2"/>
                         <outlet property="imageBorderView" destination="9An-EQ-UZs" id="wCx-c6-Rm6"/>
                         <outlet property="imageView" destination="iU1-nC-JlG" id="wpH-Wj-etK"/>
-                        <outlet property="openURLButton" destination="L0A-Xf-APx" id="uhI-ES-ZkC"/>
+                        <outlet property="openURLButton" destination="L0A-Xf-APx" id="tlT-DY-ibR"/>
                         <outlet property="separatorView" destination="I3s-6e-Sdh" id="Nir-fv-Iw8"/>
                         <outlet property="titleLabel" destination="3Jr-Bq-TkR" id="tRC-yB-tgh"/>
                     </connections>
