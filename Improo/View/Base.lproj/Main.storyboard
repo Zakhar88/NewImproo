@@ -386,7 +386,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtv-UV-LpD" userLabel="SeparatorView">
                                         <rect key="frame" x="0.0" y="188" width="320" height="2"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="6Sv-hc-g1O"/>
                                         </constraints>
@@ -475,7 +475,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80u-YY-BUL">
-                                                <rect key="frame" x="40.5" y="189" width="273" height="14.5"/>
+                                                <rect key="frame" x="282" y="189" width="31" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -503,7 +503,7 @@
                                             <constraint firstAttribute="trailing" secondItem="3Jr-Bq-TkR" secondAttribute="trailing" constant="20" id="eQM-Lo-c79"/>
                                             <constraint firstItem="3Jr-Bq-TkR" firstAttribute="top" secondItem="Hxe-kz-Xrf" secondAttribute="bottom" constant="8" id="hk2-3Y-ugF"/>
                                             <constraint firstItem="I3s-6e-Sdh" firstAttribute="top" secondItem="80u-YY-BUL" secondAttribute="bottom" constant="8" id="iWm-gd-ekX"/>
-                                            <constraint firstItem="80u-YY-BUL" firstAttribute="leading" secondItem="oNg-S2-ElO" secondAttribute="leading" constant="40" id="kNd-Le-h40"/>
+                                            <constraint firstItem="80u-YY-BUL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oNg-S2-ElO" secondAttribute="leading" constant="8" id="kNd-Le-h40"/>
                                             <constraint firstAttribute="trailing" secondItem="80u-YY-BUL" secondAttribute="trailing" constant="8" id="lJi-ih-ICI"/>
                                             <constraint firstItem="I3s-6e-Sdh" firstAttribute="leading" secondItem="oNg-S2-ElO" secondAttribute="leading" constant="8" id="vGe-ka-meR"/>
                                         </constraints>
