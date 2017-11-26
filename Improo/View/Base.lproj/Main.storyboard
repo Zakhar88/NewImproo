@@ -564,7 +564,7 @@
                         <viewLayoutGuide key="safeArea" id="c5G-RY-p9I"/>
                     </view>
                     <navigationItem key="navigationItem" id="kW3-bN-Lm8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="tR7-ZU-ioC"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="tR7-ZU-ioC"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>

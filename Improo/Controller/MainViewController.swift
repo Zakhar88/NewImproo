@@ -35,7 +35,12 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var entertainmens: [Item]?
     var entertainmensCategories: [String]?
     
-    var selectedCategory = FirestoreManager.allCategories
+    var selectedCategory = FirestoreManager.allCategories {
+        didSet {
+            categoriesBarButton?.title = selectedCategory
+            self.itemsCollectionView?.reloadData()
+        }
+    }
     var itemsCollectioViewDataSource: ItemsCollectionViewDataSource!
     
     var sectionItems: [Item]? {
@@ -73,6 +78,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         didSet {
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
+            selectedCategory = FirestoreManager.allCategories
             itemsCollectionView.reloadData()
         }
     }
@@ -119,8 +125,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         categoriesViewController.categoires = sectionCategories ?? []
         categoriesViewController.selectAction = { category in
             self.selectedCategory = category
-            sender?.title = category
-            self.itemsCollectionView?.reloadData()
         }
         navigationController?.pushViewController(categoriesViewController, animated: true)
     }
