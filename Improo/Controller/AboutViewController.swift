@@ -33,4 +33,11 @@ class AboutViewController: UIViewController {
             sendFeedbackButton?.layer.cornerRadius = 5
         }
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if UserDefaults.standard.bool(forKey: hideAdvertisementUserDefauleSettingKey) {
+            turnOffAdvertisementButton?.removeFromSuperview()
+        }
+    }
 }

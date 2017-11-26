@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIButton.appearance().backgroundColor = UIColor.mainThemeColor
         UIButton.appearance().setTitleColor(UIColor.white, for: .normal)
         
+        //TODO: Remove before release
+        UserDefaults.standard.set(true, forKey: hideAdvertisementUserDefauleSettingKey)
+        
         return true
     }
 
