@@ -79,7 +79,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
             selectedCategory = FirestoreManager.allCategories
-            itemsCollectionView.reloadData()
         }
     }
     
