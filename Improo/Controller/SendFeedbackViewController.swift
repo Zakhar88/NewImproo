@@ -39,13 +39,12 @@ class SendFeedbackViewController: UIViewController {
     @IBAction func sendMessage() {
         guard let message = messageTextView?.text, !message.isEmpty else { return }
         FirestoreManager.shared.uploadMessage(messageText: message, nickname: nicknameField?.text) { error in
-            guard let navigationController = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController, let topViewController = navigationController.visibleViewController as? AdvertisementViewController else { return }
             if let error = error {
-                topViewController.showError(error)
+                self.showError(error)
             } else {
                 self.messageTextView?.text = ""
                 self.enableSendButton(false)
-                topViewController.showAlert(title: "Надіслано!", message: "Дякуємо за відгук!")
+                self.showAlert(title: "Надіслано!", message: "Дякуємо за відгук!")
             }
         }
     }
