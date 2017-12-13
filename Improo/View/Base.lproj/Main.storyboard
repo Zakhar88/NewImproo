@@ -29,7 +29,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Bdu-6q-cYY">
                                 <rect key="frame" x="16" y="444" width="288" height="104"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-Mg-QTR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwQ-Mg-QTR" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                         <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -40,7 +40,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-CP-Ost">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-CP-Ost" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="288" height="44"/>
                                         <color key="backgroundColor" red="0.25490196078431371" green="0.39215686274509803" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -419,14 +419,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="qWd-FM-CLJ">
                                         <rect key="frame" x="16" y="198" width="288" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAg-8V-T0h">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAg-8V-T0h" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="44"/>
                                                 <state key="normal" title="Google"/>
                                                 <connections>
                                                     <action selector="searchInGoogle" destination="gmA-2C-WzO" eventType="touchUpInside" id="7VH-Eb-6Ui"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-Xf-APx">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0A-Xf-APx" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                                 <rect key="frame" x="152" y="0.0" width="136" height="44"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>

@@ -10,28 +10,13 @@ import UIKit
 
 class AboutViewController: UIViewController {
     
-    @IBOutlet weak var aboutTextView: UITextView? {
-        didSet {
-            //aboutTextView?.addBorder(width: 1, color: UIColor.lightGray)
-            FirestoreManager.shared.loadInfo { (infoText, error) in
-                guard let infoText = infoText else {
-                    self.showError(error)
-                    return
-                }
-                self.aboutTextView?.text = infoText
-            }
-        }
-    }
+    @IBOutlet weak var aboutTextView: UITextView?
+    @IBOutlet weak var turnOffAdvertisementButton: UIButton?
+    @IBOutlet weak var sendFeedbackButton: UIButton?
     
-    @IBOutlet weak var turnOffAdvertisementButton: UIButton? {
-        didSet {
-            turnOffAdvertisementButton?.layer.cornerRadius = 5
-        }
-    }
-    @IBOutlet weak var sendFeedbackButton: UIButton? {
-        didSet {
-            sendFeedbackButton?.layer.cornerRadius = 5
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        aboutTextView?.text = FirestoreManager.shared.infoText
     }
     
     override func viewWillLayoutSubviews() {

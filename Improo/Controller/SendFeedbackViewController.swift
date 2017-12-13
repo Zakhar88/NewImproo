@@ -43,7 +43,7 @@ class SendFeedbackViewController: UIViewController {
     
     func enableSendButton(_ enabled: Bool) {
         sendButton?.isEnabled = enabled
-v    }
+    }
 }
 
 extension SendFeedbackViewController: UITextViewDelegate {

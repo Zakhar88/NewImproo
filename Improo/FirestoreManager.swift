@@ -14,21 +14,24 @@ class FirestoreManager {
     
     private let databaseReference: Firestore!
     
+    var infoText: String?
+    
     private init() {
         databaseReference = Firestore.firestore()
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = true
         let db = Firestore.firestore()
         db.settings = settings
+        subscribeForAboutText()
     }
     
-    func loadInfo(completion: @escaping (String?, Error?)->()) {
-        databaseReference.document("ukrainian/info").getDocument { (documentSnapshot, error) in
-            guard let infoText = documentSnapshot?.data()["text"] as? String else {
-                completion(nil, error)
+    func subscribeForAboutText() {
+        databaseReference.document("ukrainian/info").addSnapshotListener { (snapshot, error) in
+            guard let aboutText = snapshot?.data()["text"] as? String else {
+                self.uploadError(error)
                 return
             }
-            completion(infoText, nil)
+            self.infoText = aboutText
         }
     }
     
@@ -57,7 +60,7 @@ class FirestoreManager {
         }
     }
     
-    func sunscribeForUpdates(forSection section: Section, completion: @escaping (Item?, DocumentChangeType?, Error?)->()) {
+    func subscribeForUpdates(forSection section: Section, completion: @escaping (Item?, DocumentChangeType?, Error?)->()) {
         databaseReference.collection("ukrainian/\(section.rawValue)/Collection").addSnapshotListener { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot, error == nil else {
                 completion(nil, nil, error)
