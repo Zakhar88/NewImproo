@@ -27,10 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
 
         UITabBar.appearance().backgroundColor = UIColor.white
-        UIApplication.shared.statusBarStyle = .lightContent
-
-        UIButton.appearance().backgroundColor = UIColor.mainThemeColor
-        UIButton.appearance().setTitleColor(UIColor.white, for: .normal)
         
         //TODO: Remove before release
         UserDefaults.standard.set(true, forKey: hideAdvertisementUserDefauleSettingKey)

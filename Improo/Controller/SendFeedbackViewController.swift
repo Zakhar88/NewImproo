@@ -11,18 +11,10 @@ import UIKit
 class SendFeedbackViewController: UIViewController {
 
     @IBOutlet weak var sendButton: UIBarButtonItem?
-    
-    @IBOutlet weak var nicknameField: UITextField? {
-        didSet {
-            nicknameField?.addBorder(width: 1, color: UIColor.lightGray)
-        }
-    }
-    
+    @IBOutlet weak var nicknameField: UITextField?
     @IBOutlet weak var messageTextView: UITextView? {
         didSet {
-            messageTextView?.addBorder(width: 1, color: UIColor.lightGray)
             messageTextView?.placeholder = "Ваше повідомлення..."
-
         }
     }
     
@@ -51,8 +43,7 @@ class SendFeedbackViewController: UIViewController {
     
     func enableSendButton(_ enabled: Bool) {
         sendButton?.isEnabled = enabled
-        //sendButton?.backgroundColor = enabled ? sendButton?.tintColor : UIColor.lightGray
-    }
+v    }
 }
 
 extension SendFeedbackViewController: UITextViewDelegate {
