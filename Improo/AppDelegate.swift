@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor.white
         
         //TODO: Remove before release
-        UserDefaults.standard.set(true, forKey: hideAdvertisementUserDefauleSettingKey)
-        
+        UserDefaults.standard.set(false, forKey: hideAdvertisementUserDefauleSettingKey)
+        PurchaseManager.shared.requestProducts()
         return true
     }
 
