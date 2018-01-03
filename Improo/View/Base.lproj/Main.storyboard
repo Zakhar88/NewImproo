@@ -86,6 +86,7 @@
                     <connections>
                         <outlet property="aboutTextView" destination="5qQ-ui-h0T" id="6rd-8X-Dxp"/>
                         <outlet property="buyFullAccessButton" destination="LwQ-Mg-QTR" id="Vg9-Jz-EjX"/>
+                        <outlet property="fullAccessDescriptionLabel" destination="myV-dX-iSX" id="IsF-KO-wXe"/>
                         <outlet property="sendFeedbackButton" destination="bXy-CP-Ost" id="NSE-nv-hLF"/>
                     </connections>
                 </viewController>

@@ -28,6 +28,7 @@ class AboutViewController: UIViewController {
         super.viewWillLayoutSubviews()
         if UserDefaults.standard.bool(forKey: FullAccessID) {
             buyFullAccessButton?.removeFromSuperview()
+            fullAccessDescriptionLabel?.removeFromSuperview()
         }
     }
     
