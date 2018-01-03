@@ -48,6 +48,9 @@
                                         <state key="normal" title="Придбати повний доступ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buyFullAccess" destination="QH7-y3-ZLn" eventType="touchUpInside" id="p4a-ix-W5X"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-CP-Ost" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="343" height="44"/>
