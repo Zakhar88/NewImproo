@@ -19,7 +19,7 @@ class AboutViewController: UIViewController {
         super.viewWillAppear(animated)
         aboutTextView?.text = FirestoreManager.shared.infoText
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
+        NotificationCenter.default.addObserver(self, selector: #selector(AboutViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: PurchaseNotification),
                                                object: nil)
     }
@@ -29,6 +29,11 @@ class AboutViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: FullAccessID) {
             buyFullAccessButton?.removeFromSuperview()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
     
     @IBAction func buyFullAccess() {

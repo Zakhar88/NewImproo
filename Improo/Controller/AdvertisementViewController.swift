@@ -24,10 +24,6 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
         super.viewDidLoad()
         if userHasFullAccess { return }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
-                                               name: NSNotification.Name(rawValue: PurchaseNotification),
-                                               object: nil)
-        
         let request = GADRequest()
         request.testDevices = [ kGADSimulatorID, "f74bec2a8ec746202a77d38886ba6a00" ]
         
@@ -41,7 +37,17 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !userHasFullAccess {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: PurchaseNotification),
+                                               object: nil)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
 
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
