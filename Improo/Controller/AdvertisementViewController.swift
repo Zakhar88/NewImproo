@@ -9,32 +9,39 @@
 import UIKit
 import GoogleMobileAds
 
-let hideAdvertisementUserDefauleSettingKey = "hideAdvertisementUserDefauleSettingKey"
-
 class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
     
     @IBOutlet weak var advertisementView: UIView?
     @IBOutlet weak var advertisementViewHeightConstraint: NSLayoutConstraint?
     
-    var hideAdvertisement: Bool {
-        return UserDefaults.standard.bool(forKey: hideAdvertisementUserDefauleSettingKey)
+    var userHasFullAccess: Bool {
+        return UserDefaults.standard.bool(forKey: FullAccessID)
     }
     
-    lazy var adBannerView: GADBannerView = {
-        let adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        adBannerView.adUnitID = "ca-app-pub-1829214457085802/2822142769"
-        adBannerView.delegate = self
-        adBannerView.rootViewController = self
-        return adBannerView
-    }()
+    fileprivate var adBannerView: GADBannerView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if hideAdvertisement { return }
+        if userHasFullAccess { return }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: PurchaseNotification),
+                                               object: nil)
         
         let request = GADRequest()
         request.testDevices = [ kGADSimulatorID, "f74bec2a8ec746202a77d38886ba6a00" ]
-        adBannerView.load(request)
+        
+        adBannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        adBannerView?.adUnitID = "ca-app-pub-1829214457085802/2822142769"
+        adBannerView?.delegate = self
+        adBannerView?.rootViewController = self
+        adBannerView?.load(request)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
 
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
@@ -51,5 +58,13 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
         }
     }
     
-    //func advertisementIsOn() -> Bool
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard let productID = notification.object as? String else { return }
+        if productID == FullAccessID {
+            adBannerView?.delegate = nil
+            adBannerView = nil
+        } else {
+            showAlert(title: "Purchase Error", message: productID)
+        }
+    }
 }

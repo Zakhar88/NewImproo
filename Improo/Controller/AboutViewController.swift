@@ -11,18 +11,37 @@ import UIKit
 class AboutViewController: UIViewController {
     
     @IBOutlet weak var aboutTextView: UITextView?
-    @IBOutlet weak var turnOffAdvertisementButton: UIButton?
+    @IBOutlet weak var buyFullAccessButton: UIButton?
     @IBOutlet weak var sendFeedbackButton: UIButton?
+    @IBOutlet weak var fullAccessDescriptionLabel: UILabel?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         aboutTextView?.text = FirestoreManager.shared.infoText
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: PurchaseNotification),
+                                               object: nil)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if UserDefaults.standard.bool(forKey: hideAdvertisementUserDefauleSettingKey) {
-            turnOffAdvertisementButton?.removeFromSuperview()
+        if UserDefaults.standard.bool(forKey: FullAccessID) {
+            buyFullAccessButton?.removeFromSuperview()
+        }
+    }
+    
+    @IBAction func buyFullAccess() {
+        PurchaseManager.shared.buyProVersion()
+    }
+    
+    @objc func handlePurchaseNotification(_ notification: Notification) {
+        guard let productID = notification.object as? String else { return }
+        if productID == FullAccessID {
+            buyFullAccessButton?.removeFromSuperview()
+            fullAccessDescriptionLabel?.removeFromSuperview()
+        } else {
+            showAlert(title: "Purchase Error", message: productID)
         }
     }
 }

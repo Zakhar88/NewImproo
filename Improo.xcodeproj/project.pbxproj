@@ -19,7 +19,7 @@
 		6B624CAC1F90E177007CC30A /* ImprooImageVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B624CAB1F90E177007CC30A /* ImprooImageVIew.swift */; };
 		6B64706D1FAF5D1600E3D8DE /* MainViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B64706C1FAF5D1600E3D8DE /* MainViewController+DataSource.swift */; };
 		6B7731121FFBC71B009EEF8B /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7731111FFBC71B009EEF8B /* PurchaseManager.swift */; };
-		6B7731181FFBD8B2009EEF8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7731171FFBD8B2009EEF8B /* StoreKit.framework */; };
+		6B7731221FFBECF1009EEF8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B7731211FFBECF1009EEF8B /* StoreKit.framework */; };
 		6B9708F71FA9E855000DDE6B /* AdvertisementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9708F61FA9E855000DDE6B /* AdvertisementViewController.swift */; };
 		6BAB9B771FB8BF9C003E4A7A /* DiagonallyFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAB9B761FB8BF9C003E4A7A /* DiagonallyFilledView.swift */; };
 		6BAF476A1FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAF47691FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift */; };
@@ -51,7 +51,7 @@
 		6B624CAB1F90E177007CC30A /* ImprooImageVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprooImageVIew.swift; sourceTree = "<group>"; };
 		6B64706C1FAF5D1600E3D8DE /* MainViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+DataSource.swift"; sourceTree = "<group>"; };
 		6B7731111FFBC71B009EEF8B /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
-		6B7731171FFBD8B2009EEF8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		6B7731211FFBECF1009EEF8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6B9708F61FA9E855000DDE6B /* AdvertisementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementViewController.swift; sourceTree = "<group>"; };
 		6BAB9B761FB8BF9C003E4A7A /* DiagonallyFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagonallyFilledView.swift; sourceTree = "<group>"; };
 		6BAF47691FAF42C00018FCF7 /* ItemsCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F40E09FB31C5EE75601DB4F /* Pods_Improo.framework in Frameworks */,
-				6B7731181FFBD8B2009EEF8B /* StoreKit.framework in Frameworks */,
+				6B7731221FFBECF1009EEF8B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +187,7 @@
 		F106EB1DDF53E297C8EDB128 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6B7731171FFBD8B2009EEF8B /* StoreKit.framework */,
+				6B7731211FFBECF1009EEF8B /* StoreKit.framework */,
 				FDCC7DE915ADFBCD11AB9541 /* Pods_Improo.framework */,
 			);
 			name = Frameworks;

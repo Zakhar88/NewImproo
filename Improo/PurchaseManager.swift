@@ -9,26 +9,24 @@
 import StoreKit
 import Foundation
 
-let fullAccessID = "ImprooFullAccess"
-
-//public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products: [SKProduct]?) -> ()
+let FullAccessID = "ImprooFullAccess"
+let PurchaseNotification = "PurchaseNotification"
 
 class PurchaseManager: NSObject {
     
     static let shared = PurchaseManager()
+    fileprivate var fullAccessProduct: SKProduct!
     fileprivate var productsRequest: SKProductsRequest?
 
-    
     override init() {
         super.init()
         SKPaymentQueue.default().add(self)
     }
     
-    public func buyProVersion(completion: (_ error: String?)->() ) {
-        guard SKPaymentQueue.canMakePayments() else {
-            completion("Device is not able or allowed to make payments")
-            return
-        }
+    public func buyProVersion() {
+        guard SKPaymentQueue.canMakePayments() else { return }
+        let payment = SKPayment(product: fullAccessProduct)
+        SKPaymentQueue.default().add(payment)
     }
     
     public func restorePurchases() {
@@ -36,28 +34,20 @@ class PurchaseManager: NSObject {
     }
     
     public func requestProducts() {
-        let identifiers: Set<String> = [fullAccessID]
+        let identifiers: Set<String> = [FullAccessID]
         productsRequest = SKProductsRequest(productIdentifiers: identifiers)
         productsRequest?.delegate = self
         productsRequest?.start()
     }
-    //fileprivate var productsRequestCompletionHandler: ProductsRequestCompletionHandler?
-    
-//    public func requestProduct(completionHandler: @escaping ProductsRequestCompletionHandler) {
-//        productsRequest.cancel()
-//        productsRequestCompletionHandler = completionHandler
-//
-//        productsRequest = SKProductsRequest(productIdentifiers: [])
-//        productsRequest.delegate = self
-//        productsRequest.start()
-//    }
-    
 }
 
 extension PurchaseManager: SKProductsRequestDelegate {
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print(response.products)
+        guard let product = response.products.first, product.productIdentifier == FullAccessID else {
+            return
+        }
+        fullAccessProduct = product
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
@@ -67,56 +57,50 @@ extension PurchaseManager: SKProductsRequestDelegate {
 extension PurchaseManager: SKPaymentTransactionObserver {
     
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-//        for transaction in transactions {
-//            switch (transaction.transactionState) {
-//            case .purchased:
-//                complete(transaction: transaction)
-//                break
-//            case .failed:
-//                fail(transaction: transaction)
-//                break
-//            case .restored:
-//                restore(transaction: transaction)
-//                break
-//            case .deferred:
-//                break
-//            case .purchasing:
-//                break
-//            }
-//        }
+        for transaction in transactions {
+            switch (transaction.transactionState) {
+                case .purchased:
+                    complete(transaction: transaction)
+                    break
+                case .failed:
+                    fail(transaction: transaction)
+                    break
+                case .restored:
+                    restore(transaction: transaction)
+                    break
+                case .deferred:
+                    break
+                case .purchasing:
+                    break
+            }
+        }
     }
     
     private func complete(transaction: SKPaymentTransaction) {
-//        print("complete...")
-//        deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
-//        SKPaymentQueue.default().finishTransaction(transaction)
+        PostPurchaseNotificationFor(transaction.payment.productIdentifier)
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
     private func restore(transaction: SKPaymentTransaction) {
-//        guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
-//
-//        print("restore... \(productIdentifier)")
-//        deliverPurchaseNotificationFor(identifier: productIdentifier)
-//        SKPaymentQueue.default().finishTransaction(transaction)
+        guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
+        PostPurchaseNotificationFor(productIdentifier)
+        SKPaymentQueue().finishTransaction(transaction)
     }
     
     private func fail(transaction: SKPaymentTransaction) {
-//        print("fail...")
-//        if let transactionError = transaction.error as? NSError {
-//            if transactionError.code != SKError.paymentCancelled.rawValue {
-//                print("Transaction Error: \(transaction.error?.localizedDescription)")
-//            }
-//        }
-//        
-//        SKPaymentQueue.default().finishTransaction(transaction)
+        if let transactionError = transaction.error as? NSError {
+            if transactionError.code != SKError.paymentCancelled.rawValue, let errorDescription = transaction.error?.localizedDescription {
+                PostPurchaseNotificationFor(errorDescription)
+            }
+        }
+        SKPaymentQueue.default().finishTransaction(transaction)
     }
     
-    private func deliverPurchaseNotificationFor(identifier: String?) {
-//        guard let identifier = identifier else { return }
-//
-//        purchasedProductIdentifiers.insert(identifier)
-//        UserDefaults.standard.set(true, forKey: identifier)
-//        UserDefaults.standard.synchronize()
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: identifier)
+    private func PostPurchaseNotificationFor(_ message: String) {
+        if message == FullAccessID {
+            UserDefaults.standard.set(true, forKey: FullAccessID)
+            UserDefaults.standard.synchronize()
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: PurchaseNotification), object: message)
     }
 }
