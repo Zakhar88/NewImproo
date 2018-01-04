@@ -13,6 +13,7 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var aboutTextView: UITextView?
     @IBOutlet weak var buyFullAccessButton: UIButton?
     @IBOutlet weak var sendFeedbackButton: UIButton?
+    @IBOutlet weak var restorePurchasesButton: UIButton?
     @IBOutlet weak var fullAccessDescriptionLabel: UILabel?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +30,7 @@ class AboutViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: FullAccessID) {
             buyFullAccessButton?.removeFromSuperview()
             fullAccessDescriptionLabel?.removeFromSuperview()
+            restorePurchasesButton?.removeFromSuperview()
         }
     }
     
@@ -39,6 +41,10 @@ class AboutViewController: UIViewController {
     
     @IBAction func buyFullAccess() {
         PurchaseManager.shared.buyProVersion()
+    }
+    
+    @IBAction func restorePurchases() {
+        PurchaseManager.shared.restorePurchases()
     }
     
     @objc func handlePurchaseNotification(_ notification: Notification) {

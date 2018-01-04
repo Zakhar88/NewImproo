@@ -72,7 +72,10 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
     @objc func handlePurchaseNotification(_ notification: Notification) {
         guard let productID = notification.object as? String else { return }
         if productID == FullAccessID {
-            adBannerView?.delegate = nil
+            if let bannerView = self.adBannerView {
+                bannerView.delegate = nil
+                adViewWillDismissScreen(bannerView)
+            }
             adBannerView = nil
         } else {
             showAlert(title: "Purchase Error", message: productID)

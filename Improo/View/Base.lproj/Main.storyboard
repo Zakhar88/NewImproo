@@ -20,14 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5qQ-ui-h0T">
-                                <rect key="frame" x="16" y="84" width="343" height="387"/>
+                                <rect key="frame" x="16" y="84" width="343" height="327"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">	Замислюєтеся інколи, що хотіли б розвиватися, але поки не знаєте, з чого почати і куди рухатись? Цей застосунок створено саме для того, щоб у цьому Вам допомогти.	В майбутньому ми плануємо покращити дизайн, додати більше контенту, а також коментарі та рейтинги до книг та курсів.	Ми лише починаємо, отож Ваші поради та зауваження дуже важливі! Ви можете надсилати їх нам, скориставшись формою нижче. Дякуємо!</string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Bdu-6q-cYY">
-                                <rect key="frame" x="16" y="487" width="343" height="160"/>
+                                <rect key="frame" x="16" y="427" width="343" height="220"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="50" text="Повний доступ це розділ Розваги, відсутність реклами та допомога проекту!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myV-dX-iSX">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
@@ -52,8 +52,22 @@
                                             <action selector="buyFullAccess" destination="QH7-y3-ZLn" eventType="touchUpInside" id="p4a-ix-W5X"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-CP-Ost" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFx-JR-4jV" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="343" height="44"/>
+                                        <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="EyE-eb-4wZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Відновити покупки">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restorePurchases" destination="QH7-y3-ZLn" eventType="touchUpInside" id="O1l-QO-pic"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXy-CP-Ost" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="176" width="343" height="44"/>
                                         <color key="backgroundColor" red="0.25490196078431371" green="0.39215686274509803" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="QuB-UF-fLr"/>
@@ -87,6 +101,7 @@
                         <outlet property="aboutTextView" destination="5qQ-ui-h0T" id="6rd-8X-Dxp"/>
                         <outlet property="buyFullAccessButton" destination="LwQ-Mg-QTR" id="Vg9-Jz-EjX"/>
                         <outlet property="fullAccessDescriptionLabel" destination="myV-dX-iSX" id="IsF-KO-wXe"/>
+                        <outlet property="restorePurchasesButton" destination="nFx-JR-4jV" id="dK2-W9-fFL"/>
                         <outlet property="sendFeedbackButton" destination="bXy-CP-Ost" id="NSE-nv-hLF"/>
                     </connections>
                 </viewController>
