@@ -310,9 +310,53 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="yNs-6H-ZWq">
+                                <rect key="frame" x="16" y="253" width="343" height="160"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="50" text="Повний доступ це розділ Розваги, відсутність реклами та допомога проекту!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7w-OP-lmQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hNH-O8-qfd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zay-Ma-3pk" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="343" height="44"/>
+                                        <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="8DE-nt-Srj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Придбати повний доступ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buyFullAccess" destination="BYZ-38-t0r" eventType="touchUpInside" id="b9y-nR-65R"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-es-GOL" customClass="CustomizedButton" customModule="Improo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="116" width="343" height="44"/>
+                                        <color key="backgroundColor" red="0.25490196079999999" green="0.3921568627" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="yyH-rV-A7i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Відновити покупки">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restorePurchases" destination="BYZ-38-t0r" eventType="touchUpInside" id="ojG-d4-62T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yNs-6H-ZWq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Re-yH-SK0"/>
+                            <constraint firstItem="yNs-6H-ZWq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6et-SQ-kAp"/>
                             <constraint firstItem="LIN-wC-Cze" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D2r-Kh-m3d"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LfN-3w-a6H" secondAttribute="trailing" id="LGI-Vt-typ"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sjh-Gc-JK8"/>
@@ -324,6 +368,8 @@
                             <constraint firstItem="LIN-wC-Cze" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="odS-0d-NH3"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="top" secondItem="LfN-3w-a6H" secondAttribute="bottom" constant="1" id="sG3-zh-h0u"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8YL-eM-1fh" secondAttribute="trailing" id="uWR-hq-bBc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yNs-6H-ZWq" secondAttribute="trailing" constant="16" id="uZ1-jV-4OB"/>
+                            <constraint firstItem="yNs-6H-ZWq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uxo-to-ZyE"/>
                             <constraint firstItem="XlQ-uD-o0f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wXt-E0-oOB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -346,8 +392,10 @@
                         <outlet property="activityIndicatorView" destination="LIN-wC-Cze" id="GZR-0u-ecC"/>
                         <outlet property="advertisementView" destination="8YL-eM-1fh" id="wxx-jw-hTm"/>
                         <outlet property="advertisementViewHeightConstraint" destination="QTd-Zq-ZIy" id="yx7-wt-7gT"/>
+                        <outlet property="buyFullAccessButton" destination="Zay-Ma-3pk" id="x1Y-8E-M3r"/>
                         <outlet property="categoriesBarButton" destination="Wty-Pr-b1v" id="h6w-82-MoQ"/>
                         <outlet property="itemsCollectionView" destination="LfN-3w-a6H" id="ss0-AU-1OG"/>
+                        <outlet property="purchaseStackView" destination="yNs-6H-ZWq" id="Sxb-bH-Oby"/>
                         <outlet property="sectionsTabBar" destination="XlQ-uD-o0f" id="bO2-4t-bwU"/>
                     </connections>
                 </viewController>

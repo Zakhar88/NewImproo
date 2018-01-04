@@ -19,26 +19,15 @@ class AboutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         aboutTextView?.text = FirestoreManager.shared.infoText
-        let title = "Придбати повний доступ ($\(PurchaseManager.shared.fullAccessProduct.price))"
-        buyFullAccessButton?.setTitle(title, for: .normal)
+        buyFullAccessButton?.setTitle(PurchaseManager.shared.purchaseButtonTitle, for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(AboutViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: PurchaseNotification),
                                                object: nil)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        
         if UserDefaults.standard.bool(forKey: FullAccessID) {
-            buyFullAccessButton?.removeFromSuperview()
-            fullAccessDescriptionLabel?.removeFromSuperview()
-            restorePurchasesButton?.removeFromSuperview()
+            hidePurchaseInfo()
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
-        super.viewWillDisappear(animated)
     }
     
     @IBAction func buyFullAccess() {
@@ -52,10 +41,15 @@ class AboutViewController: UIViewController {
     @objc func handlePurchaseNotification(_ notification: Notification) {
         guard let productID = notification.object as? String else { return }
         if productID == FullAccessID {
-            buyFullAccessButton?.removeFromSuperview()
-            fullAccessDescriptionLabel?.removeFromSuperview()
+            hidePurchaseInfo()
         } else {
             showAlert(title: "Purchase Error", message: productID)
         }
+    }
+    
+    func hidePurchaseInfo() {
+        buyFullAccessButton?.removeFromSuperview()
+        fullAccessDescriptionLabel?.removeFromSuperview()
+        restorePurchasesButton?.removeFromSuperview()
     }
 }

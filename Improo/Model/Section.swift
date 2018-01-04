@@ -22,7 +22,7 @@ enum Section: String {
                 self = .Books
             case "Про Нас":
                 self = .About
-            case "Дії":
+            case "Статті":
                 self = .Activities
             case "Курси":
                 self = .Courses
@@ -40,7 +40,7 @@ enum Section: String {
         case .About:
             return "Про Нас"
         case .Activities:
-            return "Дії"
+            return "Статті"
         case .Courses:
             return "Курси"
         case .Entertainment:

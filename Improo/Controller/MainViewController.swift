@@ -17,6 +17,8 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     @IBOutlet weak var sectionsTabBar: UITabBar!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet var categoriesBarButton: UIBarButtonItem!
+    @IBOutlet weak var purchaseStackView: UIStackView?
+    @IBOutlet weak var buyFullAccessButton: UIButton?
     
     // MARK: - Properties
     
@@ -79,6 +81,12 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
             selectedCategory = FirestoreManager.allCategories
+            
+            if !UserDefaults.standard.bool(forKey: FullAccessID) {
+                purchaseStackView?.isHidden = selectedSection != .Entertainment
+                itemsCollectionView.isHidden = selectedSection == .Entertainment
+                buyFullAccessButton?.setTitle(PurchaseManager.shared.purchaseButtonTitle, for: .normal)
+            }
         }
     }
     

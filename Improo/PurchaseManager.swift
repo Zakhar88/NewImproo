@@ -15,8 +15,11 @@ let PurchaseNotification = "PurchaseNotification"
 class PurchaseManager: NSObject {
     
     static let shared = PurchaseManager()
-    var fullAccessProduct: SKProduct!
-    fileprivate var productsRequest: SKProductsRequest?
+    
+    lazy var purchaseButtonTitle: String = { return "Придбати повний доступ ($\(fullAccessProduct?.price ?? 0.99))" }()
+    
+    var fullAccessProduct: SKProduct?
+    var productsRequest: SKProductsRequest?
 
     override init() {
         super.init()
@@ -25,7 +28,7 @@ class PurchaseManager: NSObject {
     
     public func buyProVersion() {
         guard SKPaymentQueue.canMakePayments() else { return }
-        let payment = SKPayment(product: fullAccessProduct)
+        let payment = SKPayment(product: fullAccessProduct!)
         SKPaymentQueue.default().add(payment)
     }
     

@@ -14,15 +14,19 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
     @IBOutlet weak var advertisementView: UIView?
     @IBOutlet weak var advertisementViewHeightConstraint: NSLayoutConstraint?
     
+    fileprivate var adBannerView: GADBannerView?
+
     var userHasFullAccess: Bool {
         return UserDefaults.standard.bool(forKey: FullAccessID)
     }
     
-    fileprivate var adBannerView: GADBannerView?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if userHasFullAccess { return }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
+                                               name: NSNotification.Name(rawValue: PurchaseNotification),
+                                               object: nil)
         
         let request = GADRequest()
         request.testDevices = [ kGADSimulatorID, "f74bec2a8ec746202a77d38886ba6a00" ]
@@ -32,22 +36,6 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
         adBannerView?.delegate = self
         adBannerView?.rootViewController = self
         adBannerView?.load(request)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if !userHasFullAccess {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
-                                               name: NSNotification.Name(rawValue: PurchaseNotification),
-                                               object: nil)
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
-        super.viewWillDisappear(animated)
     }
 
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
@@ -72,11 +60,18 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
     @objc func handlePurchaseNotification(_ notification: Notification) {
         guard let productID = notification.object as? String else { return }
         if productID == FullAccessID {
+            //Hide Advertisement Banner
             if let bannerView = self.adBannerView {
                 bannerView.delegate = nil
                 adViewWillDismissScreen(bannerView)
             }
             adBannerView = nil
+            
+            //Hide Purchase menu on Entertainment section
+            if let mainVC = self as? MainViewController {
+                mainVC.purchaseStackView?.isHidden = true
+                mainVC.itemsCollectionView.isHidden = false
+            }
         } else {
             showAlert(title: "Purchase Error", message: productID)
         }
