@@ -15,7 +15,7 @@ let PurchaseNotification = "PurchaseNotification"
 class PurchaseManager: NSObject {
     
     static let shared = PurchaseManager()
-    fileprivate var fullAccessProduct: SKProduct!
+    var fullAccessProduct: SKProduct!
     fileprivate var productsRequest: SKProductsRequest?
 
     override init() {
