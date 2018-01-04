@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>10243956986-hknkn91f0gkjnb3oh8cmgdvteu8s3g7j.apps.googleusercontent.com</string>
+	<string>10243956986-ps2l05u0djbbu4md2g99eqrteq0svi3v.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.10243956986-hknkn91f0gkjnb3oh8cmgdvteu8s3g7j</string>
+	<string>com.googleusercontent.apps.10243956986-ps2l05u0djbbu4md2g99eqrteq0svi3v</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDY5XIei5R28KmA9qO1BdY3TIolNolx0Zs</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>GaranZZ.Improo</string>
+	<string>com.gzakhar.improo</string>
 	<key>PROJECT_ID</key>
 	<string>firebase-improo</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:10243956986:ios:4441fe0da744cc9a</string>
+	<string>1:10243956986:ios:f9af10ed4374e8a1</string>
 	<key>DATABASE_URL</key>
 	<string>https://improo.firebaseio.com</string>
 </dict>

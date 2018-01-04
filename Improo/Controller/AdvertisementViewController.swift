@@ -64,6 +64,11 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
         }
     }
     
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print("Fail to receive ads")
+        print(error)
+    }
+    
     @objc func handlePurchaseNotification(_ notification: Notification) {
         guard let productID = notification.object as? String else { return }
         if productID == FullAccessID {
