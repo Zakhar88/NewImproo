@@ -154,8 +154,8 @@
                         <constraints>
                             <constraint firstItem="MHQ-yA-XU0" firstAttribute="top" secondItem="GF0-gS-nT3" secondAttribute="bottom" constant="1" id="0kI-dc-2J9"/>
                             <constraint firstItem="77u-vN-mjm" firstAttribute="trailing" secondItem="MHQ-yA-XU0" secondAttribute="trailing" constant="16" id="IcD-VE-2FD"/>
-                            <constraint firstItem="77u-vN-mjm" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1w4-cF-vr9" secondAttribute="bottom" constant="20" id="MGK-Tf-SSa"/>
                             <constraint firstItem="MHQ-yA-XU0" firstAttribute="leading" secondItem="77u-vN-mjm" secondAttribute="leading" constant="16" id="NBa-7D-pI3"/>
+                            <constraint firstItem="77u-vN-mjm" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kny-4J-fYM" secondAttribute="bottom" constant="16" id="QDj-Tz-onT"/>
                             <constraint firstItem="1w4-cF-vr9" firstAttribute="leading" secondItem="77u-vN-mjm" secondAttribute="leading" constant="16" id="VX7-L8-Fvm"/>
                             <constraint firstItem="kny-4J-fYM" firstAttribute="top" secondItem="1w4-cF-vr9" secondAttribute="bottom" constant="1" id="W61-Ra-hvl"/>
                             <constraint firstItem="GF0-gS-nT3" firstAttribute="leading" secondItem="77u-vN-mjm" secondAttribute="leading" constant="20" id="cyg-er-FV0"/>
@@ -299,8 +299,8 @@
                                 <items>
                                     <tabBarItem title="Книги" image="books" id="a5p-UR-oeD"/>
                                     <tabBarItem title="Курси" image="learning" id="UA8-gh-kpF"/>
-                                    <tabBarItem title="Дії" image="activity" id="H7E-lc-eYO"/>
-                                    <tabBarItem title="Розваги" image="game" id="LqO-Tf-yHo"/>
+                                    <tabBarItem title="Статті" image="article" id="H7E-lc-eYO"/>
+                                    <tabBarItem title="Розваги" image="entertainment" id="LqO-Tf-yHo"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Eo5-vu-Rod"/>
@@ -468,7 +468,7 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="qWd-FM-CLJ" firstAttribute="leading" secondItem="3Tn-sk-YHF" secondAttribute="leading" constant="16" id="1of-fm-6ox"/>
                                     <constraint firstItem="qWd-FM-CLJ" firstAttribute="top" secondItem="dtv-UV-LpD" secondAttribute="bottom" constant="8" id="MN4-HN-QMZ"/>
@@ -628,9 +628,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="activity" width="25" height="25"/>
+        <image name="article" width="25" height="25"/>
         <image name="books" width="25" height="25"/>
-        <image name="game" width="25" height="25"/>
+        <image name="entertainment" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
         <image name="learning" width="25" height="25"/>
     </resources>

@@ -88,10 +88,8 @@ extension PurchaseManager: SKPaymentTransactionObserver {
     }
     
     private func fail(transaction: SKPaymentTransaction) {
-        if let transactionError = transaction.error as? NSError {
-            if transactionError.code != SKError.paymentCancelled.rawValue, let errorDescription = transaction.error?.localizedDescription {
-                PostPurchaseNotificationFor(errorDescription)
-            }
+        if (transaction.error! as NSError).code != SKError.paymentCancelled.rawValue, let errorDescription = transaction.error?.localizedDescription {
+            PostPurchaseNotificationFor(errorDescription)
         }
         SKPaymentQueue.default().finishTransaction(transaction)
     }
