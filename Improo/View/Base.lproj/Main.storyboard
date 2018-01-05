@@ -231,12 +231,13 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="t7A-3k-1wi" firstAttribute="centerX" secondItem="e0I-G2-ISo" secondAttribute="centerX" id="E0m-Tp-eUY"/>
-                                                        <constraint firstItem="t7A-3k-1wi" firstAttribute="top" secondItem="e0I-G2-ISo" secondAttribute="top" id="RmY-Kb-T31"/>
-                                                        <constraint firstAttribute="bottom" secondItem="t7A-3k-1wi" secondAttribute="bottom" id="bnq-TL-SiB"/>
+                                                        <constraint firstItem="t7A-3k-1wi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="e0I-G2-ISo" secondAttribute="top" id="RmY-Kb-T31"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t7A-3k-1wi" secondAttribute="bottom" id="bnq-TL-SiB"/>
                                                         <constraint firstItem="zHB-Hk-K6O" firstAttribute="centerY" secondItem="e0I-G2-ISo" secondAttribute="centerY" id="ce4-qW-gev"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t7A-3k-1wi" secondAttribute="trailing" constant="4" id="mQC-xO-Fuy"/>
-                                                        <constraint firstItem="t7A-3k-1wi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e0I-G2-ISo" secondAttribute="leading" constant="4" id="n3k-26-7lZ"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="t7A-3k-1wi" secondAttribute="trailing" id="mQC-xO-Fuy"/>
+                                                        <constraint firstItem="t7A-3k-1wi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e0I-G2-ISo" secondAttribute="leading" id="n3k-26-7lZ"/>
                                                         <constraint firstItem="zHB-Hk-K6O" firstAttribute="centerX" secondItem="e0I-G2-ISo" secondAttribute="centerX" id="qyx-kO-VAu"/>
+                                                        <constraint firstItem="t7A-3k-1wi" firstAttribute="centerY" secondItem="e0I-G2-ISo" secondAttribute="centerY" id="sch-PK-7x0"/>
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FGV-QV-QBN">
