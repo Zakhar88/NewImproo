@@ -12,16 +12,25 @@ class SendFeedbackViewController: UIViewController {
 
     @IBOutlet weak var sendButton: UIBarButtonItem?
     @IBOutlet weak var nicknameField: UITextField?
-    @IBOutlet weak var messageTextView: UITextView? {
-        didSet {
-            messageTextView?.placeholder = "Ваше повідомлення..."
-        }
-    }
+    @IBOutlet weak var messageTextView: UITextView?
+    @IBOutlet weak var messageTextViewBottomConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        messageTextView?.placeholder = "Ваше повідомлення..."
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
     
     @objc func dismissKeyboard() {
@@ -43,6 +52,17 @@ class SendFeedbackViewController: UIViewController {
     
     func enableSendButton(_ enabled: Bool) {
         sendButton?.isEnabled = enabled
+    }
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        messageTextViewBottomConstraint?.constant = keyboardFrame.size.height + 16.0
+    }
+    
+    @objc func keyboardWillHide(notification:NSNotification) {
+        messageTextViewBottomConstraint?.constant = 16.0
     }
 }
 

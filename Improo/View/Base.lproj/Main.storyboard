@@ -177,6 +177,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="messageTextView" destination="1w4-cF-vr9" id="V8S-zY-3EB"/>
+                        <outlet property="messageTextViewBottomConstraint" destination="QDj-Tz-onT" id="VjC-nk-z9B"/>
                         <outlet property="nicknameField" destination="GF0-gS-nT3" id="gCK-p5-NHg"/>
                         <outlet property="sendButton" destination="sij-sR-4QY" id="T7F-EG-9zZ"/>
                     </connections>
