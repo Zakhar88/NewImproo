@@ -209,6 +209,7 @@
 				B1CE46A31F7C2BC600BE8937 /* Resources */,
 				28DF686268314CEC82C82276 /* [CP] Embed Pods Frameworks */,
 				07A409FA424B9710C661AB3E /* [CP] Copy Pods Resources */,
+				6B0069E61FFFAC7800203383 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -323,6 +324,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Improo/Pods-Improo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6B0069E61FFFAC7800203383 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 124bb65d44118dad03bc3127689fca7e25ce53ff 9e1ba2d8ec5fba14473903f69220952fdbe39f0ea16fc94c75f789f4b6e01e86";
 		};
 		73EF56E834FC415696EAA7C7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

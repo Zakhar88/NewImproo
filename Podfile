@@ -9,4 +9,7 @@ target 'Improo' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'Firebase/AdMob'
+  
+  pod 'Fabric'
+  pod 'Crashlytics'
 end

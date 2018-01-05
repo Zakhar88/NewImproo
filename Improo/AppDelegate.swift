@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleMobileAds
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         GADMobileAds.configure(withApplicationID: "ca-app-pub-1829214457085802~5279639934")
+        Fabric.with([Crashlytics.self])
         
         (UIApplication.shared.value(forKey: "statusBar") as? UIView)?.backgroundColor = UIColor.mainThemeColor
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
