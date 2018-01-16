@@ -31,8 +31,8 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var courses: [Item]?
     var coursesCategories: [String]?
     
-    var activities: [Item]?
-    var activitiesCategories: [String]?
+    var articles: [Item]?
+    var articlesCategories: [String]?
     
     var entertainmens: [Item]?
     var entertainmensCategories: [String]?
@@ -48,7 +48,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var sectionItems: [Item]? {
         switch selectedSection {
         case .About: return []
-        case .Activities: return activities
+        case .Articles: return articles
         case .Books: return books
         case .Courses: return courses
         case .Entertainment: return entertainmens
@@ -69,7 +69,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var sectionCategories: [String]? {
         switch selectedSection {
         case .About: return []
-        case .Activities: return activitiesCategories
+        case .Articles: return articlesCategories
         case .Books: return booksCategories
         case .Courses: return coursesCategories
         case .Entertainment: return entertainmensCategories
@@ -111,7 +111,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     // MARK: - Functions
     
     func checkAllDataExisting() {
-        if activities != nil, books != nil, courses != nil, entertainmens != nil {
+        if articles != nil, books != nil, courses != nil, entertainmens != nil {
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
         }
@@ -144,8 +144,8 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         //Load categories
-        FirestoreManager.shared.loadCategories(forSection: .Activities) { (categories, _) in
-            self.activitiesCategories = categories
+        FirestoreManager.shared.loadCategories(forSection: .Articles) { (categories, _) in
+            self.articlesCategories = categories
         }
         FirestoreManager.shared.loadCategories(forSection: .Books) { (categories, _) in
             self.booksCategories = categories
@@ -158,9 +158,9 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         }
         
         //Load items
-        FirestoreManager.shared.loadDocuments(forSection: .Activities) { (items, error) in
-            self.activities = items
-            if self.selectedSection == .Activities {
+        FirestoreManager.shared.loadDocuments(forSection: .Articles) { (items, error) in
+            self.articles = items
+            if self.selectedSection == .Articles {
                 self.itemsCollectionView.reloadData()
             }
             self.checkAllDataExisting()
