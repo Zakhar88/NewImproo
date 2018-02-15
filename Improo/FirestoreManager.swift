@@ -27,7 +27,7 @@ class FirestoreManager {
     
     func subscribeForAboutText() {
         databaseReference.document("ukrainian/info").addSnapshotListener { (snapshot, error) in
-            guard let aboutText = snapshot?.data()["text"] as? String else {
+            guard let aboutText = snapshot?.data()?["text"] as? String else {
                 self.uploadError(error)
                 return
             }
@@ -37,7 +37,7 @@ class FirestoreManager {
     
     func loadCategories(forSection section: Section, completion: @escaping ([String]?, Error?)->()) {
         databaseReference.document("ukrainian/\(section.rawValue)").getDocument { (documentSnaphot, error) in
-            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()["Categories"] as? [String] else {
+            guard documentSnaphot?.exists == true, var categories = documentSnaphot?.data()?["Categories"] as? [String] else {
                 completion(nil, error)
                 return
             }

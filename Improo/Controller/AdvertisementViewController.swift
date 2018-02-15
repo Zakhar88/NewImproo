@@ -66,12 +66,6 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
                 adViewWillDismissScreen(bannerView)
             }
             adBannerView = nil
-            
-            //Hide Purchase menu on Entertainment section
-            if let mainVC = self as? MainViewController {
-                mainVC.purchaseStackView?.isHidden = true
-                mainVC.itemsCollectionView.isHidden = false
-            }
         } else {
             showAlert(title: "Purchase Error", message: productID)
         }

@@ -21,9 +21,9 @@ class Item {
     required init?(documentSnapshot: DocumentSnapshot, section: Section) {
         
         let dictionary = documentSnapshot.data()
-        guard  let title = dictionary["title"] as? String,
-            let description = dictionary["description"] as? String,
-            let categories = dictionary["categories"] as? [String] else {
+        guard  let title = dictionary?["title"] as? String,
+            let description = dictionary?["description"] as? String,
+            let categories = dictionary?["categories"] as? [String] else {
                 return nil
         }
         
@@ -32,11 +32,11 @@ class Item {
         self.description = description
         self.categories = categories
         
-        if let urlString = dictionary["url"] as? String, let url = URL(string: urlString) {
+        if let urlString = dictionary?["url"] as? String, let url = URL(string: urlString) {
             self.url = url
         }
         
-        if let author = dictionary["author"] as? String {
+        if let author = dictionary?["author"] as? String {
             self.author = author
         }
         

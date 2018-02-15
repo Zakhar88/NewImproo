@@ -16,7 +16,7 @@ class PurchaseManager: NSObject {
     
     static let shared = PurchaseManager()
     
-    lazy var purchaseButtonTitle: String = { return "Придбати повний доступ ($\(fullAccessProduct?.price ?? 0.99))" }()
+    lazy var purchaseButtonTitle: String = { return "Вимкнути рекламу ($\(fullAccessProduct?.price ?? 1.99))" }()
     
     var fullAccessProduct: SKProduct?
     var productsRequest: SKProductsRequest?

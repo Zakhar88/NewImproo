@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = UIColor.white
         
         //TODO: Remove before release
-        UserDefaults.standard.set(true, forKey: FullAccessID)
+        UserDefaults.standard.set(false, forKey: FullAccessID)
         UserDefaults.standard.synchronize()
         
         if !UserDefaults.standard.bool(forKey: FullAccessID) {
