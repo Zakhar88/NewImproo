@@ -92,7 +92,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         title = booksBarItem?.title
         
         loadDocuments()
-        //subscribeForUpdates()
+        subscribeForUpdates()
         
         itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
         itemsCollectionView.dataSource = itemsCollectioViewDataSource
@@ -109,6 +109,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         }
     }
     
+    //TODO: Add button for that
     func selectRandomItem() {
         guard selectedItems.count > 0 else { return }
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedItems.count))), section: 0)
@@ -178,6 +179,11 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             }
             self.checkAllDataExisting()
         }
+    }
+    
+    func subscribeForUpdates() {
+        //TODO: Create closure for managing updates
+        //TODO: Add that closure to each section update func
     }
 }
 
