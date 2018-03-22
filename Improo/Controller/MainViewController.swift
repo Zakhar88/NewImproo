@@ -23,40 +23,28 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     let sectionInsets = UIEdgeInsets(top: 15.0, left: 10.0, bottom: 15.0, right: 10.0)
     let itemsPerRow: CGFloat = 2
     
-    var books: [Item]?
-    var booksCategories: [String]?
-    
-    var courses: [Item]?
-    var coursesCategories: [String]?
-    
-    var articles: [Item]?
-    var articlesCategories: [String]?
-    
-    var entertainmens: [Item]?
-    var entertainmensCategories: [String]?
-    
-    var selectedCategory = FirestoreManager.allCategories {
+    var allSectionsData = [SectionData]()
+    var itemsCollectioViewDataSource: ItemsCollectionViewDataSource!
+    var selectedCategory = FirestoreManager.allCategoriesTitle {
         didSet {
             categoriesBarButton?.title = selectedCategory
             self.itemsCollectionView?.reloadData()
         }
     }
-    var itemsCollectioViewDataSource: ItemsCollectionViewDataSource!
     
     var sectionItems: [Item]? {
-        switch selectedSection {
-        case .About: return []
-        case .Articles: return articles
-        case .Books: return books
-        case .Courses: return courses
-        case .Entertainment: return entertainmens
+        for sectionData in allSectionsData {
+            if sectionData.section == selectedSection {
+                return sectionData.items
+            }
         }
+        return nil
     }
     
     var selectedItems: [Item] {
         get {
             guard let sectionItems = sectionItems else { return [Item]() }
-            if selectedCategory != FirestoreManager.allCategories {
+            if selectedCategory != FirestoreManager.allCategoriesTitle {
                 return sectionItems.filter({$0.categories.contains(selectedCategory)})
             } else {
                 return sectionItems
@@ -65,20 +53,19 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     }
     
     var sectionCategories: [String]? {
-        switch selectedSection {
-        case .About: return []
-        case .Articles: return articlesCategories
-        case .Books: return booksCategories
-        case .Courses: return coursesCategories
-        case .Entertainment: return entertainmensCategories
+        for sectionData in allSectionsData {
+            if sectionData.section == selectedSection {
+                return sectionData.categories
+            }
         }
+        return nil
     }
     
     var selectedSection: Section = .Books {
         didSet {
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
-            selectedCategory = FirestoreManager.allCategories
+            selectedCategory = FirestoreManager.allCategoriesTitle
         }
     }
     
@@ -86,26 +73,21 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let booksBarItem = sectionsTabBar?.items?.first
-        sectionsTabBar?.selectedItem = booksBarItem
-        title = booksBarItem?.title
-        
-        loadDocuments()
-        subscribeForUpdates()
-        
+        sectionsTabBar.tintColor = UIColor.mainThemeColor
         itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
         itemsCollectionView.dataSource = itemsCollectioViewDataSource
-        
-        sectionsTabBar.tintColor = UIColor.mainThemeColor
+        setSections()
+
+        //TODO: subscribeForUpdates()
     }
     
     // MARK: - Functions
     
     func checkAllDataExisting() {
-        if articles != nil, books != nil, courses != nil, entertainmens != nil {
+        if allSectionsData.count == sectionsTabBar.items?.count {
             self.activityIndicatorView?.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
+            self.itemsCollectionView.reloadData()
         }
     }
     
@@ -131,53 +113,52 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     //MARK: - Firebase
     
-    private func loadDocuments() {
+    private func setSections() {
+        
+        FirestoreManager.shared.getSettings { (settings, error) in
+            guard let settings = settings else {
+                self.showError(error)
+                return
+            }
+            
+            let sections = settings.sections
+            var items = [UITabBarItem]()
+            for (index, section) in sections.enumerated() {
+                let tabBarItem = SectionTabBarItem(title: section.ukrainianTitle, image: UIImage(named: section.rawValue), tag: index)
+                tabBarItem.section = section
+                items.append(tabBarItem)
+            }
+            self.sectionsTabBar.setItems(items, animated: true)
+            if let firstItem = self.sectionsTabBar.items?.first {
+                self.sectionsTabBar.selectedItem = firstItem
+                self.title = firstItem.title
+            }
+            self.loadDocuments(forSections: sections)
+        }
+    }
+    
+    private func loadDocuments(forSections sections: [Section]) {
         
         activityIndicatorView?.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        //Load categories
-        FirestoreManager.shared.loadCategories(forSection: .Articles) { (categories, _) in
-            self.articlesCategories = categories
-        }
-        FirestoreManager.shared.loadCategories(forSection: .Books) { (categories, _) in
-            self.booksCategories = categories
-        }
-        FirestoreManager.shared.loadCategories(forSection: .Courses) { (categories, _) in
-            self.coursesCategories = categories
-        }
-        FirestoreManager.shared.loadCategories(forSection: .Entertainment) { (categories, _) in
-            self.entertainmensCategories = categories
-        }
-        
-        //Load items
-        FirestoreManager.shared.loadDocuments(forSection: .Articles) { (items, error) in
-            self.articles = items
-            if self.selectedSection == .Articles {
-                self.itemsCollectionView.reloadData()
+        for section in sections{
+            FirestoreManager.shared.loadDocuments(forSection: section) { (items, error) in
+                guard let items = items else {
+                    self.showError(error)
+                    return
+                }
+                let sectionData = SectionData(section: section, items: items)
+                FirestoreManager.shared.loadCategories(forSection: section, completion: { (categories, error) in
+                    guard let categories = categories else {
+                        self.showError(error)
+                        return
+                    }
+                    sectionData.categories = categories
+                    self.allSectionsData.append(sectionData)
+                    self.checkAllDataExisting()
+                })
             }
-            self.checkAllDataExisting()
-        }
-        FirestoreManager.shared.loadDocuments(forSection: .Books) { (items, error) in
-            self.books = items
-            if self.selectedSection == .Books {
-                self.itemsCollectionView.reloadData()
-            }
-            self.checkAllDataExisting()
-        }
-        FirestoreManager.shared.loadDocuments(forSection: .Courses) { (items, error) in
-            self.courses = items
-            if self.selectedSection == .Courses {
-                self.itemsCollectionView.reloadData()
-            }
-            self.checkAllDataExisting()
-        }
-        FirestoreManager.shared.loadDocuments(forSection: .Entertainment) { (items, error) in
-            self.entertainmens = items
-            if self.selectedSection == .Entertainment {
-                self.itemsCollectionView.reloadData()
-            }
-            self.checkAllDataExisting()
         }
     }
     
@@ -189,7 +170,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
 
 extension MainViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let newSection = Section(ukrainianTitle: item.title) else { return }
+        guard let newSection = (item as? SectionTabBarItem)?.section else { return }
         selectedSection = newSection
     }
 }

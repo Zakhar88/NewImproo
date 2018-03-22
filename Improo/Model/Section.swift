@@ -15,24 +15,6 @@ enum Section: String {
     case Courses = "Courses"
     case Entertainment = "Entertainment"
     
-    init?(ukrainianTitle: String?) {
-        guard let title = ukrainianTitle else { return nil }
-        switch title {
-            case "Книги":
-                self = .Books
-            case "Про Нас":
-                self = .About
-            case "Статті":
-                self = .Articles
-            case "Курси":
-                self = .Courses
-            case "Розваги":
-                self = .Entertainment
-            default:
-                return nil
-        }
-    }
-    
     var ukrainianTitle: String {
         switch self {
         case .Books:

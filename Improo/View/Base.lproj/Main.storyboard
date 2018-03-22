@@ -298,12 +298,7 @@
                             <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-uD-o0f">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem title="Книги" image="books" id="a5p-UR-oeD"/>
-                                    <tabBarItem title="Курси" image="learning" id="UA8-gh-kpF"/>
-                                    <tabBarItem title="Статті" image="article" id="H7E-lc-eYO"/>
-                                    <tabBarItem title="Розваги" image="entertainment" id="LqO-Tf-yHo"/>
-                                </items>
+                                <items/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Eo5-vu-Rod"/>
                                 </connections>
@@ -630,10 +625,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="article" width="25" height="25"/>
-        <image name="books" width="25" height="25"/>
-        <image name="entertainment" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
-        <image name="learning" width="25" height="25"/>
     </resources>
 </document>

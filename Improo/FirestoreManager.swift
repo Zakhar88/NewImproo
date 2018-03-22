@@ -10,11 +10,12 @@ import Firebase
 
 class FirestoreManager {
     static let shared = FirestoreManager()
-    static let allCategories = "Усі категорії"
+    static let allCategoriesTitle = "Усі категорії"
     
     private let databaseReference: Firestore!
     
-    var infoText: String?
+    var settings = Settings()
+    var language: Language = .ukrainian
     
     private init() {
         databaseReference = Firestore.firestore()
@@ -22,16 +23,18 @@ class FirestoreManager {
         settings.isPersistenceEnabled = true
         let db = Firestore.firestore()
         db.settings = settings
-        subscribeForAboutText()
     }
     
-    func subscribeForAboutText() {
-        databaseReference.document("ukrainian/info").addSnapshotListener { (snapshot, error) in
-            guard let aboutText = snapshot?.data()?["text"] as? String else {
-                self.uploadError(error)
-                return
+    func getSettings(completion: @escaping (Settings?, Error?)->()) {
+        databaseReference.document("\(language.rawValue)/Settings").addSnapshotListener { (snapshot, error) in
+            DispatchQueue.main.async {
+                guard let snapshot = snapshot else {
+                    completion(nil, error)
+                    return
+                }
+                self.settings = Settings(documentSnapshot: snapshot)
+                completion(self.settings, nil)
             }
-            self.infoText = aboutText
         }
     }
     
@@ -41,7 +44,7 @@ class FirestoreManager {
                 completion(nil, error)
                 return
             }
-            categories.insert(FirestoreManager.allCategories, at: 0)
+            categories.insert(FirestoreManager.allCategoriesTitle, at: 0)
             DispatchQueue.main.async {
                 completion(categories, nil)
             }
