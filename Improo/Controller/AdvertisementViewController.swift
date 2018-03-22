@@ -27,7 +27,10 @@ class AdvertisementViewController: UIViewController, GADBannerViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(AdvertisementViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: PurchaseNotification),
                                                object: nil)
-        
+        loadAdvertisement()
+    }
+    
+    func loadAdvertisement() {
         let request = GADRequest()
         request.testDevices = [ kGADSimulatorID, "f74bec2a8ec746202a77d38886ba6a00" ]
         

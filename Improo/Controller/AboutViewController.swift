@@ -19,15 +19,16 @@ class AboutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         aboutTextView?.text = FirestoreManager.shared.settings.infoText
-        buyFullAccessButton?.setTitle(PurchaseManager.shared.purchaseButtonTitle, for: .normal)
+        
+        if UserDefaults.standard.bool(forKey: FullAccessID) {
+            hidePurchaseInfo()
+        } else {
+            buyFullAccessButton?.setTitle(PurchaseManager.shared.purchaseButtonTitle, for: .normal)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(AboutViewController.handlePurchaseNotification(_:)),
                                                name: NSNotification.Name(rawValue: PurchaseNotification),
                                                object: nil)
-        
-        if UserDefaults.standard.bool(forKey: FullAccessID) {
-            hidePurchaseInfo()
-        }
     }
     
     @IBAction func buyFullAccess() {

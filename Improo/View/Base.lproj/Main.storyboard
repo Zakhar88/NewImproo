@@ -335,7 +335,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Усі категорії" id="Wty-Pr-b1v">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="selectCategory:" destination="BYZ-38-t0r" id="An9-Up-Ic8"/>
+                                <segue destination="bDX-Tu-5hd" kind="show" identifier="SelectCategorySegue" id="GCB-wN-9me"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -350,7 +350,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.75" y="144.71830985915494"/>
+            <point key="canvasLocation" x="137" y="273"/>
         </scene>
         <!--Категорії-->
         <scene sceneID="i4h-6P-k4E">
@@ -402,7 +402,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QKP-Zy-yOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="133"/>
+            <point key="canvasLocation" x="1585" y="144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hX9-4v-QzR">
@@ -621,7 +621,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zr4-Nu-YyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="145"/>
+            <point key="canvasLocation" x="842" y="562"/>
         </scene>
     </scenes>
     <resources>

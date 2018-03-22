@@ -9,7 +9,6 @@
 import Foundation
 
 enum Section: String {
-    case About = "About"
     case Articles = "Articles"
     case Books = "Books"
     case Courses = "Courses"
@@ -19,8 +18,6 @@ enum Section: String {
         switch self {
         case .Books:
             return "Книги"
-        case .About:
-            return "Про Нас"
         case .Articles:
             return "Статті"
         case .Courses:

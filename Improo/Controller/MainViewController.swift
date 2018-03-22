@@ -16,7 +16,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     @IBOutlet weak var itemsCollectionView: UICollectionView!
     @IBOutlet weak var sectionsTabBar: UITabBar!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet var categoriesBarButton: UIBarButtonItem!
+    @IBOutlet weak var categoriesBarButton: UIBarButtonItem!
     
     // MARK: - Properties
     
@@ -81,6 +81,23 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         //TODO: subscribeForUpdates()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //For fixing iOS bug: https://goo.gl/kB3YTB
+        self.navigationController?.navigationBar.tintAdjustmentMode = .normal
+        self.navigationController?.navigationBar.tintAdjustmentMode = .automatic
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SelectCategorySegue", let categoriesViewController = segue.destination as? CategoriesViewController {
+            categoriesViewController.categoires = sectionCategories ?? []
+            categoriesViewController.selectAction = { category in
+                self.selectedCategory = category
+            }
+        }
+    }
+    
     // MARK: - Functions
     
     func checkAllDataExisting() {
@@ -97,18 +114,6 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         let randomItemIndexPath = IndexPath(row: Int(arc4random_uniform(UInt32(selectedItems.count))), section: 0)
         itemsCollectionView.selectItem(at: randomItemIndexPath, animated: true, scrollPosition: .centeredVertically)
         self.collectionView(itemsCollectionView, didSelectItemAt: randomItemIndexPath)
-    }
-    
-    // MARK: - IBActions
-    
-    @IBAction func selectCategory(_ sender: UIBarButtonItem?) {
-        guard let categoriesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CategoriesViewController") as? CategoriesViewController else { return }
-        
-        categoriesViewController.categoires = sectionCategories ?? []
-        categoriesViewController.selectAction = { category in
-            self.selectedCategory = category
-        }
-        navigationController?.pushViewController(categoriesViewController, animated: true)
     }
     
     //MARK: - Firebase
