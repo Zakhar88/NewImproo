@@ -138,6 +138,12 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             }
             
             let sections = settings.sections
+            guard !sections.isEmpty else {
+                let error = NSError(localizedDescription: "No Active Sections")
+                self.showError(error)
+                self.endIgnoringEvents()
+                return
+            }
             var items = [UITabBarItem]()
             for (index, section) in sections.enumerated() {
                 let tabBarItem = SectionTabBarItem(title: section.ukrainianTitle, image: UIImage(named: section.rawValue), tag: index)
@@ -149,6 +155,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
                 self.sectionsTabBar.selectedItem = firstItem
                 self.title = firstItem.title
             }
+            
             self.loadDocuments(forSections: sections)
         }
     }

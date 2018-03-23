@@ -21,3 +21,13 @@ extension UIViewController {
         FirestoreManager.shared.uploadError(error)
     }
 }
+
+extension NSError {
+    convenience init(localizedDescription: String, failureReason: String? = nil) {
+        var userInfo: [String : Any] = [ NSLocalizedDescriptionKey :  NSLocalizedString("Description", value: localizedDescription, comment: "")]
+        if let failureReason = failureReason {
+            userInfo[NSLocalizedFailureReasonErrorKey] = NSLocalizedString("Reason", value: failureReason, comment: "")
+        }
+        self.init(domain: "", code: 0, userInfo: userInfo)
+    }
+}
