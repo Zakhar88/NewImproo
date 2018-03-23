@@ -66,6 +66,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
             selectedCategory = FirestoreManager.allCategoriesTitle
+            itemsCollectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
     
@@ -100,11 +101,15 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     // MARK: - Functions
     
+    func endIgnoringEvents() {
+        self.activityIndicatorView?.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        self.itemsCollectionView.reloadData()
+    }
+    
     func checkAllDataExisting() {
         if allSectionsData.count == sectionsTabBar.items?.count {
-            self.activityIndicatorView?.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            self.itemsCollectionView.reloadData()
+            endIgnoringEvents()
         }
     }
     
@@ -120,9 +125,13 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     private func setSections() {
         
+        activityIndicatorView?.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
         FirestoreManager.shared.getSettings { (settings, error) in
             guard let settings = settings else {
                 self.showError(error)
+                self.endIgnoringEvents()
                 return
             }
             
@@ -143,20 +152,19 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     }
     
     private func loadDocuments(forSections sections: [Section]) {
-        
-        activityIndicatorView?.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
+
         for section in sections{
             FirestoreManager.shared.loadDocuments(forSection: section) { (items, error) in
                 guard let items = items else {
                     self.showError(error)
+                    self.endIgnoringEvents()
                     return
                 }
                 let sectionData = SectionData(section: section, items: items)
                 FirestoreManager.shared.loadCategories(forSection: section, completion: { (categories, error) in
                     guard let categories = categories else {
                         self.showError(error)
+                        self.endIgnoringEvents()
                         return
                     }
                     sectionData.categories = categories
