@@ -28,7 +28,8 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var selectedCategory = FirestoreManager.allCategoriesTitle {
         didSet {
             categoriesBarButton?.title = selectedCategory
-            self.itemsCollectionView?.reloadData()
+            itemsCollectionView?.reloadData()
+            itemsCollectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
     
