@@ -188,7 +188,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
                 switch changeType {
                 case .added:
                     for sectionData in self.allSectionsData {
-                        if sectionData.section == section {
+                        if sectionData.section == section && !sectionData.items.contains(where: {$0.id == item.id}) {
                             sectionData.items.append(item)
                             sectionData.items.sort(by: { $0.title > $1.title})
                             break
