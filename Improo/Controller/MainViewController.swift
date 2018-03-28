@@ -28,7 +28,8 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     var selectedCategory = FirestoreManager.allCategoriesTitle {
         didSet {
             categoriesBarButton?.title = selectedCategory
-            self.itemsCollectionView?.reloadData()
+            itemsCollectionView?.reloadData()
+            itemsCollectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
     
@@ -66,6 +67,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
             guard oldValue != selectedSection else { return }
             self.title = selectedSection.ukrainianTitle
             selectedCategory = FirestoreManager.allCategoriesTitle
+            itemsCollectionView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
     
@@ -77,7 +79,7 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         itemsCollectioViewDataSource = ItemsCollectionViewDataSource(delegate: self)
         itemsCollectionView.dataSource = itemsCollectioViewDataSource
         setSections()
-
+        
         //TODO: subscribeForUpdates()
     }
     
@@ -100,11 +102,16 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     // MARK: - Functions
     
+    func endIgnoringEvents() {
+        self.activityIndicatorView?.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+        self.itemsCollectionView.reloadData()
+    }
+    
     func checkAllDataExisting() {
         if allSectionsData.count == sectionsTabBar.items?.count {
-            self.activityIndicatorView?.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            self.itemsCollectionView.reloadData()
+            endIgnoringEvents()
+            //subscribeForUpdates()
         }
     }
     
@@ -120,13 +127,23 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     
     private func setSections() {
         
+        activityIndicatorView?.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
         FirestoreManager.shared.getSettings { (settings, error) in
             guard let settings = settings else {
                 self.showError(error)
+                self.endIgnoringEvents()
                 return
             }
             
             let sections = settings.sections
+            guard !sections.isEmpty else {
+                let error = NSError(localizedDescription: "No Active Sections")
+                self.showError(error)
+                self.endIgnoringEvents()
+                return
+            }
             var items = [UITabBarItem]()
             for (index, section) in sections.enumerated() {
                 let tabBarItem = SectionTabBarItem(title: section.ukrainianTitle, image: UIImage(named: section.rawValue), tag: index)
@@ -138,25 +155,25 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
                 self.sectionsTabBar.selectedItem = firstItem
                 self.title = firstItem.title
             }
+            
             self.loadDocuments(forSections: sections)
         }
     }
     
     private func loadDocuments(forSections sections: [Section]) {
         
-        activityIndicatorView?.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
         for section in sections{
             FirestoreManager.shared.loadDocuments(forSection: section) { (items, error) in
                 guard let items = items else {
                     self.showError(error)
+                    self.endIgnoringEvents()
                     return
                 }
                 let sectionData = SectionData(section: section, items: items)
                 FirestoreManager.shared.loadCategories(forSection: section, completion: { (categories, error) in
                     guard let categories = categories else {
                         self.showError(error)
+                        self.endIgnoringEvents()
                         return
                     }
                     sectionData.categories = categories
@@ -168,8 +185,40 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
     }
     
     func subscribeForUpdates() {
-        //TODO: Create closure for managing updates
-        //TODO: Add that closure to each section update func
+        
+        for section in FirestoreManager.shared.settings.sections {
+            FirestoreManager.shared.subscribeForUpdates(forSection: section, completion: { (item, changeType, error) in
+                guard let item = item, let changeType = changeType else {
+                    self.showError(error)
+                    return
+                }
+                
+                switch changeType {
+                case .added:
+                    for sectionData in self.allSectionsData {
+                        if sectionData.section == section && !sectionData.items.contains(where: {$0.id == item.id}) {
+                            sectionData.items.append(item)
+                            sectionData.items.sort(by: { $0.title > $1.title})
+                            break
+                        }
+                    }
+                case .modified:
+                    for sectionData in self.allSectionsData {
+                        if sectionData.section == section, let indexOfModifiedItem = sectionData.items.index(where: {$0.id == item.id}) {
+                            sectionData.items[indexOfModifiedItem] = item
+                            break
+                        }
+                    }
+                case .removed:
+                    for sectionData in self.allSectionsData {
+                        if sectionData.section == section, let indexOfRemovedItem = sectionData.items.index(where: {$0.id == item.id}) {
+                            sectionData.items.remove(at: indexOfRemovedItem)
+                            break
+                        }
+                    }
+                }
+            })
+        }
     }
 }
 
