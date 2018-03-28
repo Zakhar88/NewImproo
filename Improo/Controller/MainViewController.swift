@@ -91,6 +91,11 @@ class MainViewController: AdvertisementViewController, ItemsCollectionViewDelega
         self.navigationController?.navigationBar.tintAdjustmentMode = .automatic
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sectionsTabBar.invalidateIntrinsicContentSize()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SelectCategorySegue", let categoriesViewController = segue.destination as? CategoriesViewController {
             categoriesViewController.categoires = sectionCategories ?? []
