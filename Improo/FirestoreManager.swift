@@ -16,6 +16,7 @@ class FirestoreManager {
     
     var settings = Settings()
     var language: Language = .ukrainian
+    var infoText: String!
     
     private init() {
         databaseReference = Firestore.firestore()
@@ -23,6 +24,19 @@ class FirestoreManager {
         settings.isPersistenceEnabled = true
         let db = Firestore.firestore()
         db.settings = settings
+        subscibeForInfoText()
+    }
+    
+    func subscibeForInfoText() {
+        databaseReference.document("\(language.rawValue)/InfoText").addSnapshotListener { (snapshot, error) in
+            DispatchQueue.main.async {
+                guard let snapshot = snapshot else {
+                    self.uploadError(error)
+                    return
+                }
+                self.infoText = (snapshot.data()?["infoText"] as? String) ?? ""
+            }
+        }
     }
     
     func getSettings(completion: @escaping (Settings?, Error?)->()) {

@@ -12,15 +12,11 @@ import Firebase
 class Settings {
     var sections: [Section] = []
     var showAdvertisement: Bool = false
-    var infoText: String = ""
     
     init() {
     }
     
     init(documentSnapshot: DocumentSnapshot) {
-        if let infoText = documentSnapshot.data()?["infoText"] as? String {
-            self.infoText = infoText
-        }
         
         if let showAdvertisement = documentSnapshot.data()?["showAdvertisement"] as? Bool {
             self.showAdvertisement = showAdvertisement

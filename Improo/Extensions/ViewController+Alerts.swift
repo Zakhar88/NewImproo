@@ -21,3 +21,4 @@ extension UIViewController {
         FirestoreManager.shared.uploadError(error)
     }
 }
+
