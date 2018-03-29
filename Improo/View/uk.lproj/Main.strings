@@ -1,0 +1,57 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "3Jr-Bq-TkR"; */
+"3Jr-Bq-TkR.text" = "Title";
+
+/* Class = "UITextView"; text = "\tЗамислюєтеся інколи, що хотіли б розвиватися, але поки не знаєте, з чого почати і куди рухатись? Цей застосунок створено саме для того, щоб у цьому Вам допомогти.\tВ майбутньому ми плануємо покращити дизайн, додати більше контенту, а також коментарі та рейтинги до книг та курсів.\tМи лише починаємо, отож Ваші поради та зауваження дуже важливі! Ви можете надсилати їх нам, скориставшись формою нижче. Дякуємо!"; ObjectID = "5qQ-ui-h0T"; */
+"5qQ-ui-h0T.text" = "\tЗамислюєтеся інколи, що хотіли б розвиватися, але поки не знаєте, з чого почати і куди рухатись? Цей застосунок створено саме для того, щоб у цьому Вам допомогти.\tВ майбутньому ми плануємо покращити дизайн, додати більше контенту, а також коментарі та рейтинги до книг та курсів.\tМи лише починаємо, отож Ваші поради та зауваження дуже важливі! Ви можете надсилати їх нам, скориставшись формою нижче. Дякуємо!";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "6oP-oJ-1SL"; */
+"6oP-oJ-1SL.text" = "Title";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "80u-YY-BUL"; */
+"80u-YY-BUL.text" = "Label";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bac-MG-Q0P"; */
+"Bac-MG-Q0P.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Нікнейм (за бажанням)"; ObjectID = "GF0-gS-nT3"; */
+"GF0-gS-nT3.placeholder" = "Нікнейм (за бажанням)";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "L0A-Xf-APx"; */
+"L0A-Xf-APx.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Вимкнути рекламу"; ObjectID = "LwQ-Mg-QTR"; */
+"LwQ-Mg-QTR.normalTitle" = "Вимкнути рекламу";
+
+/* Class = "UIBarButtonItem"; title = "Усі категорії"; ObjectID = "Wty-Pr-b1v"; */
+"Wty-Pr-b1v.title" = "Усі категорії";
+
+/* Class = "UIButton"; normalTitle = "Надіслати відгук"; ObjectID = "bXy-CP-Ost"; */
+"bXy-CP-Ost.normalTitle" = "Надіслати відгук";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "h73-c8-gZ4"; */
+"h73-c8-gZ4.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Вимикаючи рекламу Ви також допомогаєте проекту розвиватись!"; ObjectID = "myV-dX-iSX"; */
+"myV-dX-iSX.text" = "Вимикаючи рекламу Ви також допомогаєте проекту розвиватись!";
+
+/* Class = "UIButton"; normalTitle = "Відновити покупки"; ObjectID = "nFx-JR-4jV"; */
+"nFx-JR-4jV.normalTitle" = "Відновити покупки";
+
+/* Class = "UINavigationItem"; title = "Про нас"; ObjectID = "oTr-07-S3Q"; */
+"oTr-07-S3Q.title" = "Про нас";
+
+/* Class = "UINavigationItem"; title = "Категорії"; ObjectID = "omq-N5-FUN"; */
+"omq-N5-FUN.title" = "Категорії";
+
+/* Class = "UILabel"; text = "Author"; ObjectID = "sfU-Pm-3gw"; */
+"sfU-Pm-3gw.text" = "Author";
+
+/* Class = "UIBarButtonItem"; title = "Надіслати"; ObjectID = "sij-sR-4QY"; */
+"sij-sR-4QY.title" = "Надіслати";
+
+/* Class = "UIButton"; normalTitle = "Google"; ObjectID = "wAg-8V-T0h"; */
+"wAg-8V-T0h.normalTitle" = "Google";
+
+/* Class = "UILabel"; text = "Author"; ObjectID = "xbv-20-113"; */
+"xbv-20-113.text" = "Author";
