@@ -19,6 +19,7 @@ class AboutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         aboutTextView?.text = FirestoreManager.shared.infoText
+        aboutTextView?.sizeToFit()
         
         if UserDefaults.standard.bool(forKey: FullAccessID) {
             hidePurchaseInfo()
